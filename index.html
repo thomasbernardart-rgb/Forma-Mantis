@@ -194,7 +194,7 @@ nav a:hover, nav a.active { color: var(--black); }
 /* FEATURED GRID */
 .home-featured-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   border-bottom: 0.5px solid var(--gray-light);
 }
 .featured-main {
@@ -203,8 +203,8 @@ nav a:hover, nav a.active { color: var(--black); }
 }
 .featured-main:hover .feat-title { text-decoration: underline; text-underline-offset: 3px; }
 .feat-img { overflow: hidden; background: #d0cec8; }
-.feat-img-main { height: 400px; }
-.feat-img-side { height: 400px; }
+.feat-img-main { height: 440px; }
+.feat-img-side { height: 440px; }
 .feat-body { padding: 22px 28px 28px; }
 .feat-tag {
   font-size: 10px;
@@ -783,19 +783,19 @@ footer nav a:hover { color: var(--black); }
       <div class="home-kpi-grid">
         <div class="home-kpi">
           <span>Dernière exposition</span>
-          <p>Entre deux cœurs<br>Cédrix Crespel<br>Paris, 2026</p>
+          <p><em>Entre deux cœurs</em><br>Cédrix Crespel<br>Paris, 2026</p>
         </div>
         <div class="home-kpi">
           <span>Commissaire</span>
           <p>Thomas Bernard<br>Direction artistique<br>& curatoriale</p>
         </div>
         <div class="home-kpi">
-          <span>Galeries partenaires</span>
-          <p>Rabouan Moussion<br>Strouk<br>NEC</p>
+          <span>En cours</span>
+          <p><em>Les Nymphéas</em><br>Galerie Strouk<br>Paris</p>
         </div>
         <div class="home-kpi">
-          <span>Basé à</span>
-          <p>Paris<br>& Pont-Aven<br>Bretagne</p>
+          <span>Direction artistique</span>
+          <p>Thomas Bernard<br>& Valentine Gauthier</p>
         </div>
       </div>
     </div>
@@ -809,7 +809,7 @@ footer nav a:hover { color: var(--black); }
       </div>
       <div class="feat-body">
         <div class="feat-tag">Exposition collective — Galerie Strouk, Paris, 2025</div>
-        <div class="feat-title">Les Nymphéas : Miroirs des profondeurs</div>
+        <div class="feat-title"><em>Les Nymphéas : Miroirs des profondeurs</em></div>
         <div class="feat-sub">Autour de l'héritage de Monet — six artistes réunis par Thomas Bernard.</div>
       </div>
     </div>
@@ -819,7 +819,7 @@ footer nav a:hover { color: var(--black); }
       </div>
       <div class="feat-body">
         <div class="feat-tag">STROUK × ENSBA — Décembre 2024</div>
-        <div class="feat-title">La jeunesse a toujours raison même quand elle a tort</div>
+        <div class="feat-title"><em>La jeunesse a toujours raison même quand elle a tort</em></div>
         <div class="feat-sub">Plus de trente artistes des Beaux-Arts de Paris.</div>
       </div>
     </div>
@@ -829,7 +829,7 @@ footer nav a:hover { color: var(--black); }
       </div>
       <div class="feat-body">
         <div class="feat-tag">Galerie Rabouan Moussion — Paris, 2026</div>
-        <div class="feat-title">Cédrix Crespel — Entre deux cœurs</div>
+        <div class="feat-title"><em>Cédrix Crespel — Entre deux cœurs</em></div>
         <div class="feat-sub">Texte de présentation signé Thomas Bernard.</div>
       </div>
     </div>
@@ -844,7 +844,7 @@ footer nav a:hover { color: var(--black); }
       <a onclick="nav('editions')">Éditions</a>
       <a onclick="nav('apropos')">À propos</a>
     </nav>
-    <p>Paris & Pont-Aven</p>
+    <p>Paris</p>
   </footer>
 </div>
 
@@ -865,7 +865,7 @@ footer nav a:hover { color: var(--black); }
     </div>
     <div class="project-row-body">
       <div class="project-row-meta">Exposition — Galerie Rabouan Moussion <span class="status-badge active">2026</span></div>
-      <div class="project-row-title">Cédrix Crespel — Entre deux cœurs</div>
+      <div class="project-row-title"><em>Cédrix Crespel — Entre deux cœurs</em></div>
       <div class="project-row-desc">Un travail pictural entre dévoilement et retenue, le net et le flou. Texte de présentation signé Thomas Bernard.</div>
     </div>
     <div class="project-row-right">
@@ -877,11 +877,11 @@ footer nav a:hover { color: var(--black); }
 
   <div class="project-row" onclick="nav('mason')">
     <div class="project-row-img">
-      <img class="img-cover" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="Charles Mason — Galerie NEC">
+      <img class="img-cover" src="charles_mason_sculpture.jpg" alt="Charles Mason — sculpture">
     </div>
     <div class="project-row-body">
       <div class="project-row-meta">Exposition — Galerie NEC <span class="status-badge">Passée</span></div>
-      <div class="project-row-title">Charles Mason</div>
+      <div class="project-row-title"><em>Charles Mason</em></div>
       <div class="project-row-desc">Exposition monographique de l'artiste britannique Charles Mason à la Galerie NEC (Nilsson & Chiglien), Paris Marais. Sculptures, installations et œuvres sur papier. Commissariat Thomas Bernard.</div>
     </div>
     <div class="project-row-right">
@@ -893,11 +893,11 @@ footer nav a:hover { color: var(--black); }
 
   <div class="project-row" onclick="nav('jeunesse')">
     <div class="project-row-img">
-      <img class="img-cover" src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=600&q=80&fit=crop" alt="La jeunesse a toujours raison — Strouk">
+      <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/_1045827.jpg" alt="La jeunesse a toujours raison — Strouk">
     </div>
     <div class="project-row-body">
       <div class="project-row-meta">Exposition collective — Galerie Strouk <span class="status-badge">Passée</span></div>
-      <div class="project-row-title">La jeunesse a toujours raison même quand elle a tort</div>
+      <div class="project-row-title"><em>La jeunesse a toujours raison même quand elle a tort</em></div>
       <div class="project-row-desc">STROUK × ENSBA — Une sélection de plus de trente artistes issus de l'École nationale supérieure des beaux-arts de Paris. Organisée par Alain Berland avec la complicité de Thomas Bernard, cette exposition célèbre une génération d'une audace formelle et narrative qui défie les conventions.</div>
     </div>
     <div class="project-row-right">
@@ -913,7 +913,7 @@ footer nav a:hover { color: var(--black); }
     </div>
     <div class="project-row-body">
       <div class="project-row-meta">Exposition en deux actes — Galerie Strouk <span class="status-badge">Passée</span></div>
-      <div class="project-row-title">Les Nymphéas : Miroirs des profondeurs</div>
+      <div class="project-row-title"><em>Les Nymphéas : Miroirs des profondeurs</em></div>
       <div class="project-row-desc">Autour de l'héritage de Claude Monet — une vision contemporaine fondée sur les notions de surface et de profondeur. Six artistes réunis par Thomas Bernard : Vincent Beaurin, Christophe Doucet, Vincent Gicquel, Ludivine Gonthier, Orsten Groom, Marlène Mocquet.</div>
     </div>
     <div class="project-row-right">
@@ -926,7 +926,7 @@ footer nav a:hover { color: var(--black); }
   <footer>
     <p>Forma Mantis — 2025</p>
     <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
-    <p>Paris & Pont-Aven</p>
+    <p>Paris</p>
   </footer>
 </div>
 
@@ -951,7 +951,7 @@ footer nav a:hover { color: var(--black); }
       </div>
       <div class="edition-card-body">
         <div class="edition-type">Livret</div>
-        <div class="edition-name">Le Séjour des formes, n°1</div>
+        <div class="edition-name"><em>Le Séjour des formes, n°1</em></div>
         <div class="edition-detail">Texte de Thomas Bernard. 32 pages, couverture risograph deux couleurs. Papier bouffant 90g.</div>
         <div class="edition-price-row"><span class="edition-price">24 €</span><span class="edition-tirage">50 ex.</span></div>
       </div>
@@ -962,7 +962,7 @@ footer nav a:hover { color: var(--black); }
       </div>
       <div class="edition-card-body">
         <div class="edition-type">Objet textile</div>
-        <div class="edition-name">Série textile Valentine Gauthier</div>
+        <div class="edition-name"><em>Série textile Valentine Gauthier</em></div>
         <div class="edition-detail">Pièce en lin naturel teint en végétal. Numérotée et signée par VG. Collaboration exclusive.</div>
         <div class="edition-price-row"><span class="edition-price">180 €</span><span class="edition-tirage">30 ex.</span></div>
       </div>
@@ -973,7 +973,7 @@ footer nav a:hover { color: var(--black); }
       </div>
       <div class="edition-card-body">
         <div class="edition-type">Estampe</div>
-        <div class="edition-name">Forma I — Pont-Aven</div>
+        <div class="edition-name"><em>Forma I — Pont-Aven</em></div>
         <div class="edition-detail">Gravure sur cuivre, impression taille-douce. 21 × 29,7 cm. Papier BFK Rives 250g.</div>
         <div class="edition-price-row"><span class="edition-price">320 €</span><span class="edition-tirage">20 ex.</span></div>
       </div>
@@ -984,7 +984,7 @@ footer nav a:hover { color: var(--black); }
       </div>
       <div class="edition-card-body">
         <div class="edition-type">Catalogue</div>
-        <div class="edition-name">Catalogue d'exposition 2025</div>
+        <div class="edition-name"><em>Catalogue d'exposition 2025</em></div>
         <div class="edition-detail">72 pages, bilingue FR/EN. Textes critiques, documentation photographique. Parution automne 2025.</div>
         <div class="edition-price-row"><span class="edition-price">38 €</span><span class="edition-tirage">100 ex.</span></div>
       </div>
@@ -999,7 +999,7 @@ footer nav a:hover { color: var(--black); }
   <footer>
     <p>Forma Mantis — 2025</p>
     <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('projets')">Projets</a><a onclick="nav('apropos')">À propos</a></nav>
-    <p>Paris & Pont-Aven</p>
+    <p>Paris</p>
   </footer>
 </div>
 
@@ -1080,7 +1080,7 @@ footer nav a:hover { color: var(--black); }
   <footer>
     <p>Forma Mantis — 2025</p>
     <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
-    <p>Paris & Pont-Aven</p>
+    <p>Paris</p>
   </footer>
 </div>
 
@@ -1138,7 +1138,7 @@ footer nav a:hover { color: var(--black); }
   <footer>
     <p>Forma Mantis — 2025</p>
     <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('projets')">Projets</a></nav>
-    <p>Paris & Pont-Aven</p>
+    <p>Paris</p>
   </footer>
 </div>
 
@@ -1153,7 +1153,7 @@ footer nav a:hover { color: var(--black); }
       <div class="contact-block"><span>Presse & partenariats</span><a href="mailto:presse@formamantis.com">presse@formamantis.com</a></div>
       <div class="contact-block"><span>Commandes éditions</span><a href="mailto:editions@formamantis.com">editions@formamantis.com</a></div>
       <div class="contact-block"><span>Pont-Aven Social Club</span><a href="mailto:club@formamantis.com">club@formamantis.com</a></div>
-      <div class="contact-block"><span>Localisation</span><p>Paris & Pont-Aven, Bretagne<br>France</p></div>
+      <div class="contact-block"><span>Localisation</span><p>Paris, France</p></div>
     </div>
     <div class="contact-right">
       <h3>Écrire un message</h3>
@@ -1177,7 +1177,7 @@ footer nav a:hover { color: var(--black); }
   <footer>
     <p>Forma Mantis — 2025</p>
     <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
-    <p>Paris & Pont-Aven</p>
+    <p>Paris</p>
   </footer>
 </div>
 
@@ -1191,7 +1191,7 @@ footer nav a:hover { color: var(--black); }
     <div class="hero-bottom">
       <div class="hero-title">
         <p>7 mars – 16 avril 2026 — Paris</p>
-        <h1>Entre deux cœurs</h1>
+        <h1><em>Entre deux cœurs</em></h1>
       </div>
       <div class="hero-meta">
         <span>Artiste</span>
@@ -1354,19 +1354,19 @@ footer nav a:hover { color: var(--black); }
       <a onclick="nav('artistes')">Artistes</a>
       <a onclick="nav('contact')">Contact</a>
     </nav>
-    <p>Paris & Pont-Aven</p>
+    <p>Paris</p>
   </footer>
 </div>
 
 <!-- ══ CHARLES MASON — GALERIE NEC ══ -->
 <div class="page" id="page-mason">
   <div class="hero" style="height:400px;">
-    <img class="img-cover" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&fit=crop" alt="Charles Mason">
+    <img class="img-cover" src="charles_mason_sculpture.jpg" alt="Charles Mason — sculpture, Galerie NEC">
     <div class="hero-overlay"></div>
     <div class="hero-bottom">
       <div class="hero-title">
         <p>Paris, Marais — Galerie NEC</p>
-        <h1>Charles Mason</h1>
+        <h1><em>Charles Mason</em></h1>
       </div>
       <div class="hero-meta"><span>Commissaire</span><p>Thomas Bernard</p></div>
     </div>
@@ -1374,9 +1374,11 @@ footer nav a:hover { color: var(--black); }
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">À propos</p>
-      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Dans ses sculptures, Charles Mason déploie une approche minimale déceptive.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;">Les formes sculpturales employées sont le plus souvent des éléments récupérés de l'espace urbain, puis déplacés dans le lieu de la galerie. Les objets qui pourraient être définis par leur forme et leur emploi propre, ici, sont laqués, peints ou recouverts de scotch leur offrant une aura d'utopie moderniste.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Ils semblent imiter et offrir les souvenirs de leur fonction pratique, qu'implique la reconnaissance immédiate pour le spectateur, mais le contexte reste inapproprié. Face aux sculptures courent quelques tensions physiques intrinsèques liées à la question de la survie de ces objets en tant que sculpture.</p>
+      <p style="font-family:var(--serif);font-size:18px;line-height:1.75;color:var(--black);">Charles Mason a inscrit son travail dans une tradition profondément ancrée dans la sculpture anglaise, marquée par une attention particulière à la relation entre forme, espace et expérience sensible.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:18px;">À la manière des figures majeures comme Henry Moore ou Antony Gormley, il ne s'agit pas tellement de représenter mais faire advenir une présence, souvent silencieuse, presque méditative. Mais là où cette tradition s'est historiquement attachée au paysage ou au corps, Charles Mason déplace subtilement le regard vers l'espace domestique, vers des formes plus modestes, plus proches du quotidien.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Ses sculptures, souvent constituées d'éléments simples — fragments de mobilier, objets trouvés, matériaux ordinaires — prolongent cette sensibilité anglaise tout en la ramenant à une échelle intime. Cette simplicité apparente est essentielle. Elle ouvre un espace de projection où l'œuvre devient le lieu d'une relation plutôt que celui d'une démonstration.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Le travail de Charles Mason dialogue étroitement avec sa relation à Naomie Wilkinson, dont la présence traverse son œuvre de manière discrète mais persistante. Sans jamais se perdre dans l'anecdotique, certaines sculptures peuvent être lues comme une forme de mise en liaison où deux éléments qui coexistent se répondent, et parfois résistent l'un à l'autre.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Il ne s'agit pas de représenter un couple, mais plutôt d'en proposer une traduction minimale, presque abstraite. Une proximité fragile, un équilibre toujours à chercher : autant de dynamiques qui trouvent dans ses assemblages une forme juste et dépouillée de tout effet.</p>
       <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:28px;border-top:0.5px solid var(--gray-light);padding-top:16px;">Commissariat : Thomas Bernard — Galerie NEC, Paris</p>
     </div>
     <div style="padding:56px 48px;display:flex;flex-direction:column;gap:24px;">
@@ -1386,11 +1388,55 @@ footer nav a:hover { color: var(--black); }
       <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;background:var(--gray-light);padding:16px;"><p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);margin-bottom:8px;">Note</p><p style="font-family:var(--serif);font-size:13px;color:var(--gray-text);font-style:italic;line-height:1.6;">Les visuels de cette exposition seront ajoutés prochainement.</p></div>
     </div>
   </div>
+  <!-- TEXTE CRITIQUE LONG -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Essai critique</p>
+      <p style="font-family:var(--serif);font-size:18px;line-height:1.75;color:var(--black);font-style:italic;">Il y a une tradition presque secrète dans la sculpture britannique d'après-guerre.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;">Secrète parce qu'elle ne se donne pas à voir facilement — parce qu'elle se tient dans les carnets, dans les tiroirs, dans les réserves des ateliers. C'est la tradition du dessin de sculpteur. Non pas l'esquisse préparatoire, la note de travail rapide ou le brouillon fonctionnel, mais le dessin comme espace de vérité parallèle, comme territoire où la pensée va plus loin que le volume ne peut aller.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Henry Moore l'avait formulé dans ses carnets avec une clarté presque brutale : le dessin lui permettait d'atteindre l'os sous la peau, de penser l'intérieur d'un corps sans passer par sa surface. Ses <em>Shelter Drawings</em> de 1940, réalisés dans les stations de métro londoniennes pendant le Blitz, ne préparaient aucune sculpture. Ils pensaient le corps vulnérable, replié, vivant — ce que le bronze, nécessairement, aurait monumentalisé et donc trahi.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Richard Long, quelques décennies plus tard, radicalisa ce geste jusqu'à faire de la boue et du paysage sa surface de dessin. La ligne devenait un acte physique dans le réel. Antony Gormley parlait de dessiner avec le corps, comme si le trait était une empreinte existentielle avant d'être une forme. Et Rachel Whiteread dessinait les volumes négatifs : l'intérieur des choses, l'air emprisonné, ce que l'œil ne voit jamais directement.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Ce que toutes ces pratiques partagent, c'est une conviction profondément ancrée dans la culture artistique britannique : le dessin dit ce que la sculpture tait.</p>
+    </div>
+    <div style="padding:56px 48px;">
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);">C'est précisément dans cet espace exigeant, peu spectaculaire, rarement exposé seul que s'inscrit l'œuvre graphique de Charles Mason. Non pas en marge de ses sculptures — comme leur face retournée.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Mason naît à Exeter en 1962. Il se forme à la Bristol School of Art, puis à la Slade School of Art à Londres, en sculpture, entre 1987 et 1989. La Slade : l'institution qui a formé plusieurs générations de sculpteurs britanniques, un lieu où le dessin n'a jamais été relégué au rang d'outil secondaire.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Quand il meurt à Londres en 2013, il laisse une œuvre sculpturale d'une cohérence rare : des formes en plexiglas qui évoquent à la fois la prothèse, le mobilier urbain et le corps générique — et un corpus de dessins qui n'a jamais cessé de travailler dans l'ombre, à un régime différent, avec d'autres ambitions.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">L'exposition <em>Early Works</em>, présentée à Paris en 2016 à la Galerie Thomas Bernard Cortex Athletico, révéla pour la première fois la profondeur de cette pratique graphique. Ses formes de jeunesse travaillaient déjà une grammaire du corps indécidable — ni masculin ni féminin, ni organique ni industriel, ni dedans ni dehors. Pas encore solidifié. Encore mobile. Encore hésitant.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Voir les dessins de Charles Mason, c'est rencontrer le moment où une forme hésite encore à naître. C'est une expérience rare, dans l'art contemporain, et précieuse : celle de la pensée avant qu'elle ne se solidifie.</p>
+      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:24px;border-top:0.5px solid var(--gray-light);padding-top:16px;">Thomas Bernard</p>
+    </div>
+  </div>
+
+  <!-- SECOND TEXTE CRITIQUE COMPLET -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Texte intégral</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);">Il y a une tradition presque secrète dans la sculpture britannique d'après-guerre. Secrète parce qu'elle ne se donne pas à voir facilement — parce qu'elle se tient dans les carnets, dans les tiroirs, dans les réserves des ateliers. C'est la tradition du dessin de sculpteur. Non pas l'esquisse préparatoire, la note de travail rapide ou le brouillon fonctionnel, mais le dessin comme espace de vérité parallèle, comme territoire où la pensée va plus loin que le volume ne peut aller.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Henry Moore l'avait formulé dans ses carnets avec une clarté presque brutale : le dessin lui permettait d'atteindre l'os sous la peau, de penser l'intérieur d'un corps sans passer par sa surface. Ses <em>Shelter Drawings</em> de 1940, réalisés dans les stations de métro londoniennes pendant le Blitz, ne préparaient aucune sculpture. Ils pensaient le corps vulnérable, replié, vivant — ce que le bronze, nécessairement, aurait monumentalisé et donc trahi.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Richard Long, quelques décennies plus tard, radicalisa ce geste jusqu'à faire de la boue et du paysage sa surface de dessin. La ligne devenait un acte physique dans le réel, et le papier n'était plus qu'un support parmi d'autres. Antony Gormley, enfin, parlait de dessiner avec le corps, comme si le trait était une empreinte existentielle avant d'être une forme. Et Rachel Whiteread dessinait les volumes négatifs : l'intérieur des choses, l'air emprisonné, ce que l'œil ne voit jamais directement.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Ce que toutes ces pratiques partagent, c'est une conviction profondément ancrée dans la culture artistique britannique : le dessin dit ce que la sculpture tait. Il accède à ce que le volume, par définition, referme sur lui-même.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">C'est précisément dans cet espace exigeant, peu spectaculaire, rarement exposé seul que s'inscrit l'œuvre graphique de Charles Mason. Non pas en marge de ses sculptures. Comme leur face retournée.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Mason naît à Exeter en 1962. Il se forme à la Bristol School of Art, puis à la Slade School of Art à Londres, en sculpture, entre 1987 et 1989. La Slade : l'institution qui a formé plusieurs générations de sculpteurs britanniques, un lieu où le dessin n'a jamais été relégué au rang d'outil secondaire, où travailler en volume et travailler sur le papier sont deux gestes également légitimes, également sérieux.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Quand il meurt à Londres en 2013, il laisse une œuvre sculpturale d'une cohérence rare : des formes en plexiglas qui évoquent à la fois la prothèse, le mobilier urbain et le corps générique, des objets qui nous repoussent comme un bouclier tout en nous montrant notre propre reflet déformé ; et un corpus de dessins qui, lui, n'a jamais cessé de travailler dans l'ombre, à un régime différent, avec d'autres ambitions.</p>
+    </div>
+    <div style="padding:56px 48px;">
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);">L'exposition <em>Early Works</em>, que nous présentâmes à Paris en 2016 à la Galerie Thomas Bernard Cortex Athletico, révéla pour la première fois avec clarté la profondeur de cette pratique graphique dans les années de formation. Ce que l'on y découvrit, c'est que le dessin chez Mason n'était pas un préalable à la sculpture : c'était un laboratoire d'identités en suspens. Ses formes de jeunesse travaillaient déjà ce que l'on pourrait appeler une grammaire du corps indécidable, ni masculin ni féminin, ni organique ni industriel, ni dedans ni dehors. Des formes androgynes, des emboîtements, des inversions : tout ce qui deviendra dans ses sculptures matures un langage minimal et queer était déjà là, à l'état de trait, dans ces dessins. Pas encore solidifié. Encore mobile. Encore hésitant.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Et c'est précisément cette hésitation productive qui donne à ces dessins leur force particulière. Mason ne dessine pas pour voir. Il dessine pour ne pas savoir encore. Le trait n'est jamais chez lui la certitude d'une forme à venir, il est la durée d'une question restée ouverte.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Ce que l'exposition actuelle à la Galerie NEC donne à voir prolonge cette enquête tout en la déplaçant. Les dessins ici rassemblés témoignent d'un artiste qui travaille à la frontière de plusieurs régimes visuels à la fois. Il y a dans ces œuvres quelque chose qui appartient simultanément au dessin d'architecture — la rigueur de la structure, la tension entre la surface et ce qu'elle contient — et au dessin de corps : la sensibilité à la pression du trait, à ce que la main trahit malgré elle.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Mason a toujours pensé l'espace comme un corps, et le corps comme une architecture. Ses sculptures en sont l'expression la plus évidente. Ses dessins en sont la genèse la plus intime.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Il faut, pour regarder ces dessins, accepter de ralentir. De ne pas chercher immédiatement la sculpture derrière eux. Il faut les regarder comme ce qu'ils sont : des œuvres autonomes, des espaces de pensée qui ont leur propre temporalité, leur propre économie formelle, leur propre exigence.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Ce que Mason a su faire — et c'est rare — c'est maintenir jusqu'au bout deux pratiques en parallèle, sans jamais les hiérarchiser. La sculpture ne prime pas sur le dessin. Le dessin ne commente pas la sculpture. Ils pensent ensemble, différemment, la même question fondamentale : qu'est-ce qu'un corps dans l'espace ? Qu'est-ce qu'une forme qui se tient ?</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;font-style:italic;">Voir les dessins de Charles Mason, c'est rencontrer le moment où une forme hésite encore à naître. C'est une expérience rare, dans l'art contemporain, et précieuse : celle de la pensée avant qu'elle ne se solidifie.</p>
+      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:24px;border-top:0.5px solid var(--gray-light);padding-top:16px;">Thomas Bernard</p>
+    </div>
+  </div>
+
   <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour toute demande sur cette exposition, contacter Forma Mantis.</p>
     <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://galerienec.com" target="_blank" style="color:var(--gray-text);">Galerie NEC ↗</a></div>
   </div>
-  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris & Pont-Aven</p></footer>
+  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris</p></footer>
 </div>
 
 <!-- ══ LA JEUNESSE A TOUJOURS RAISON ══ -->
@@ -1448,7 +1494,7 @@ footer nav a:hover { color: var(--black); }
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour en savoir plus sur les artistes exposés ou les projets nés de cette collaboration, contacter Forma Mantis.</p>
     <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk ↗</a></div>
   </div>
-  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris & Pont-Aven</p></footer>
+  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris</p></footer>
 </div>
 
 <!-- ══ LES NYMPHÉAS — STROUK ══ -->
@@ -1511,7 +1557,7 @@ footer nav a:hover { color: var(--black); }
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour en savoir plus sur les artistes ou les œuvres, contacter Forma Mantis ou la Galerie Strouk.</p>
     <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk ↗</a></div>
   </div>
-  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris & Pont-Aven</p></footer>
+  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris</p></footer>
 </div>
 
 

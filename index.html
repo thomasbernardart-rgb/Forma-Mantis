@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forma Mantis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black: #0e0e0d;
+  --white: #faf9f7;
+  --gray-light: #e8e6e1;
+  --gray-mid: #c4c2bc;
+  --gray-text: #888885;
+  --gray-muted: #b0b0ad;
+  --serif: 'EB Garamond', Georgia, serif;
+  --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  background: var(--white);
+  color: var(--black);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(250,249,247,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 0.5px solid var(--gray-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 56px;
+}
+.logo {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--black);
+  text-decoration: none;
+  cursor: pointer;
+}
+nav { display: flex; gap: 32px; align-items: center; }
+nav a {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+nav a:hover, nav a.active { color: var(--black); }
+.lang-switch {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
+  cursor: pointer;
+  padding-left: 20px;
+  border-left: 0.5px solid var(--gray-light);
+}
+
+/* PAGES */
+.page { display: none; padding-top: 56px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* IMAGE UTILITY */
+.img-cover {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.85) brightness(0.96);
+}
+
+/* ── ACCUEIL ── */
+.hero {
+  position: relative;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  background: #c8c4bc;
+}
+.hero .img-cover { position: absolute; inset: 0; height: 100%; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(14,14,13,0.55) 0%, transparent 50%);
+}
+.hero-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 40px 48px;
+  z-index: 2;
+}
+.hero-title p {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+.hero-title h1 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.hero-meta { text-align: right; }
+.hero-meta span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 4px;
+}
+.hero-meta p {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.4;
+}
+
+/* ACCUEIL BODY */
+.home-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.home-intro-left {
+  padding: 56px 48px;
+  border-right: 0.5px solid var(--gray-light);
+}
+.home-intro-left p {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--black);
+  max-width: 440px;
+}
+.home-intro-left p + p {
+  margin-top: 20px;
+  font-size: 15px;
+  color: var(--gray-text);
+}
+.home-intro-right { padding: 56px 48px; }
+.home-kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.home-kpi { border-top: 0.5px solid var(--gray-light); padding-top: 16px; }
+.home-kpi span {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  display: block;
+  margin-bottom: 8px;
+}
+.home-kpi p {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--black);
+  line-height: 1.5;
+}
+
+.section-label {
+  padding: 18px 48px;
+  border-bottom: 0.5px solid var(--gray-light);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+}
+
+/* FEATURED GRID */
+.home-featured-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.featured-main {
+  border-right: 0.5px solid var(--gray-light);
+  cursor: pointer;
+}
+.featured-main:hover .feat-title { text-decoration: underline; text-underline-offset: 3px; }
+.feat-img { overflow: hidden; background: #d0cec8; }
+.feat-img-main { height: 320px; }
+.feat-img-side { height: 210px; }
+.feat-body { padding: 22px 28px 28px; }
+.feat-tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 8px;
+}
+.feat-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.25;
+}
+.featured-main .feat-title { font-size: 24px; }
+.feat-sub {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--gray-text);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+.featured-side {
+  border-right: 0.5px solid var(--gray-light);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.featured-side:last-child { border-right: none; }
+.featured-side:hover .feat-title { text-decoration: underline; text-underline-offset: 3px; }
+
+/* STRIP IMAGE */
+.home-strip {
+  height: 200px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.home-strip-img {
+  overflow: hidden;
+  border-right: 0.5px solid var(--gray-light);
+}
+.home-strip-img:last-child { border-right: none; }
+.home-strip-img img { width: 100%; height: 200px; object-fit: cover; filter: saturate(0.7) brightness(0.92); transition: filter 0.4s; }
+.home-strip-img:hover img { filter: saturate(1) brightness(1); }
+
+/* ── PROJETS ── */
+.page-header {
+  padding: 64px 48px 48px;
+  border-bottom: 0.5px solid var(--gray-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.page-header h2 {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+}
+.page-header p {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--gray-text);
+  max-width: 340px;
+  text-align: right;
+  line-height: 1.6;
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: 280px 1fr 180px;
+  border-bottom: 0.5px solid var(--gray-light);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.project-row:hover { background: #f4f2ee; }
+.project-row-img {
+  height: 200px;
+  overflow: hidden;
+  border-right: 0.5px solid var(--gray-light);
+  background: #d4d2cc;
+}
+.project-row-body {
+  padding: 28px 40px;
+  border-right: 0.5px solid var(--gray-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.project-row-meta {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.project-row-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.25;
+}
+.project-row-desc {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--gray-text);
+  margin-top: 10px;
+  line-height: 1.65;
+  max-width: 500px;
+}
+.project-row-right {
+  padding: 28px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.project-row-detail { border-top: 0.5px solid var(--gray-light); padding-top: 10px; }
+.project-row-detail span {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  display: block;
+  margin-bottom: 4px;
+}
+.project-row-detail p {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--black);
+  line-height: 1.4;
+}
+.status-badge {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 0.5px solid var(--gray-mid);
+  color: var(--gray-text);
+}
+.status-badge.active { border-color: var(--black); color: var(--black); }
+
+/* ── ÉDITIONS ── */
+.editions-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.editions-intro-text {
+  padding: 56px 48px;
+  border-right: 0.5px solid var(--gray-light);
+}
+.editions-intro-text p {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--black);
+  max-width: 380px;
+}
+.editions-intro-text p + p {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--gray-text);
+}
+.editions-intro-right { padding: 56px 48px; }
+.editions-note {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 16px;
+}
+.editions-note-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--gray-text);
+  line-height: 1.75;
+  max-width: 320px;
+}
+
+.editions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.edition-card {
+  border-right: 0.5px solid var(--gray-light);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.edition-card:last-child { border-right: none; }
+.edition-card:hover { background: #f4f2ee; }
+.edition-card-img {
+  height: 280px;
+  overflow: hidden;
+  border-bottom: 0.5px solid var(--gray-light);
+  background: #dddbd5;
+}
+.edition-card-body { padding: 20px 24px 28px; }
+.edition-type {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 8px;
+}
+.edition-name {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.edition-detail {
+  font-size: 12px;
+  color: var(--gray-text);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.edition-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 0.5px solid var(--gray-light);
+  padding-top: 12px;
+}
+.edition-price { font-family: var(--serif); font-size: 16px; color: var(--black); }
+.edition-tirage {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+}
+.editions-commande {
+  padding: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.editions-commande p {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--gray-text);
+  max-width: 460px;
+  line-height: 1.65;
+}
+
+/* ── ARTISTES ── */
+.artists-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.artist-card {
+  border-right: 0.5px solid var(--gray-light);
+  border-bottom: 0.5px solid var(--gray-light);
+  cursor: pointer;
+}
+.artist-card:nth-child(3n) { border-right: none; }
+.artist-card:hover .artist-name { text-decoration: underline; text-underline-offset: 3px; }
+.artist-img {
+  height: 240px;
+  overflow: hidden;
+  border-bottom: 0.5px solid var(--gray-light);
+  background: #d8d6d0;
+}
+.artist-body { padding: 20px 28px 28px; }
+.artist-origin {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 8px;
+}
+.artist-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+.artist-bio {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--gray-text);
+  line-height: 1.75;
+}
+.artist-tags { margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap; }
+.artist-tag {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  border: 0.5px solid var(--gray-mid);
+  padding: 3px 8px;
+}
+
+/* ── À PROPOS ── */
+.about-hero {
+  height: 420px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.about-hero .img-cover { position: absolute; inset: 0; height: 100%; }
+.about-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(14,14,13,0.5) 0%, transparent 60%);
+}
+.about-hero-text {
+  position: absolute;
+  left: 48px; bottom: 44px;
+  z-index: 2;
+}
+.about-hero-text h2 {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.2;
+}
+.about-hero-text p {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+}
+.about-manifeste {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.about-manifeste-left {
+  padding: 56px 48px;
+  border-right: 0.5px solid var(--gray-light);
+}
+.about-manifeste-left h3 {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 24px;
+}
+.about-manifeste-left p {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--black);
+}
+.about-manifeste-left p + p { margin-top: 20px; font-size: 15px; color: var(--gray-text); }
+.about-manifeste-right { padding: 56px 48px; }
+.about-manifeste-right h3 {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 24px;
+}
+.about-axe {
+  border-top: 0.5px solid var(--gray-light);
+  padding: 16px 0;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+}
+.about-axe span {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  padding-top: 2px;
+}
+.about-axe p {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--black);
+  line-height: 1.6;
+}
+.about-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.about-person { border-right: 0.5px solid var(--gray-light); }
+.about-person:last-child { border-right: none; }
+.about-person-img {
+  height: 300px;
+  overflow: hidden;
+  border-bottom: 0.5px solid var(--gray-light);
+  background: #ccc;
+}
+.about-person-body { padding: 32px 40px; }
+.about-person-role {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 10px;
+}
+.about-person-name {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 18px;
+}
+.about-person-bio {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--gray-text);
+  line-height: 1.8;
+}
+
+/* ── CONTACT ── */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 112px);
+}
+.contact-left {
+  padding: 64px 48px;
+  border-right: 0.5px solid var(--gray-light);
+}
+.contact-left h2 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.contact-left p.intro {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--gray-text);
+  line-height: 1.75;
+  max-width: 360px;
+  margin-bottom: 44px;
+}
+.contact-block { margin-bottom: 28px; }
+.contact-block span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 6px;
+}
+.contact-block a, .contact-block p {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--black);
+  text-decoration: none;
+  line-height: 1.5;
+}
+.contact-block a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.contact-right { padding: 64px 48px; }
+.contact-right h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 32px;
+}
+.form-field { margin-bottom: 26px; }
+.form-field label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 10px;
+}
+.form-field input, .form-field select, .form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 0.5px solid var(--gray-mid);
+  padding: 10px 0;
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--black);
+  outline: none;
+  appearance: none;
+  border-radius: 0;
+}
+.form-field textarea { height: 88px; resize: none; }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-bottom-color: var(--black); }
+
+/* BTN */
+.btn-outline {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: transparent;
+  border: 0.5px solid var(--gray-mid);
+  padding: 13px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+.btn-outline:hover { background: var(--gray-light); border-color: var(--black); }
+
+/* FOOTER */
+footer {
+  border-top: 0.5px solid var(--gray-light);
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
+}
+footer nav { gap: 24px; }
+footer nav a { font-size: 10px; color: var(--gray-muted); text-decoration: none; }
+footer nav a:hover { color: var(--black); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--gray-mid); }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" onclick="nav('accueil')">Forma Mantis</a>
+  <nav id="main-nav">
+    <a onclick="nav('accueil')" id="n-accueil" class="active">Accueil</a>
+    <a onclick="nav('projets')" id="n-projets">Projets</a>
+    <a onclick="nav('editions')" id="n-editions">Éditions</a>
+    <a onclick="nav('artistes')" id="n-artistes">Artistes</a>
+    <a onclick="nav('apropos')" id="n-apropos">À propos</a>
+    <a onclick="nav('contact')" id="n-contact">Contact</a>
+    <span class="lang-switch">Fr / En</span>
+  </nav>
+</header>
+
+<!-- ══ ACCUEIL ══ -->
+<div class="page active" id="page-accueil">
+  <div class="hero">
+    <!-- Côte bretonne, Unsplash libre de droits -->
+    <img class="img-cover" src="Entre_deux_coeurs-6552_-_HD.jpg" alt="Cédrix Crespel — Entre deux cœurs">
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom">
+      <div class="hero-title">
+        <p>7 mars – 16 avril 2026 — Paris</p>
+        <h1>Entre deux cœurs</h1>
+      </div>
+      <div class="hero-meta">
+        <span>Cédrix Crespel</span>
+        <p>Galerie Rabouan Moussion<br>Paris 3e</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-intro">
+    <div class="home-intro-left">
+      <p>Forma Mantis est une structure indépendante développant des projets à la croisée de l'art contemporain, de la mode et de l'édition.</p>
+      <p>Expositions dans des lieux atypiques, éditions limitées, résidences, collaborations avec artistes, designers et artisans — un modèle alternatif, ancré dans ses territoires.</p>
+    </div>
+    <div class="home-intro-right">
+      <div class="home-kpi-grid">
+        <div class="home-kpi">
+          <span>Dernière exposition</span>
+          <p>Entre deux cœurs<br>Cédrix Crespel<br>Paris, 2026</p>
+        </div>
+        <div class="home-kpi">
+          <span>Commissaire</span>
+          <p>Thomas Bernard<br>Direction artistique<br>& curatoriale</p>
+        </div>
+        <div class="home-kpi">
+          <span>Galeries partenaires</span>
+          <p>Rabouan Moussion<br>Strouk<br>NEC</p>
+        </div>
+        <div class="home-kpi">
+          <span>Basé à</span>
+          <p>Paris<br>& Pont-Aven<br>Bretagne</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Projets récents</div>
+  <div class="home-featured-grid">
+    <div class="featured-main" onclick="nav('crespel')">
+      <div class="feat-img feat-img-main">
+        <img class="img-cover" src="Entre_deux_coeurs-6410_-_HD.jpg" alt="Cédrix Crespel — Entre deux cœurs">
+      </div>
+      <div class="feat-body">
+        <div class="feat-tag">Exposition — Galerie Rabouan Moussion, Paris, 2026</div>
+        <div class="feat-title">Cédrix Crespel — Entre deux cœurs</div>
+        <div class="feat-sub">Un travail pictural entre dévoilement et retenue, le net et le flou. Texte de présentation signé Thomas Bernard.</div>
+      </div>
+    </div>
+    <div class="featured-side" onclick="nav('nympheas')">
+      <div class="feat-img feat-img-side">
+        <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1020-hd.jpg" alt="Les Nymphéas — Galerie Strouk">
+      </div>
+      <div class="feat-body">
+        <div class="feat-tag">Exposition collective — Galerie Strouk, 2025</div>
+        <div class="feat-title">Les Nymphéas : Miroirs des profondeurs</div>
+        <div class="feat-sub">Autour de l'héritage de Monet — six artistes réunis par Thomas Bernard.</div>
+      </div>
+    </div>
+    <div class="featured-side" onclick="nav('jeunesse')">
+      <div class="feat-img feat-img-side">
+        <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/_1045827.jpg" alt="La jeunesse a toujours raison">
+      </div>
+      <div class="feat-body">
+        <div class="feat-tag">STROUK × ENSBA — Décembre 2024</div>
+        <div class="feat-title">La jeunesse a toujours raison même quand elle a tort</div>
+        <div class="feat-sub">Plus de trente artistes des Beaux-Arts de Paris investissent la Galerie Strouk.</div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav>
+      <a onclick="nav('contact')">Contact</a>
+      <a onclick="nav('editions')">Éditions</a>
+      <a onclick="nav('apropos')">À propos</a>
+    </nav>
+    <p>Paris & Pont-Aven</p>
+  </footer>
+</div>
+
+<!-- ══ PROJETS ══ -->
+<div class="page" id="page-projets">
+  <div class="page-header">
+    <h2>Projets</h2>
+    <p>Expositions, résidences et situations — pensées en relation avec leurs lieux.</p>
+  </div>
+
+  onclick="nav('crespel')">
+    <div class="project-row-img">
+      <img class="img-cover" src="Entre_deux_coeurs-6410_-_HD.jpg" alt="Cédrix Crespel — Entre deux cœurs">
+    </div>
+    <div class="project-row-body">
+      <div class="project-row-meta">Exposition — Galerie Rabouan Moussion <span class="status-badge active">Récent</span></div>
+      <div class="project-row-title">Cédrix Crespel — Entre deux cœurs</div>
+      <div class="project-row-desc">Comment représenter une relation amoureuse, ses complicités intérieures, son histoire et ses récits ? Un travail pictural à la fois charnel et spirituel, entre dévoilement et retenue, entre le net et le flou. Texte de présentation signé Thomas Bernard.</div>
+    </div>
+    <div class="project-row-right">
+      <div class="project-row-detail"><span>Lieu</span><p>Galerie Rabouan Moussion<br>Paris 3e</p></div>
+      <div class="project-row-detail"><span>Dates</span><p>7 mars – 16 avril 2026</p></div>
+      <div class="project-row-detail"><span>Format</span><p>Peinture, sculpture<br>Grand format</p></div>
+    </div>
+  </div>
+
+  <div class="project-row">
+    <div class="project-row-img">
+      <img class="img-cover" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80&fit=crop" alt="Lieu permanent">
+    </div>
+    <div class="project-row-body">
+      <div class="project-row-meta">Lieu permanent <span class="status-badge">À venir</span></div>
+      <div class="project-row-title">Lieu Forma Mantis</div>
+      <div class="project-row-desc">Un espace permanent combinant café, galerie de petite taille, lieu de résidence et espace de vente des éditions. Une adresse fixe qui devient le centre de gravité du réseau. Recherche de lieu en cours.</div>
+    </div>
+    <div class="project-row-right">
+      <div class="project-row-detail"><span>Type</span><p>Café, galerie, résidence</p></div>
+      <div class="project-row-detail"><span>Territoire</span><p>Bretagne ou Paris</p></div>
+      <div class="project-row-detail"><span>Horizon</span><p>2026</p></div>
+    </div>
+  </div>
+
+  <div class="project-row" onclick="nav('mason')">
+    <div class="project-row-img">
+      <img class="img-cover" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="Charles Mason — Galerie NEC">
+    </div>
+    <div class="project-row-body">
+      <div class="project-row-meta">Exposition — Galerie NEC <span class="status-badge">Passée</span></div>
+      <div class="project-row-title">Charles Mason</div>
+      <div class="project-row-desc">Exposition monographique de l'artiste britannique Charles Mason à la Galerie NEC (Nilsson & Chiglien), Paris Marais. Sculptures, installations et œuvres sur papier. Commissariat Thomas Bernard.</div>
+    </div>
+    <div class="project-row-right">
+      <div class="project-row-detail"><span>Lieu</span><p>Galerie NEC<br>Paris, Marais</p></div>
+      <div class="project-row-detail"><span>Artiste</span><p>Charles Mason</p></div>
+      <div class="project-row-detail"><span>Commissaire</span><p>Thomas Bernard</p></div>
+    </div>
+  </div>
+
+  <div class="project-row" onclick="nav('jeunesse')">
+    <div class="project-row-img">
+      <img class="img-cover" src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=600&q=80&fit=crop" alt="La jeunesse a toujours raison — Strouk">
+    </div>
+    <div class="project-row-body">
+      <div class="project-row-meta">Exposition collective — Galerie Strouk <span class="status-badge">Passée</span></div>
+      <div class="project-row-title">La jeunesse a toujours raison même quand elle a tort</div>
+      <div class="project-row-desc">STROUK × ENSBA — Une sélection de plus de trente artistes issus de l'École nationale supérieure des beaux-arts de Paris. Organisée par Alain Berland avec la complicité de Thomas Bernard, cette exposition célèbre une génération d'une audace formelle et narrative qui défie les conventions.</div>
+    </div>
+    <div class="project-row-right">
+      <div class="project-row-detail"><span>Lieu</span><p>Galerie Strouk<br>5 rue du Mail, Paris 2e</p></div>
+      <div class="project-row-detail"><span>Dates</span><p>10 – 14 décembre 2024</p></div>
+      <div class="project-row-detail"><span>Format</span><p>+30 artistes ENSBA</p></div>
+    </div>
+  </div>
+
+  <div class="project-row" onclick="nav('nympheas')">
+    <div class="project-row-img">
+      <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1020-hd.jpg" alt="Les Nymphéas — Galerie Strouk">
+    </div>
+    <div class="project-row-body">
+      <div class="project-row-meta">Exposition en deux actes — Galerie Strouk <span class="status-badge">Passée</span></div>
+      <div class="project-row-title">Les Nymphéas : Miroirs des profondeurs</div>
+      <div class="project-row-desc">Autour de l'héritage de Claude Monet — une vision contemporaine fondée sur les notions de surface et de profondeur. Six artistes réunis par Thomas Bernard : Vincent Beaurin, Christophe Doucet, Vincent Gicquel, Ludivine Gonthier, Orsten Groom, Marlène Mocquet.</div>
+    </div>
+    <div class="project-row-right">
+      <div class="project-row-detail"><span>Lieu</span><p>Galerie Strouk<br>2 av. Matignon, Paris 8e</p></div>
+      <div class="project-row-detail"><span>Dates</span><p>24 janvier – 8 mars 2025</p></div>
+      <div class="project-row-detail"><span>Artistes</span><p>6 artistes</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
+    <p>Paris & Pont-Aven</p>
+  </footer>
+</div>
+
+<!-- ══ ÉDITIONS ══ -->
+<div class="page" id="page-editions">
+  <div class="editions-intro">
+    <div class="editions-intro-text">
+      <p>Des objets, des livrets, des pièces — conçus en lien direct avec les projets.</p>
+      <p>Petites séries, tirages limités et numérotés, production artisanale. Chaque édition est pensée comme une extension du travail d'exposition.</p>
+    </div>
+    <div class="editions-intro-right">
+      <div class="editions-note">Politique éditoriale</div>
+      <p class="editions-note-text">Tous les tirages sont limités, numérotés et signés. Les commandes se font par email ou lors des événements Forma Mantis. Chaque pièce est emballée et expédiée à la main.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Disponible</div>
+  <div class="editions-grid">
+    <div class="edition-card">
+      <div class="edition-card-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&q=80&fit=crop" alt="Livret n°1">
+      </div>
+      <div class="edition-card-body">
+        <div class="edition-type">Livret</div>
+        <div class="edition-name">Le Séjour des formes, n°1</div>
+        <div class="edition-detail">Texte de Thomas Bernard. 32 pages, couverture risograph deux couleurs. Papier bouffant 90g.</div>
+        <div class="edition-price-row"><span class="edition-price">24 €</span><span class="edition-tirage">50 ex.</span></div>
+      </div>
+    </div>
+    <div class="edition-card">
+      <div class="edition-card-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80&fit=crop" alt="Textile Valentine Gauthier">
+      </div>
+      <div class="edition-card-body">
+        <div class="edition-type">Objet textile</div>
+        <div class="edition-name">Série textile Valentine Gauthier</div>
+        <div class="edition-detail">Pièce en lin naturel teint en végétal. Numérotée et signée par VG. Collaboration exclusive.</div>
+        <div class="edition-price-row"><span class="edition-price">180 €</span><span class="edition-tirage">30 ex.</span></div>
+      </div>
+    </div>
+    <div class="edition-card">
+      <div class="edition-card-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?w=400&q=80&fit=crop" alt="Estampe Forma I">
+      </div>
+      <div class="edition-card-body">
+        <div class="edition-type">Estampe</div>
+        <div class="edition-name">Forma I — Pont-Aven</div>
+        <div class="edition-detail">Gravure sur cuivre, impression taille-douce. 21 × 29,7 cm. Papier BFK Rives 250g.</div>
+        <div class="edition-price-row"><span class="edition-price">320 €</span><span class="edition-tirage">20 ex.</span></div>
+      </div>
+    </div>
+    <div class="edition-card">
+      <div class="edition-card-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&q=80&fit=crop" alt="Catalogue 2025">
+      </div>
+      <div class="edition-card-body">
+        <div class="edition-type">Catalogue</div>
+        <div class="edition-name">Catalogue d'exposition 2025</div>
+        <div class="edition-detail">72 pages, bilingue FR/EN. Textes critiques, documentation photographique. Parution automne 2025.</div>
+        <div class="edition-price-row"><span class="edition-price">38 €</span><span class="edition-tirage">100 ex.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="editions-commande">
+    <p>Les commandes se font par email. Envoi dans toute la France et à l'international. Chaque pièce est emballée à la main et expédiée sous 5 jours ouvrés.</p>
+    <a class="btn-outline" onclick="nav('contact')">Commander par email</a>
+  </div>
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('projets')">Projets</a><a onclick="nav('apropos')">À propos</a></nav>
+    <p>Paris & Pont-Aven</p>
+  </footer>
+</div>
+
+<!-- ══ ARTISTES ══ -->
+<div class="page" id="page-artistes">
+  <div class="page-header">
+    <h2>Artistes & collaborateurs</h2>
+    <p>Peu d'artistes, fortement accompagnés — une approche curatoriale construite dans la durée.</p>
+  </div>
+  <div class="artists-grid">
+    <div class="artist-card">
+      <div class="artist-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="Valentine Gauthier">
+      </div>
+      <div class="artist-body">
+        <div class="artist-origin">Paris, France</div>
+        <div class="artist-name">Valentine Gauthier</div>
+        <div class="artist-bio">Créatrice de mode, fondatrice de Valentine Gauthier (2007) et Value (2023). Le vêtement comme acte de pensée — féminité libre, engagement écologique, dialogue constant avec l'art contemporain.</div>
+        <div class="artist-tags"><span class="artist-tag">Mode</span><span class="artist-tag">Direction artistique</span><span class="artist-tag">Textile</span></div>
+      </div>
+    </div>
+    <div class="artist-card">
+      <div class="artist-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1536924430914-91f9e2041b83?w=600&q=80&fit=crop" alt="Artiste sculpture">
+      </div>
+      <div class="artist-body">
+        <div class="artist-origin">Bretagne, France</div>
+        <div class="artist-name">Artiste associé·e n°1</div>
+        <div class="artist-bio">Pratique articulée autour du paysage, de la mémoire des lieux et des matériaux trouvés. Sculpture et installation in situ. Exposé dans plusieurs centres d'art régionaux.</div>
+        <div class="artist-tags"><span class="artist-tag">Sculpture</span><span class="artist-tag">Installation</span><span class="artist-tag">In situ</span></div>
+      </div>
+    </div>
+    <div class="artist-card">
+      <div class="artist-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=600&q=80&fit=crop" alt="Artiste photographie">
+      </div>
+      <div class="artist-body">
+        <div class="artist-origin">Europe du Nord</div>
+        <div class="artist-name">Artiste associé·e n°2</div>
+        <div class="artist-bio">Photographe et éditeur interrogeant les formes de diffusion de l'image. Plusieurs livres d'artiste publiés. Le livre comme espace autonome de création.</div>
+        <div class="artist-tags"><span class="artist-tag">Photographie</span><span class="artist-tag">Édition</span><span class="artist-tag">Livre d'artiste</span></div>
+      </div>
+    </div>
+    <div class="artist-card">
+      <div class="artist-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?w=600&q=80&fit=crop" alt="Graveur">
+      </div>
+      <div class="artist-body">
+        <div class="artist-origin">France / Portugal</div>
+        <div class="artist-name">Artiste associé·e n°3</div>
+        <div class="artist-bio">Dessinateur et graveur. Séries de petits formats au croisement du botanique et de l'abstraction géométrique. Contribue aux éditions Forma Mantis.</div>
+        <div class="artist-tags"><span class="artist-tag">Dessin</span><span class="artist-tag">Gravure</span><span class="artist-tag">Éditions</span></div>
+      </div>
+    </div>
+    <div class="artist-card">
+      <div class="artist-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80&fit=crop" alt="Céramique">
+      </div>
+      <div class="artist-body">
+        <div class="artist-origin">France</div>
+        <div class="artist-name">Artisan·e associé·e</div>
+        <div class="artist-bio">Céramiste formé·e aux Beaux-Arts et à Sèvres. Pièces fonctionnelles en petites séries, en dialogue avec les projets d'exposition. Collaborations mode et design.</div>
+        <div class="artist-tags"><span class="artist-tag">Céramique</span><span class="artist-tag">Design</span><span class="artist-tag">Petite série</span></div>
+      </div>
+    </div>
+    <div class="artist-card" style="border-right:none">
+      <div class="artist-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80&fit=crop" alt="Critique d'art">
+      </div>
+      <div class="artist-body">
+        <div class="artist-origin">Paris & international</div>
+        <div class="artist-name">Critique & auteur·e</div>
+        <div class="artist-bio">Auteur·e et critique d'art. Collabore aux textes des publications et catalogues Forma Mantis. Participe aux dîners et rencontres du Pont-Aven Social Club.</div>
+        <div class="artist-tags"><span class="artist-tag">Critique</span><span class="artist-tag">Écriture</span><span class="artist-tag">Conférences</span></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
+    <p>Paris & Pont-Aven</p>
+  </footer>
+</div>
+
+<!-- ══ À PROPOS ══ -->
+<div class="page" id="page-apropos">
+  <div class="about-hero">
+    <img class="img-cover" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1600&q=80&fit=crop" alt="Bretagne paysage">
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-text">
+      <h2>Une structure indépendante<br>à la croisée des formes</h2>
+      <p>Art contemporain, mode, édition — sans hiérarchie entre les disciplines</p>
+    </div>
+  </div>
+
+  <div class="about-manifeste">
+    <div class="about-manifeste-left">
+      <h3>Manifeste</h3>
+      <p>Forma Mantis repose sur une conviction simple : l'art se pense mieux à l'écart des circuits normés, dans des lieux qui ont une histoire, avec des gens qui ont une sensibilité.</p>
+      <p>Ni galerie, ni bureau de production, ni label — quelque chose de plus organique. Un réseau de confiance, des projets cohérents, une économie maîtrisée. La rareté comme choix, la qualité comme seule contrainte.</p>
+    </div>
+    <div class="about-manifeste-right">
+      <h3>Axes de travail</h3>
+      <div class="about-axe"><span>Exposition</span><p>Des lieux atypiques, une scénographie précise, peu d'œuvres mais bien choisies.</p></div>
+      <div class="about-axe"><span>Édition</span><p>Livrets, estampes, objets hybrides — des pièces produites en conscience.</p></div>
+      <div class="about-axe"><span>Réseau</span><p>Dîners, rencontres, séjours — l'hospitalité comme forme de transmission.</p></div>
+      <div class="about-axe"><span>Territoire</span><p>Ancrage local à Pont-Aven et Paris, diffusion internationale.</p></div>
+      <div class="about-axe"><span>Économie</span><p>Modèle autonome, non subventionné, fondé sur la vente directe et les partenariats.</p></div>
+    </div>
+  </div>
+
+  <div class="section-label">Direction artistique</div>
+  <div class="about-duo">
+    <div class="about-person">
+      <div class="about-person-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop&crop=face" alt="Thomas Bernard">
+      </div>
+      <div class="about-person-body">
+        <div class="about-person-role">Direction artistique & curatoriale</div>
+        <div class="about-person-name">Thomas Bernard</div>
+        <div class="about-person-bio">Commissaire d'exposition, auteur et directeur artistique. Développe des projets à la croisée de l'art contemporain, du design et de l'édition. Construit des récits, accompagne des artistes, structure des visions. Formé à l'histoire de l'art et aux métiers du livre, il a exercé dans plusieurs structures culturelles indépendantes avant de fonder Forma Mantis.</div>
+      </div>
+    </div>
+    <div class="about-person">
+      <div class="about-person-img">
+        <img class="img-cover" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&q=80&fit=crop&crop=face" alt="Valentine Gauthier">
+      </div>
+      <div class="about-person-body">
+        <div class="about-person-role">Direction artistique & création</div>
+        <div class="about-person-name">Valentine Gauthier</div>
+        <div class="about-person-bio">Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Son travail considère le vêtement comme acte de pensée — une féminité non normative, un engagement écologique pionnier, un dialogue profond avec l'art contemporain. Travaille en lien avec des galeries de référence et défend un nouveau luxe fondé sur la transparence, la petite série et la matière vivante.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('projets')">Projets</a></nav>
+    <p>Paris & Pont-Aven</p>
+  </footer>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div class="page" id="page-contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <h2>Contact</h2>
+      <p class="intro">Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.</p>
+      <div class="contact-block"><span>Direction artistique</span><p>Thomas Bernard & Valentine Gauthier</p></div>
+      <div class="contact-block"><span>Contact général</span><a href="mailto:contact@formamantis.com">contact@formamantis.com</a></div>
+      <div class="contact-block"><span>Presse & partenariats</span><a href="mailto:presse@formamantis.com">presse@formamantis.com</a></div>
+      <div class="contact-block"><span>Commandes éditions</span><a href="mailto:editions@formamantis.com">editions@formamantis.com</a></div>
+      <div class="contact-block"><span>Pont-Aven Social Club</span><a href="mailto:club@formamantis.com">club@formamantis.com</a></div>
+      <div class="contact-block"><span>Localisation</span><p>Paris & Pont-Aven, Bretagne<br>France</p></div>
+    </div>
+    <div class="contact-right">
+      <h3>Écrire un message</h3>
+      <div class="form-field"><label>Nom & prénom</label><input type="text"/></div>
+      <div class="form-field"><label>Email</label><input type="email"/></div>
+      <div class="form-field">
+        <label>Objet</label>
+        <select>
+          <option value="">— Sélectionner —</option>
+          <option>Projet / collaboration</option>
+          <option>Commande éditions</option>
+          <option>Presse & partenariat</option>
+          <option>Pont-Aven Social Club</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Message</label><textarea></textarea></div>
+      <button class="btn-outline" onclick="this.textContent='Message envoyé —'; this.style.borderColor='var(--black)'">Envoyer</button>
+    </div>
+  </div>
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
+    <p>Paris & Pont-Aven</p>
+  </footer>
+</div>
+
+<!-- ══ CÉDRIX CRESPEL — ENTRE DEUX CŒURS ══ -->
+<div class="page" id="page-crespel">
+
+  <!-- HERO : première photo de l'expo -->
+  <div class="hero">
+    <img class="img-cover" src="Entre_deux_coeurs-6410_-_HD.jpg" alt="Entre deux cœurs — Vue d'exposition, Galerie Rabouan Moussion, 2026">
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom">
+      <div class="hero-title">
+        <p>7 mars – 16 avril 2026 — Paris</p>
+        <h1>Entre deux cœurs</h1>
+      </div>
+      <div class="hero-meta">
+        <span>Artiste</span>
+        <p>Cédrix Crespel</p>
+        <p style="margin-top:6px; font-size:12px; color:rgba(255,255,255,0.6);">Galerie Rabouan Moussion<br>11 rue Pastourelle, Paris 3e</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO TEXTE + MÉTA -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px; border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gray-text); margin-bottom:24px;">Texte de présentation</p>
+      <p style="font-family:var(--serif); font-size:19px; line-height:1.75; color:var(--black);">Comment représenter une relation amoureuse, ses complicités intérieures, son histoire et ses récits, sa posture objective et sociale ?</p>
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.8; color:var(--gray-text); margin-top:20px;">C'est l'exercice ambitieux et délicat que Cédrix Crespel essaie de relever dans une peinture qui n'est jamais une surface lisse ni un simple espace de projection. Elle se déploie comme un territoire instable, traversé de tensions, de glissements et de résistances : entre dévoilement et retenue, entre une lumière qui effleure les formes et une ombre qui les consume sans jamais les abolir.</p>
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.8; color:var(--gray-text); margin-top:16px;">La toile devient un champ sensible où se joue une dialectique constante entre ce qui apparaît et ce qui se dérobe, entre ce que l'on donne à voir et ce que l'on choisit de maintenir à distance. En ce sens, le travail de Cédrix Crespel rappelle que ce médium reste l'un des lieux les plus exigeants et les plus fragiles pour approcher le désir, la vulnérabilité et la relation à l'autre.</p>
+      <p style="font-family:var(--serif); font-size:13px; font-style:italic; color:var(--gray-muted); margin-top:28px; border-top:0.5px solid var(--gray-light); padding-top:16px;">Texte : Thomas Bernard</p>
+    </div>
+    <div style="padding:56px 48px; display:flex; flex-direction:column; gap:28px;">
+      <div style="border-top:0.5px solid var(--gray-light); padding-top:16px;">
+        <span style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray-text); display:block; margin-bottom:8px;">Artiste</span>
+        <p style="font-family:var(--serif); font-size:16px; color:var(--black);">Cédrix Crespel<br><span style="font-size:13px; color:var(--gray-text);">Né en 1974 à Batz-sur-Mer<br>Vit et travaille à Guérande</span></p>
+      </div>
+      <div style="border-top:0.5px solid var(--gray-light); padding-top:16px;">
+        <span style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray-text); display:block; margin-bottom:8px;">Galerie</span>
+        <p style="font-family:var(--serif); font-size:15px; color:var(--black);">Galerie Rabouan Moussion<br><span style="font-size:13px; color:var(--gray-text);">11 rue Pastourelle, 75003 Paris</span></p>
+      </div>
+      <div style="border-top:0.5px solid var(--gray-light); padding-top:16px;">
+        <span style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray-text); display:block; margin-bottom:8px;">Dates</span>
+        <p style="font-family:var(--serif); font-size:15px; color:var(--black);">7 mars – 16 avril 2026</p>
+      </div>
+      <div style="border-top:0.5px solid var(--gray-light); padding-top:16px;">
+        <span style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray-text); display:block; margin-bottom:8px;">Représentation</span>
+        <p style="font-family:var(--serif); font-size:13px; color:var(--gray-text); line-height:1.6;">Galerie Rabouan Moussion (FR)<br>Montresso Art Foundation (Maroc)<br>Madison Gallery (US)</p>
+      </div>
+      <div style="border-top:0.5px solid var(--gray-light); padding-top:16px;">
+        <span style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray-text); display:block; margin-bottom:8px;">Lien Forma Mantis</span>
+        <p style="font-family:var(--serif); font-size:13px; color:var(--gray-text); font-style:italic; line-height:1.6;">Cédrix Crespel a rejoint la Galerie Rabouan Moussion avec le soutien de Thomas Bernard. Cette exposition marque le début d'une collaboration au long cours.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXTE LONG : suite -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:48px 48px; border-right:0.5px solid var(--gray-light);">
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--gray-text);">Loin d'un récit explicite ou d'une frontalité spectaculaire, ses œuvres s'inscrivent dans une zone intermédiaire : ni pure abstraction du sentiment, ni figuration illustrative. Elles habitent cet espace du trouble, du presque-visible, où l'image ne se livre jamais entièrement.</p>
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--gray-text); margin-top:16px;">L'histoire de l'art est profondément traversée par cette quête d'intimité et de dévoilement. Du clair-obscur du Caravage, au velouté des chairs d'Ingres, à l'érotisme feutré de Balthus, jusqu'à Bacon et la distorsion convulsive des figures — chaque époque a inventé ses propres stratégies pour rendre visible la proximité des corps et des affects.</p>
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--gray-text); margin-top:16px;">Chez Cédrix Crespel, cette filiation agit comme un soubassement, un terrain de résonances. L'intime n'y est ni idéalisé ni brutalement exposé. Il est un matériau vivant, instable, issu d'un dialogue amoureux en permanente recomposition.</p>
+    </div>
+    <div style="padding:48px 48px;">
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--gray-text);">Les tableaux de Crespel naissent d'un flux d'images partagé avec son épouse : une correspondance visuelle, continue, parfois quotidienne, où l'image devient un langage à part entière. Ce qui circule entre eux n'est pas destiné à être montré, et c'est précisément dans ce déplacement — du privé vers l'espace de la peinture — que l'œuvre prend forme.</p>
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--gray-text); margin-top:16px;">Face à ces œuvres, le spectateur est placé dans une position ambiguë : ni voyeur, ni simple témoin. Il devient dépositaire d'une intimité qui ne lui appartient pas, mais qui lui est néanmoins confiée.</p>
+      <p style="font-family:var(--serif); font-size:15px; line-height:1.85; color:var(--gray-text); margin-top:16px;">Cédrix Crespel poursuit ainsi une exploration à la fois charnelle et spirituelle de la peinture. Ses œuvres font dialoguer les héritages du passé avec une sensibilité profondément contemporaine, où l'intime devient un enjeu universel.</p>
+    </div>
+  </div>
+
+  <!-- GALERIE PHOTOS -->
+  <div style="padding:20px 48px 0; border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gray-text); padding-bottom:20px; border-bottom:0.5px solid var(--gray-light);">Vues d'exposition</p>
+  </div>
+
+  <!-- Ligne 1 : 2 images -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:460px; overflow:hidden; border-right:0.5px solid var(--gray-light);">
+      <img style="width:100%; height:100%; object-fit:cover; filter:saturate(0.9) brightness(0.97);" src="Entre_deux_coeurs-6209_-_HD.jpg" alt="Vue d'exposition 1">
+    </div>
+    <div style="height:460px; overflow:hidden;">
+      <img style="width:100%; height:100%; object-fit:cover; filter:saturate(0.9) brightness(0.97);" src="Entre_deux_coeurs-6282_-_HD.jpg" alt="Vue d'exposition 2">
+    </div>
+  </div>
+
+  <!-- Ligne 2 : image pleine largeur -->
+  <div style="height:560px; overflow:hidden; border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%; height:100%; object-fit:cover; filter:saturate(0.9) brightness(0.97);" src="Entre_deux_coeurs-6552_-_HD.jpg" alt="Vue d'exposition — grande salle">
+  </div>
+
+  <!-- Ligne 3 : 3 images -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:340px; overflow:hidden; border-right:0.5px solid var(--gray-light);">
+      <img style="width:100%; height:100%; object-fit:cover; filter:saturate(0.9) brightness(0.97);" src="Entre_deux_coeurs-6419_-_HD.jpg" alt="Œuvre — détail">
+    </div>
+    <div style="height:340px; overflow:hidden; border-right:0.5px solid var(--gray-light);">
+      <img style="width:100%; height:100%; object-fit:cover; filter:saturate(0.9) brightness(0.97);" src="Entre_deux_coeurs-6476_-_HD.jpg" alt="Œuvre — format paysage">
+    </div>
+    <div style="height:340px; overflow:hidden;">
+      <img style="width:100%; height:100%; object-fit:cover; filter:saturate(0.9) brightness(0.97);" src="Entre_deux_coeurs-6514_-_HD.jpg" alt="Vue d'ensemble">
+    </div>
+  </div>
+
+  <!-- NOTE LÉGALE PHOTOS -->
+  <div style="padding:16px 48px; border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-size:10px; letter-spacing:0.08em; color:var(--gray-muted);">Courtesy de l'artiste et de la Galerie Rabouan Moussion, Paris — Photos : HD</p>
+  </div>
+
+  <!-- BIO ARTISTE -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:48px 48px; border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gray-text); margin-bottom:20px;">L'artiste</p>
+      <p style="font-family:var(--serif); font-size:22px; font-weight:400; color:var(--black); margin-bottom:16px;">Cédrix Crespel</p>
+      <p style="font-family:var(--serif); font-size:14px; color:var(--gray-text); line-height:1.8;">Né en 1974 à Batz-sur-Mer, Cédrix Crespel vit et travaille à Guérande. Plasticien, peintre, photographe et sculpteur, il explore depuis plus de trente ans la passion qu'il voue à sa relation amoureuse, faisant de l'intime le cœur de son œuvre.</p>
+      <p style="font-family:var(--serif); font-size:14px; color:var(--gray-text); line-height:1.8; margin-top:14px;">Ses toiles grand format, à l'acrylique et à l'huile, explorent le féminin, le désir, la relation amoureuse et la vulnérabilité du corps. Ni pure abstraction, ni figuration illustrative, ses œuvres habitent un espace trouble du presque-visible, où le jeu entre le flou et le net installe une tension picturale unique.</p>
+      <p style="font-family:var(--serif); font-size:14px; color:var(--gray-text); line-height:1.8; margin-top:14px;">Son œuvre dialogue avec les grandes figures de l'histoire de l'art — de Caravage à Bacon, d'Ingres à Monet. Représenté par la Galerie Rabouan Moussion à Paris, il expose régulièrement en France et à l'international, notamment à la Montresso Art Foundation au Maroc et à la ZONA MACO Art Fair à Mexico.</p>
+    </div>
+    <div style="padding:48px 48px;">
+      <p style="font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gray-text); margin-bottom:20px;">Sélection d'œuvres</p>
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <div style="border-top:0.5px solid var(--gray-light); padding:14px 0; display:grid; grid-template-columns:1fr auto;">
+          <div>
+            <p style="font-family:var(--serif); font-size:14px; color:var(--black);">Tu Me Tues, Tu Me Fais Du Bien</p>
+            <p style="font-size:11px; color:var(--gray-text); margin-top:3px;">Huile sur toile, 2025</p>
+          </div>
+          <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-text); padding-top:2px;">Disponible</p>
+        </div>
+        <div style="border-top:0.5px solid var(--gray-light); padding:14px 0; display:grid; grid-template-columns:1fr auto;">
+          <div>
+            <p style="font-family:var(--serif); font-size:14px; color:var(--black);">Yellow Carpet</p>
+            <p style="font-size:11px; color:var(--gray-text); margin-top:3px;">Acrylique sur toile, 2025</p>
+          </div>
+          <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-text); padding-top:2px;">Disponible</p>
+        </div>
+        <div style="border-top:0.5px solid var(--gray-light); padding:14px 0; display:grid; grid-template-columns:1fr auto;">
+          <div>
+            <p style="font-family:var(--serif); font-size:14px; color:var(--black);">Intime Acquasantiera</p>
+            <p style="font-size:11px; color:var(--gray-text); margin-top:3px;">Huile sur toile, 2025</p>
+          </div>
+          <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-text); padding-top:2px;">Disponible</p>
+        </div>
+        <div style="border-top:0.5px solid var(--gray-light); padding:14px 0; display:grid; grid-template-columns:1fr auto;">
+          <div>
+            <p style="font-family:var(--serif); font-size:14px; color:var(--black);">Palimpseste</p>
+            <p style="font-size:11px; color:var(--gray-text); margin-top:3px;">Technique mixte, 2026</p>
+          </div>
+          <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-text); padding-top:2px;">Disponible</p>
+        </div>
+        <div style="border-top:0.5px solid var(--gray-light); border-bottom:0.5px solid var(--gray-light); padding:14px 0; display:grid; grid-template-columns:1fr auto;">
+          <div>
+            <p style="font-family:var(--serif); font-size:14px; color:var(--black);">ZIP</p>
+            <p style="font-size:11px; color:var(--gray-text); margin-top:3px;">Acrylique sur toile, 2026</p>
+          </div>
+          <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-text); padding-top:2px;">Vendu</p>
+        </div>
+      </div>
+      <p style="font-family:var(--serif); font-size:13px; color:var(--gray-text); font-style:italic; margin-top:20px; line-height:1.6;">Prix sur demande — 5 000 à 10 000 €<br>Contact : <a href="mailto:contact@formamantis.com" style="color:var(--black); text-decoration:none;">contact@formamantis.com</a></p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="padding:48px; display:flex; justify-content:space-between; align-items:center; border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-family:var(--serif); font-size:16px; color:var(--gray-text); max-width:480px; line-height:1.65;">Pour toute demande d'information sur les œuvres, les disponibilités ou les conditions d'acquisition, contacter Forma Mantis ou directement la Galerie Rabouan Moussion.</p>
+    <div style="display:flex; gap:16px; flex-shrink:0;">
+      <a class="btn-outline" onclick="nav('contact')">Nous contacter</a>
+      <a class="btn-outline" href="https://www.rabouanmoussion.com" target="_blank" style="color:var(--gray-text);">Galerie Rabouan Moussion ↗</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav>
+      <a onclick="nav('projets')">Projets</a>
+      <a onclick="nav('artistes')">Artistes</a>
+      <a onclick="nav('contact')">Contact</a>
+    </nav>
+    <p>Paris & Pont-Aven</p>
+  </footer>
+</div>
+
+<!-- ══ CHARLES MASON — GALERIE NEC ══ -->
+<div class="page" id="page-mason">
+  <div class="hero" style="height:400px;">
+    <img class="img-cover" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&fit=crop" alt="Charles Mason">
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom">
+      <div class="hero-title">
+        <p>Paris, Marais — Galerie NEC</p>
+        <h1>Charles Mason</h1>
+      </div>
+      <div class="hero-meta"><span>Commissaire</span><p>Thomas Bernard</p></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">À propos</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Dans ses sculptures, Charles Mason déploie une approche minimale déceptive.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;">Les formes sculpturales employées sont le plus souvent des éléments récupérés de l'espace urbain, puis déplacés dans le lieu de la galerie. Les objets qui pourraient être définis par leur forme et leur emploi propre, ici, sont laqués, peints ou recouverts de scotch leur offrant une aura d'utopie moderniste.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Ils semblent imiter et offrir les souvenirs de leur fonction pratique, qu'implique la reconnaissance immédiate pour le spectateur, mais le contexte reste inapproprié. Face aux sculptures courent quelques tensions physiques intrinsèques liées à la question de la survie de ces objets en tant que sculpture.</p>
+      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:28px;border-top:0.5px solid var(--gray-light);padding-top:16px;">Commissariat : Thomas Bernard — Galerie NEC, Paris</p>
+    </div>
+    <div style="padding:56px 48px;display:flex;flex-direction:column;gap:24px;">
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Artiste</span><p style="font-family:var(--serif);font-size:16px;color:var(--black);">Charles Mason<br><span style="font-size:13px;color:var(--gray-text);">Artiste britannique</span></p></div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Galerie</span><p style="font-family:var(--serif);font-size:15px;color:var(--black);">Galerie NEC — Nilsson &amp; Chiglien<br><span style="font-size:13px;color:var(--gray-text);">117 rue Vieille du Temple, 75003 Paris</span></p></div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Format</span><p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.6;">Sculptures, installations<br>Exposition monographique<br>Commissariat Thomas Bernard</p></div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;background:var(--gray-light);padding:16px;"><p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);margin-bottom:8px;">Note</p><p style="font-family:var(--serif);font-size:13px;color:var(--gray-text);font-style:italic;line-height:1.6;">Les visuels de cette exposition seront ajoutés prochainement.</p></div>
+    </div>
+  </div>
+  <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour toute demande sur cette exposition, contacter Forma Mantis.</p>
+    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://galerienec.com" target="_blank" style="color:var(--gray-text);">Galerie NEC ↗</a></div>
+  </div>
+  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris & Pont-Aven</p></footer>
+</div>
+
+<!-- ══ LA JEUNESSE A TOUJOURS RAISON ══ -->
+<div class="page" id="page-jeunesse">
+  <div class="hero" style="height:400px;">
+    <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/vue-expo-1.jpg" alt="La jeunesse a toujours raison — vue d'exposition">
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom">
+      <div class="hero-title">
+        <p>10 – 14 décembre 2024 — Galerie Strouk, Paris</p>
+        <h1>La jeunesse a toujours raison<br>même quand elle a tort</h1>
+      </div>
+      <div class="hero-meta"><span>Format</span><p>STROUK × ENSBA</p></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Présentation</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Une célébration de la créativité de plus de trente artistes issus des Beaux-Arts de Paris.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;">La Galerie Strouk, sous la direction de Marie Laborde, a invité une sélection d'artistes issus de l'ENSBA à investir l'espace du 5, rue du Mail pour une exposition exceptionnelle.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;font-style:italic;padding-left:20px;border-left:1px solid var(--gray-light);">"Ces artistes, avec qui j'ai eu la chance de collaborer durant mon passage à l'école en tant que chargé de la programmation culturelle de 2019 à 2024, sont toutes et tous des personnalités fascinantes des arts visuels. Ensemble, nous avons tissé des dialogues secouants, organisé des expositions décoiffantes et exploré des collaborations diverses."</p>
+      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:12px;">— Alain Berland</p>
+      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:24px;border-top:0.5px solid var(--gray-light);padding-top:16px;">Projet développé avec la complicité de Thomas Bernard.</p>
+    </div>
+    <div style="padding:56px 48px;display:flex;flex-direction:column;gap:24px;">
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Lieu</span><p style="font-family:var(--serif);font-size:15px;color:var(--black);">Galerie Strouk<br><span style="font-size:13px;color:var(--gray-text);">5 rue du Mail, 75002 Paris</span></p></div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Dates</span><p style="font-family:var(--serif);font-size:15px;color:var(--black);">10 – 14 décembre 2024<br><span style="font-size:13px;color:var(--gray-text);">Vernissage lundi 9 décembre à partir de 18h</span></p></div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Artistes</span><p style="font-family:var(--serif);font-size:13px;color:var(--gray-text);line-height:1.8;">Plus de trente artistes diplômé·e·s ou en cours de formation à l'ENSBA Paris, dont Aurélia Cassé.</p></div>
+    </div>
+  </div>
+  <!-- GALERIE PHOTOS JEUNESSE -->
+  <div style="padding:18px 48px 0;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);padding-bottom:18px;border-bottom:0.5px solid var(--gray-light);">Vues d'exposition</p>
+  </div>
+  <div style="height:480px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/vue-expo-1.jpg" alt="Vue d'exposition générale">
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:340px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/_1045827.jpg" alt="Vue d'exposition"></div>
+    <div style="height:340px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/_1045858.jpg" alt="Vue d'exposition"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:280px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/ludivine-gonthier_selfie-dans-mon-jardin_2023.jpg" alt="Ludivine Gonthier — Selfie dans mon jardin, 2023"></div>
+    <div style="height:280px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/ayako-sakuragi_paris-ny-2022-2024.jpg" alt="Ayako Sakuragi — Paris-NY, 2022-2024"></div>
+    <div style="height:280px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/alz-be-ta-wolfova_insect-gaze-spectateurs-2-2024-cockroach-superhighway_2024.jpg" alt="Alžběta Wolfová — Insect Gaze, 2024"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:300px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/milana-gabriel_nnuts-1_2024.jpg" alt="Milana Gabriel — Nnuts 1, 2024"></div>
+    <div style="height:300px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/sara-noun-faites-comme-si-j-e-tais-la-2024_installation-divers-objets-entre-mur-et-sol.jpg" alt="Sara Noun — Faites comme si j'étais là, 2024"></div>
+  </div>
+  <div style="padding:14px 48px;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-size:10px;letter-spacing:0.08em;color:var(--gray-muted);">Courtesy Galerie Strouk, Paris — STROUK × ENSBA, décembre 2024</p>
+  </div>
+  <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour en savoir plus sur les artistes exposés ou les projets nés de cette collaboration, contacter Forma Mantis.</p>
+    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk ↗</a></div>
+  </div>
+  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris & Pont-Aven</p></footer>
+</div>
+
+<!-- ══ LES NYMPHÉAS — STROUK ══ -->
+<div class="page" id="page-nympheas">
+  <div class="hero" style="height:400px;">
+    <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1003-hd.jpg" alt="Les Nymphéas — Vue d'exposition, Galerie Strouk 2025">
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom">
+      <div class="hero-title">
+        <p>24 janvier – 8 mars 2025 — Galerie Strouk, Paris</p>
+        <h1>Les Nymphéas :<br>Miroirs des profondeurs</h1>
+      </div>
+      <div class="hero-meta"><span>Autour de l'héritage de</span><p>Claude Monet</p><p style="margin-top:4px;font-size:12px;color:rgba(255,255,255,0.6);">Commissariat Thomas Bernard</p></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">La surface comme paradigme de la modernité</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);font-style:italic;">« Les yeux s'enfoncent comme dans les remous d'eaux profondes. »</p>
+      <p style="font-family:var(--serif);font-size:13px;color:var(--gray-muted);margin-top:4px;">— Louis Gillet devant les Nymphéas</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:24px;">Cette plongée vertigineuse dans l'œuvre de Monet résonne aujourd'hui d'une façon singulière. La galerie Strouk a souhaité apporter une vision contemporaine à l'œuvre de Claude Monet en s'appuyant sur les notions de surface et de profondeur.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Cette contemporanéité tragique charge les Nymphéas d'une dimension mémorielle insoupçonnée : sous la beauté de la surface picturale dorment les morts, comme sous les reflets paisibles des étangs reposent les corps des soldats. Les nymphéas et la surface de l'eau deviennent les symboles d'un entre-deux mystérieux.</p>
+      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:28px;border-top:0.5px solid var(--gray-light);padding-top:16px;">Commissariat : Thomas Bernard</p>
+    </div>
+    <div style="padding:56px 48px;display:flex;flex-direction:column;gap:24px;">
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Lieu</span><p style="font-family:var(--serif);font-size:15px;color:var(--black);">Galerie Strouk<br><span style="font-size:13px;color:var(--gray-text);">2 avenue Matignon, 75008 Paris</span></p></div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Dates</span><p style="font-family:var(--serif);font-size:15px;color:var(--black);">24 janvier – 8 mars 2025</p></div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:16px;"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);display:block;margin-bottom:8px;">Artistes</span>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+          <p style="font-family:var(--serif);font-size:14px;color:var(--black);border-bottom:0.5px solid var(--gray-light);padding-bottom:6px;">Vincent Beaurin</p>
+          <p style="font-family:var(--serif);font-size:14px;color:var(--black);border-bottom:0.5px solid var(--gray-light);padding-bottom:6px;">Christophe Doucet</p>
+          <p style="font-family:var(--serif);font-size:14px;color:var(--black);border-bottom:0.5px solid var(--gray-light);padding-bottom:6px;">Vincent Gicquel</p>
+          <p style="font-family:var(--serif);font-size:14px;color:var(--black);border-bottom:0.5px solid var(--gray-light);padding-bottom:6px;">Ludivine Gonthier</p>
+          <p style="font-family:var(--serif);font-size:14px;color:var(--black);border-bottom:0.5px solid var(--gray-light);padding-bottom:6px;">Orsten Groom</p>
+          <p style="font-family:var(--serif);font-size:14px;color:var(--black);">Marlène Mocquet</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- GALERIE PHOTOS NYMPHÉAS -->
+  <div style="padding:18px 48px 0;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);padding-bottom:18px;border-bottom:0.5px solid var(--gray-light);">Vues d'exposition</p>
+  </div>
+  <div style="height:520px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1003-hd.jpg" alt="Vue d'exposition — Les Nymphéas, Galerie Strouk">
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1020-hd.jpg" alt="Vue d'exposition — Les Nymphéas"></div>
+    <div style="height:360px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1088-hd.jpg" alt="Vue d'exposition — Les Nymphéas"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:300px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1104-hd.jpg" alt="Vue d'exposition — Les Nymphéas"></div>
+    <div style="height:300px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-marle-ne-mocquet-romain-darnaud-hd.jpg" alt="Marlène Mocquet — vue exposition"></div>
+    <div style="height:300px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.9) brightness(0.97);" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/755e6ba8-5f5c-4c98-8df7-5603b08c85e0.jpg" alt="Vue d'exposition — Les Nymphéas"></div>
+  </div>
+  <div style="padding:14px 48px;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-size:10px;letter-spacing:0.08em;color:var(--gray-muted);">Courtesy Galerie Strouk, Paris — Les Nymphéas : Miroirs des profondeurs, 24 janvier – 8 mars 2025</p>
+  </div>
+  <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour en savoir plus sur les artistes ou les œuvres, contacter Forma Mantis ou la Galerie Strouk.</p>
+    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk ↗</a></div>
+  </div>
+  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris & Pont-Aven</p></footer>
+</div>
+
+
+<script>
+function nav(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#main-nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const el = document.getElementById('n-' + id);
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
+
+<!-- ══ PAGE PROJET : CÉDRIX CRESPEL ══ -->
+<!-- Inject before </body> -->

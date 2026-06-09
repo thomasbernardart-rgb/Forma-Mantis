@@ -787,38 +787,6 @@ footer nav a:hover { color: var(--black); }
     </div>
   </div>
 
-  <div class="home-featured-grid">
-    <div class="featured-main" onclick="nav('nympheas')">
-      <div class="feat-img feat-img-main">
-        <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1003-hd.jpg" alt="Les Nymphéas — Galerie Strouk">
-      </div>
-      <div class="feat-body">
-        <div class="feat-tag">Exposition collective — Galerie Strouk, Paris, 2025</div>
-        <div class="feat-title"><em>Les Nymphéas : Miroirs des profondeurs</em></div>
-        <div class="feat-sub">Autour de l'héritage de Monet — six artistes réunis par Thomas Bernard.</div>
-      </div>
-    </div>
-    <div class="featured-side" onclick="nav('jeunesse')">
-      <div class="feat-img feat-img-side">
-        <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/_1045827.jpg" alt="La jeunesse a toujours raison">
-      </div>
-      <div class="feat-body">
-        <div class="feat-tag">STROUK × ENSBA — Décembre 2024</div>
-        <div class="feat-title"><em>La jeunesse a toujours raison même quand elle a tort</em></div>
-        <div class="feat-sub">Plus de trente artistes des Beaux-Arts de Paris.</div>
-      </div>
-    </div>
-    <div class="featured-side" onclick="nav('crespel')">
-      <div class="feat-img feat-img-side">
-        <img class="img-cover" src="Entre_deux_coeurs-6282_-_HD.jpg" alt="Cédrix Crespel">
-      </div>
-      <div class="feat-body">
-        <div class="feat-tag">Galerie Rabouan Moussion — Paris, 2026</div>
-        <div class="feat-title"><em>Cédrix Crespel — Entre deux cœurs</em></div>
-        <div class="feat-sub">Texte de présentation signé Thomas Bernard.</div>
-      </div>
-    </div>
-  </div>
 
 
 
@@ -1516,129 +1484,59 @@ function nav(id) {
 }
 
 let currentLang = 'fr';
-const translations = {
-  // NAV
-  'n-accueil': { fr: 'Accueil', en: 'Home' },
-  'n-projets': { fr: 'Projets', en: 'Projects' },
-  'n-editions': { fr: 'Éditions', en: 'Editions' },
-  'n-artistes': { fr: 'Artistes', en: 'Artists' },
-  'n-apropos': { fr: 'À propos', en: 'About' },
-  'n-contact': { fr: 'Contact', en: 'Contact' },
-};
 
-const pageTranslations = {
+const t = {
   fr: {
-    // ACCUEIL
+    'n-accueil': 'Accueil',
+    'n-projets': 'Projets',
+    'n-editions': 'Éditions',
+    'n-artistes': 'Artistes',
+    'n-apropos': 'À propos',
+    'n-contact': 'Contact',
     'hero-sub': 'Art contemporain — Mode — Édition',
     'hero-label': 'Direction artistique',
-    'home-p1': 'Forma Mantis est une structure indépendante développant des projets à la croisée de l'art contemporain, de la mode et de l'édition.',
+    'home-p1': 'Forma Mantis est une structure indépendante développant des projets à la croisée de l’art contemporain, de la mode et de l’édition.',
     'home-p2': 'Expositions dans des lieux atypiques, éditions limitées, résidences, collaborations avec artistes, designers et artisans — un modèle alternatif, ancré dans ses territoires.',
-    'home-right-text': 'Structure indépendante développant des projets à la croisée de l'art contemporain, de la mode et de l'édition.',
-    // PROJETS
     'projets-title': 'Projets',
     'projets-sub': 'Expositions, résidences et situations — pensées en relation avec leurs lieux.',
-    // CONTACT
     'contact-title': 'Contact',
     'contact-intro': 'Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.',
-    'contact-dir': 'Direction artistique',
-    'contact-general': 'Contact général',
-    'contact-press': 'Presse & partenariats',
-    'contact-editions': 'Commandes éditions',
-    'contact-loc': 'Localisation',
-    'contact-msg': 'Écrire un message',
-    'form-name': 'Nom & prénom',
-    'form-email': 'Email',
-    'form-subject': 'Objet',
-    'form-message': 'Message',
-    'form-send': 'Envoyer',
-    'form-sent': 'Message envoyé —',
-    // ABOUT
     'about-h2': 'Une structure indépendante<br>à la croisée des formes',
     'about-sub': 'Art contemporain, mode, édition — sans hiérarchie entre les disciplines',
-    'about-manifeste': 'Manifeste',
-    'about-axes': 'Axes de travail',
-    'about-p1': 'Forma Mantis repose sur une conviction simple : l'art se pense mieux à l'écart des circuits normés, dans des lieux qui ont une histoire, avec des gens qui ont une sensibilité.',
-    'about-p2': 'Ni galerie, ni bureau de production, ni label — quelque chose de plus organique. Un réseau de confiance, des projets cohérents, une économie maîtrisée. La rareté comme choix, la qualité comme seule contrainte.',
-    // EDITIONS
-    'editions-p1': 'Des objets, des livrets, des pièces — conçus en lien direct avec les projets.',
-    'editions-p2': 'Petites séries, tirages limités et numérotés, production artisanale. Chaque édition est pensée comme une extension du travail d'exposition.',
-    'editions-note': 'Politique éditoriale',
-    'editions-note-text': 'Tous les tirages sont limités, numérotés et signés. Les commandes se font par email ou lors des événements Forma Mantis. Chaque pièce est emballée et expédiée à la main.',
-    'editions-available': 'Disponible',
-    'editions-order': 'Les commandes se font par email. Envoi dans toute la France et à l'international. Chaque pièce est emballée à la main et expédiée sous 5 jours ouvrés.',
-    'editions-btn': 'Commander par email',
+    'lang-btn': 'Fr / En',
   },
   en: {
-    // ACCUEIL
+    'n-accueil': 'Home',
+    'n-projets': 'Projects',
+    'n-editions': 'Editions',
+    'n-artistes': 'Artists',
+    'n-apropos': 'About',
+    'n-contact': 'Contact',
     'hero-sub': 'Contemporary Art — Fashion — Publishing',
     'hero-label': 'Artistic direction',
     'home-p1': 'Forma Mantis is an independent structure developing projects at the intersection of contemporary art, fashion and publishing.',
     'home-p2': 'Exhibitions in unconventional spaces, limited editions, residencies, collaborations with artists, designers and craftspeople — an alternative model, rooted in its territories.',
-    'home-right-text': 'An independent structure developing projects at the intersection of contemporary art, fashion and publishing.',
-    // PROJETS
     'projets-title': 'Projects',
     'projets-sub': 'Exhibitions, residencies and situations — conceived in relation to their locations.',
-    // CONTACT
     'contact-title': 'Contact',
     'contact-intro': 'Forma Mantis develops collaborations with artists, collectors, institutions and private partners.',
-    'contact-dir': 'Artistic direction',
-    'contact-general': 'General enquiries',
-    'contact-press': 'Press & partnerships',
-    'contact-editions': 'Edition orders',
-    'contact-loc': 'Location',
-    'contact-msg': 'Send a message',
-    'form-name': 'Full name',
-    'form-email': 'Email',
-    'form-subject': 'Subject',
-    'form-message': 'Message',
-    'form-send': 'Send',
-    'form-sent': 'Message sent —',
-    // ABOUT
     'about-h2': 'An independent structure<br>at the intersection of forms',
     'about-sub': 'Contemporary art, fashion, publishing — without hierarchy between disciplines',
-    'about-manifeste': 'Manifesto',
-    'about-axes': 'Fields of work',
-    'about-p1': 'Forma Mantis rests on a simple conviction: art is better conceived outside conventional circuits, in places with history, with people who have sensibility.',
-    'about-p2': 'Neither gallery, nor production office, nor label — something more organic. A network of trust, coherent projects, a controlled economy. Rarity as a choice, quality as the only constraint.',
-    // EDITIONS
-    'editions-p1': 'Objects, booklets, pieces — conceived in direct relation to the projects.',
-    'editions-p2': 'Small series, limited and numbered editions, artisanal production. Each edition is conceived as an extension of the exhibition work.',
-    'editions-note': 'Editorial policy',
-    'editions-note-text': 'All editions are limited, numbered and signed. Orders are placed by email or at Forma Mantis events. Each piece is hand-wrapped and shipped.',
-    'editions-available': 'Available',
-    'editions-order': 'Orders by email. Shipping throughout France and internationally. Each piece is hand-wrapped and dispatched within 5 working days.',
-    'editions-btn': 'Order by email',
+    'lang-btn': 'En / Fr',
   }
 };
 
 function toggleLang() {
   currentLang = currentLang === 'fr' ? 'en' : 'fr';
-  document.getElementById('lang-btn').textContent = currentLang === 'fr' ? 'Fr / En' : 'En / Fr';
-  applyTranslations();
-}
-
-function applyTranslations() {
-  const t = pageTranslations[currentLang];
-  // Apply data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (t[key]) {
-      if (el.innerHTML.includes('<br>') || t[key].includes('<br>')) {
-        el.innerHTML = t[key];
+    if (t[currentLang][key] !== undefined) {
+      if (t[currentLang][key].includes('<br>')) {
+        el.innerHTML = t[currentLang][key];
       } else {
-        el.textContent = t[key];
+        el.textContent = t[currentLang][key];
       }
     }
-  });
-  // Nav items
-  Object.entries(translations).forEach(([id, vals]) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = vals[currentLang];
-  });
-  // Section labels
-  document.querySelectorAll('.section-label[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key]) el.textContent = t[key];
   });
 }
 </script>

@@ -741,12 +741,234 @@ footer nav a:hover { color: var(--black); }
 ::-webkit-scrollbar-thumb { background: var(--gray-mid); }
 [data-en] { }
 
+
+/* ══ RESPONSIVE MOBILE ══ */
+@media (max-width: 768px) {
+
+  header {
+    padding: 0 20px;
+    height: 52px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .page {
+    padding-top: 52px;
+  }
+
+  /* HERO */
+  .hero { height: 70vh; }
+  .hero-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+    gap: 8px;
+  }
+  .hero-title h1 { font-size: 26px; }
+  .hero-meta { text-align: left; margin-top: 8px; }
+
+  /* HOME INTRO */
+  .home-intro { grid-template-columns: 1fr; }
+  .home-intro-left {
+    padding: 36px 20px;
+    border-right: none;
+    border-bottom: 0.5px solid var(--gray-light);
+  }
+  .home-intro-left p { font-size: 17px; }
+  .home-intro-right { padding: 28px 20px; }
+
+  /* FEATURED GRID */
+  .home-featured-grid { grid-template-columns: 1fr; }
+  .featured-main { border-right: none; border-bottom: 0.5px solid var(--gray-light); }
+  .featured-side { border-right: none; border-bottom: 0.5px solid var(--gray-light); }
+  .feat-img-main { height: 260px; }
+  .feat-img-side { height: 200px; }
+  .feat-body { padding: 18px 20px 22px; }
+  .featured-main .feat-title { font-size: 20px; }
+  .feat-title { font-size: 18px; }
+
+  /* PAGE HEADER */
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 36px 20px 24px;
+    gap: 12px;
+  }
+  .page-header h2 { font-size: 26px; }
+  .page-header p { text-align: left; max-width: 100%; }
+
+  /* PROJECT ROWS */
+  .project-row {
+    grid-template-columns: 1fr;
+    cursor: pointer;
+  }
+  .project-row-img {
+    height: 220px;
+    border-right: none;
+    border-bottom: 0.5px solid var(--gray-light);
+  }
+  .project-row-body {
+    padding: 20px 20px;
+    border-right: none;
+    border-bottom: 0.5px solid var(--gray-light);
+  }
+  .project-row-title { font-size: 19px; }
+  .project-row-right {
+    padding: 16px 20px 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .project-row-detail { border-top: none; padding-top: 0; min-width: 120px; }
+
+  /* EDITIONS */
+  .editions-intro { grid-template-columns: 1fr; }
+  .editions-intro-text {
+    padding: 36px 20px;
+    border-right: none;
+    border-bottom: 0.5px solid var(--gray-light);
+  }
+  .editions-intro-right { padding: 28px 20px; }
+  .editions-grid { grid-template-columns: 1fr 1fr; }
+  .edition-card-img { height: 200px; }
+  .edition-card-body { padding: 14px 14px 18px; }
+  .edition-name { font-size: 15px; }
+  .editions-commande {
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px 20px;
+    align-items: flex-start;
+  }
+
+  /* ARTISTS */
+  .artists-grid { grid-template-columns: 1fr 1fr; }
+  .artist-card:nth-child(3n) { border-right: 0.5px solid var(--gray-light); }
+  .artist-card:nth-child(2n) { border-right: none; }
+  .artist-img { height: 180px; }
+  .artist-body { padding: 14px 16px 20px; }
+  .artist-name { font-size: 16px; }
+
+  /* ABOUT */
+  .about-hero { height: 300px; }
+  .about-hero-text { left: 20px; bottom: 24px; }
+  .about-hero-text h2 { font-size: 22px; }
+  .about-manifeste { grid-template-columns: 1fr; }
+  .about-manifeste-left {
+    padding: 36px 20px;
+    border-right: none;
+    border-bottom: 0.5px solid var(--gray-light);
+  }
+  .about-manifeste-right { padding: 28px 20px; }
+  .about-axe { grid-template-columns: 100px 1fr; }
+  .about-duo { grid-template-columns: 1fr; }
+  .about-person { border-right: none; border-bottom: 0.5px solid var(--gray-light); }
+  .about-person-img { height: 240px; }
+  .about-person-body { padding: 24px 20px; }
+
+  /* CONTACT */
+  .contact-wrap { grid-template-columns: 1fr; }
+  .contact-left {
+    padding: 36px 20px;
+    border-right: none;
+    border-bottom: 0.5px solid var(--gray-light);
+  }
+  .contact-right { padding: 32px 20px; }
+
+  /* SECTION LABEL */
+  .section-label { padding: 14px 20px; }
+
+  /* FOOTER */
+  footer {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  footer nav { gap: 16px; }
+
+  /* PROJECT DETAIL PAGES */
+  .hero-bottom { padding: 20px; }
+
+  /* Two-column sections on project pages */
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    display: block !important;
+  }
+
+  [style*="grid-template-columns:1fr 1fr"] > div,
+  [style*="grid-template-columns: 1fr 1fr"] > div {
+    border-right: none !important;
+    padding: 28px 20px !important;
+  }
+
+  [style*="grid-template-columns:1fr 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  [style*="grid-template-columns:1fr 1fr 1fr"] > div,
+  [style*="grid-template-columns: 1fr 1fr 1fr"] > div {
+    border-right: none !important;
+    height: 240px !important;
+  }
+
+  /* CTA sections */
+  [style*="display:flex;justify-content:space-between;align-items:center"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+    padding: 28px 20px !important;
+  }
+
+  /* Mobile nav hamburger */
+  .mobile-nav-btn {
+    display: flex !important;
+  }
+
+  .mobile-nav-open nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 52px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-bottom: 0.5px solid var(--gray-light);
+    padding: 20px 24px;
+    gap: 20px;
+    z-index: 99;
+  }
+
+  .mobile-nav-open nav a,
+  .mobile-nav-open nav span {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* Hamburger button — hidden on desktop */
+.mobile-nav-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.mobile-nav-btn span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--black);
+}
 </style>
 </head>
 <body>
 
 <header>
   <a class="logo" onclick="nav('accueil')">Forma Mantis</a>
+  <div class="mobile-nav-btn" onclick="toggleMobileNav()" id="hamburger"><span></span><span></span><span></span></div>
   <nav id="main-nav">
     <a onclick="nav('accueil')" id="n-accueil" class="active">Accueil</a>
     <a onclick="nav('projets')" id="n-projets">Projets</a>
@@ -1481,6 +1703,10 @@ function nav(id) {
   const el = document.getElementById('n-' + id);
   if (el) el.classList.add('active');
   window.scrollTo(0, 0);
+}
+
+function toggleMobileNav() {
+  document.querySelector('header').classList.toggle('mobile-nav-open');
 }
 
 let currentLang = 'fr';

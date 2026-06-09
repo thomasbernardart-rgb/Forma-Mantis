@@ -976,6 +976,8 @@ footer nav a:hover { color: var(--black); }
     <a onclick="nav('artistes')" id="n-artistes">Artistes</a>
     <a onclick="nav('apropos')" id="n-apropos">À propos</a>
     <a onclick="nav('contact')" id="n-contact">Contact</a>
+    <a onclick="nav('rdv')" id="n-rdv" style="font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0.04em;text-transform:none;color:var(--black);border:0.5px solid var(--black);padding:6px 14px;">Rendez-vous</a>
+    <a onclick="nav('journal')" id="n-journal">Journal</a>
     <a href="https://www.instagram.com/formamantis" target="_blank" style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);text-decoration:none;padding-right:20px;border-right:0.5px solid var(--gray-light);">Instagram</a>
     <span class="lang-switch" id="lang-btn" onclick="toggleLang()" style="cursor:pointer;">Fr / En</span>
   </nav>
@@ -1692,6 +1694,140 @@ footer nav a:hover { color: var(--black); }
     <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk ↗</a></div>
   </div>
   <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris</p></footer>
+</div>
+
+<!-- ══ RENDEZ-VOUS ══ -->
+<div class="page" id="page-rdv">
+  <div class="page-header">
+    <h2 style="font-family:var(--serif);font-weight:400;">Rendez-vous</h2>
+    <p>Rencontres, visites d'exposition, présentations d'éditions — sur demande.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Prendre contact</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, partenaires, presse.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;">Chaque rencontre est une conversation. Pas de rendez-vous standardisé — une disponibilité réelle, en fonction des projets en cours.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:16px;">Pour les demandes urgentes ou les rendez-vous en galerie, contacter directement par email.</p>
+      <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;">
+        <a href="mailto:contact@formamantis.com" class="btn-outline" style="display:inline-block;width:fit-content;">contact@formamantis.com</a>
+      </div>
+      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:32px;line-height:1.6;">Le système de prise de rendez-vous en ligne sera disponible prochainement.</p>
+    </div>
+    <div style="padding:56px 48px;display:flex;flex-direction:column;gap:32px;">
+      <div>
+        <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;">Types de rendez-vous</p>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="border-top:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
+            <div>
+              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Visite d'exposition</p>
+              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Présentation privée avec Thomas Bernard</p>
+            </div>
+            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Sur demande</span>
+          </div>
+          <div style="border-top:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
+            <div>
+              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Présentation des éditions</p>
+              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Découverte des tirages disponibles</p>
+            </div>
+            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Sur demande</span>
+          </div>
+          <div style="border-top:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
+            <div>
+              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Entretien presse</p>
+              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Thomas Bernard & Valentine Gauthier</p>
+            </div>
+            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Sur demande</span>
+          </div>
+          <div style="border-top:0.5px solid var(--gray-light);border-bottom:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
+            <div>
+              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Dîner & rencontre réseau</p>
+              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Sur invitation</p>
+            </div>
+            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Invitation</span>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:0.5px solid var(--gray-light);padding-top:24px;">
+        <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Localisation</p>
+        <p style="font-family:var(--serif);font-size:15px;color:var(--black);line-height:1.6;">Paris<br><span style="color:var(--gray-text);font-size:13px;">En galerie ou à l'atelier, selon les projets en cours</span></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a></nav>
+    <p>Paris</p>
+  </footer>
+</div>
+
+<!-- ══ JOURNAL ══ -->
+<div class="page" id="page-journal">
+  <div class="page-header">
+    <h2 style="font-family:var(--serif);font-weight:400;">Journal</h2>
+    <p>Le processus curatorial — comment un projet naît, comment un artiste est accompagné.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">À propos du Journal</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Une traçabilité curatoriale — les coulisses de chaque projet.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;">Le Journal documente ce que les expositions ne montrent pas : la rencontre avec un artiste, le choix d'un lieu, l'écriture d'un texte, la fabrication d'une édition. Ce qui précède et ce qui suit.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:16px;">Ni catalogue, ni communiqué. Un carnet de bord.</p>
+    </div>
+    <div style="padding:56px 48px;">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Prochainement</p>
+      <p style="font-family:var(--serif);font-size:15px;font-style:italic;color:var(--gray-text);line-height:1.8;">Le Journal sera alimenté au fil des projets. Premières entrées à venir — rencontre avec Cédrix Crespel, genèse de l'exposition <em>Entre deux cœurs</em>.</p>
+    </div>
+  </div>
+
+  <!-- ENTRÉES JOURNAL (structure pour entrées futures) -->
+  <div style="border-bottom:0.5px solid var(--gray-light);">
+
+    <div style="display:grid;grid-template-columns:160px 1fr;border-bottom:0.5px solid var(--gray-light);">
+      <div style="padding:32px 32px;border-right:0.5px solid var(--gray-light);display:flex;flex-direction:column;justify-content:flex-start;">
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">À venir</p>
+        <p style="font-family:var(--serif);font-size:13px;color:var(--gray-muted);margin-top:8px;font-style:italic;">2026</p>
+      </div>
+      <div style="padding:32px 40px;">
+        <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:10px;">Rencontre</p>
+        <p style="font-family:var(--serif);font-size:18px;color:var(--black);">La première fois que j'ai vu le travail de Cédrix Crespel</p>
+        <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);margin-top:10px;line-height:1.7;">Thomas Bernard — à paraître</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:160px 1fr;border-bottom:0.5px solid var(--gray-light);">
+      <div style="padding:32px 32px;border-right:0.5px solid var(--gray-light);display:flex;flex-direction:column;justify-content:flex-start;">
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">À venir</p>
+        <p style="font-family:var(--serif);font-size:13px;color:var(--gray-muted);margin-top:8px;font-style:italic;">2025</p>
+      </div>
+      <div style="padding:32px 40px;">
+        <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:10px;">Processus</p>
+        <p style="font-family:var(--serif);font-size:18px;color:var(--black);">Comment les <em>Nymphéas</em> ont trouvé leur forme</p>
+        <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);margin-top:10px;line-height:1.7;">Genèse de l'exposition — Galerie Strouk, 2025 — à paraître</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:160px 1fr;">
+      <div style="padding:32px 32px;border-right:0.5px solid var(--gray-light);display:flex;flex-direction:column;justify-content:flex-start;">
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">À venir</p>
+        <p style="font-family:var(--serif);font-size:13px;color:var(--gray-muted);margin-top:8px;font-style:italic;">2025</p>
+      </div>
+      <div style="padding:32px 40px;">
+        <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:10px;">Édition</p>
+        <p style="font-family:var(--serif);font-size:18px;color:var(--black);">Fabriquer un livret à la main</p>
+        <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);margin-top:10px;line-height:1.7;">De la typographie à l'impression risograph — à paraître</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a></nav>
+    <p>Paris</p>
+  </footer>
 </div>
 
 

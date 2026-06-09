@@ -30,6 +30,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.site-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
+
 /* HEADER */
 header {
   position: fixed;
@@ -1008,6 +1014,7 @@ header { width: 100%; }
     <span class="lang-switch" id="lang-btn" onclick="cycleLang()" style="cursor:pointer;" data-i18n="lang-btn">Fr</span>
   </nav>
 </header>
+<div class="site-wrap">
 
 <!-- ══ ACCUEIL ══ -->
 <div class="page active" id="page-accueil">
@@ -1322,8 +1329,8 @@ header { width: 100%; }
       </div>
     </div>
   <div class="about-person">
-      <div class="about-person-img" style="height:300px;background:var(--gray-light);display:flex;align-items:center;justify-content:center;">
-        <img style="height:240px;width:240px;object-fit:cover;object-position:center 18%;border-radius:0;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
+      <div class="about-person-img">
+        <img class="img-cover" style="object-position:center 20%;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
       </div>
       <div class="about-person-body">
         <div class="about-person-role">Direction artistique & curatoriale</div>
@@ -2080,6 +2087,7 @@ function toggleMobileNav() {
   document.querySelector('header').classList.toggle('mobile-nav-open');
 }
 </script>
+</div><!-- /site-wrap -->
 </body>
 </html>
 

@@ -1003,15 +1003,22 @@ header { width: 100%; }
   <a class="logo" onclick="nav('accueil')">Forma Mantis</a>
   <div class="mobile-nav-btn" onclick="toggleMobileNav()" id="hamburger"><span></span><span></span><span></span></div>
   <nav id="main-nav">
-    <a onclick="nav('accueil')" id="n-accueil" class="active">Accueil</a>
-    <a onclick="nav('projets')" id="n-projets">Projets</a>
-    <a onclick="nav('artistes')" id="n-artistes">Artistes</a>
-    <a onclick="nav('apropos')" id="n-apropos">À propos</a>
-    <a onclick="nav('contact')" id="n-contact">Contact</a>
-    <a onclick="nav('rdv')" id="n-rdv" style="font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0.04em;text-transform:none;color:var(--black);border:0.5px solid var(--black);padding:6px 14px;">Rendez-vous</a>
-    <a onclick="nav('journal')" id="n-journal">Journal</a>
-    <a href="https://www.instagram.com/formamantis" target="_blank" style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);text-decoration:none;padding-right:20px;border-right:0.5px solid var(--gray-light);">Instagram</a>
-    <span class="lang-switch" id="lang-btn" onclick="cycleLang()" style="cursor:pointer;" data-i18n="lang-btn">Fr</span>
+    <a onclick="nav('accueil')" id="n-accueil" class="active" data-i18n="n-accueil">Accueil</a>
+    <a onclick="nav('projets')" id="n-projets" data-i18n="n-projets">Projets</a>
+    <a onclick="nav('artistes')" id="n-artistes" data-i18n="n-artistes">Artistes</a>
+    <a onclick="nav('bibliotheque')" id="n-bibliotheque" data-i18n="n-bibliotheque">Bibliothèque</a>
+    <a onclick="nav('apropos')" id="n-apropos" data-i18n="n-apropos">À propos</a>
+    <a onclick="nav('contact')" id="n-contact" data-i18n="n-contact">Contact</a>
+    <a onclick="nav('rdv')" id="n-rdv" style="font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0.04em;text-transform:none;color:var(--black);border:0.5px solid var(--black);padding:6px 14px;" data-i18n="n-rdv">Rendez-vous</a>
+    <a onclick="nav('journal')" id="n-journal" data-i18n="n-journal">Journal</a>
+    <a href="https://www.instagram.com/formamantis" target="_blank" style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);text-decoration:none;">Instagram</a>
+    <div class="lang-switcher">
+      <span onclick="setLang('fr')" id="btn-fr" class="lang-btn active-lang">Fr</span>
+      <span class="lang-sep">/</span>
+      <span onclick="setLang('en')" id="btn-en" class="lang-btn">En</span>
+      <span class="lang-sep">/</span>
+      <span onclick="setLang('jp')" id="btn-jp" class="lang-btn">JP</span>
+    </div>
   </nav>
 </header>
 <div class="site-wrap">
@@ -1329,8 +1336,7 @@ header { width: 100%; }
       </div>
     </div>
   <div class="about-person">
-      <div class="about-person-img">
-        <img class="img-cover" style="object-position:center 20%;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
+      <div class="about-person-img" style="background:var(--gray-light);">
       </div>
       <div class="about-person-body">
         <div class="about-person-role">Direction artistique & curatoriale</div>
@@ -1786,6 +1792,41 @@ header { width: 100%; }
   <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p>Paris</p></footer>
 </div>
 
+<!-- ══ BIBLIOTHÈQUE ══ -->
+<div class="page" id="page-bibliotheque">
+  <div class="page-header">
+    <h2 data-i18n="n-bibliotheque">Bibliothèque</h2>
+    <p data-i18n="biblio-sub">Livrets, estampes, objets — des pièces conçues en lien direct avec les projets.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;" data-i18n="biblio-politique-label">Politique éditoriale</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);" data-i18n="biblio-p1">Des objets, des livrets, des pièces — conçus en lien direct avec les projets.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;" data-i18n="biblio-p2">Petites séries, tirages limités et numérotés, production artisanale. Chaque édition est pensée comme une extension du travail d'exposition.</p>
+    </div>
+    <div style="padding:56px 48px;">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;" data-i18n="biblio-note-label">Note</p>
+      <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.75;" data-i18n="biblio-note">Tous les tirages sont limités, numérotés et signés. Les commandes se font par email ou lors des événements Forma Mantis. Chaque pièce est emballée et expédiée à la main.</p>
+    </div>
+  </div>
+
+  <div style="padding:48px;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--gray-text);text-align:center;" data-i18n="biblio-coming">Les éditions seront présentées prochainement.</p>
+  </div>
+
+  <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
+    <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;" data-i18n="biblio-order">Les commandes se font par email. Envoi dans toute la France et à l'international.</p>
+    <a class="btn-outline" onclick="nav('contact')" data-i18n="biblio-btn">Commander par email</a>
+  </div>
+
+  <footer>
+    <p>Forma Mantis — 2025</p>
+    <nav><a onclick="nav('projets')" data-i18n="n-projets">Projets</a><a onclick="nav('contact')" data-i18n="n-contact">Contact</a><a onclick="nav('apropos')" data-i18n="n-apropos">À propos</a></nav>
+    <p>Paris</p>
+  </footer>
+</div>
+
 <!-- ══ RENDEZ-VOUS ══ -->
 <div class="page" id="page-rdv">
   <div class="page-header">
@@ -1991,6 +2032,16 @@ const t = {
     'quimperle-label': 'Quimperlé, Bretagne',
     'un-lieu': 'Un lieu',
     'evenement': 'Événement en cours',
+    'n-bibliotheque': 'Bibliothèque',
+    'biblio-sub': 'Livrets, estampes, objets — des pièces conçues en lien direct avec les projets.',
+    'biblio-politique-label': 'Politique éditoriale',
+    'biblio-p1': 'Des objets, des livrets, des pièces — conçus en lien direct avec les projets.',
+    'biblio-p2': 'Petites séries, tirages limités et numérotés, production artisanale.',
+    'biblio-note-label': 'Note',
+    'biblio-note': 'Tous les tirages sont limités, numérotés et signés. Commandes par email ou lors des événements Forma Mantis.',
+    'biblio-coming': 'Les éditions seront présentées prochainement.',
+    'biblio-order': "Les commandes se font par email. Envoi dans toute la France et à l'international.",
+    'biblio-btn': 'Commander par email',
   },
   en: {
     'n-accueil': 'Home',
@@ -2025,6 +2076,16 @@ const t = {
     'quimperle-label': 'Quimperlé, Brittany',
     'un-lieu': 'A place',
     'evenement': 'Current event',
+    'n-bibliotheque': 'Library',
+    'biblio-sub': 'Booklets, prints, objects — pieces conceived in direct relation to the projects.',
+    'biblio-politique-label': 'Editorial policy',
+    'biblio-p1': 'Objects, booklets, pieces — conceived in direct relation to the projects.',
+    'biblio-p2': 'Small series, limited and numbered editions, artisanal production.',
+    'biblio-note-label': 'Note',
+    'biblio-note': 'All editions are limited, numbered and signed. Orders by email or at Forma Mantis events.',
+    'biblio-coming': 'Editions will be presented shortly.',
+    'biblio-order': 'Orders by email. Shipping throughout France and internationally.',
+    'biblio-btn': 'Order by email',
   },
   jp: {
     'n-accueil': 'ホーム',
@@ -2059,6 +2120,16 @@ const t = {
     'quimperle-label': 'キンペルレ、ブルターニュ',
     'un-lieu': '場所',
     'evenement': '現在のイベント',
+    'n-bibliotheque': 'ライブラリー',
+    'biblio-sub': '冊子、版画、オブジェ — プロジェクトと連動した作品。',
+    'biblio-politique-label': '編集方針',
+    'biblio-p1': 'オブジェ、冊子、作品 — プロジェクトと結びついた小数の作品。',
+    'biblio-p2': '限定版、手作りの制作。',
+    'biblio-note-label': 'ノート',
+    'biblio-note': '全てのエディションは限定部数、番号付き、サイン入り。メールまたはイベントで注文。',
+    'biblio-coming': 'エディションは近日公開予定。',
+    'biblio-order': 'メールで注文。フランス全土および海外発送。',
+    'biblio-btn': 'メールで注文',
   },
 };
 

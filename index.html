@@ -972,14 +972,13 @@ footer nav a:hover { color: var(--black); }
   <nav id="main-nav">
     <a onclick="nav('accueil')" id="n-accueil" class="active">Accueil</a>
     <a onclick="nav('projets')" id="n-projets">Projets</a>
-    <a onclick="nav('editions')" id="n-editions">Éditions</a>
     <a onclick="nav('artistes')" id="n-artistes">Artistes</a>
     <a onclick="nav('apropos')" id="n-apropos">À propos</a>
     <a onclick="nav('contact')" id="n-contact">Contact</a>
     <a onclick="nav('rdv')" id="n-rdv" style="font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0.04em;text-transform:none;color:var(--black);border:0.5px solid var(--black);padding:6px 14px;">Rendez-vous</a>
     <a onclick="nav('journal')" id="n-journal">Journal</a>
     <a href="https://www.instagram.com/formamantis" target="_blank" style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);text-decoration:none;padding-right:20px;border-right:0.5px solid var(--gray-light);">Instagram</a>
-    <span class="lang-switch" id="lang-btn" onclick="toggleLang()" style="cursor:pointer;">Fr / En</span>
+    <span class="lang-switch" id="lang-btn" onclick="cycleLang()" style="cursor:pointer;" data-i18n="lang-btn">Fr</span>
   </nav>
 </header>
 
@@ -1003,8 +1002,8 @@ footer nav a:hover { color: var(--black); }
 
   <div class="home-intro">
     <div class="home-intro-left">
-      <p data-i18n="home-p1">Forma Mantis est une structure indépendante développant des projets à la croisée de l'art contemporain, de la mode et de l'édition.</p>
-      <p data-i18n="home-p2">Expositions dans des lieux atypiques, éditions limitées, résidences, collaborations avec artistes, designers et artisans — un modèle alternatif, ancré dans ses territoires.</p>
+      <p data-i18n="home-p1">Forma Mantis développe des expositions, des éditions et des projets culturels sur mesure. Une structure indépendante fondée par Valentine Gauthier et Thomas Bernard.</p>
+      <p data-i18n="home-p2">Expositions dans des lieux atypiques, éditions limitées, résidences et collaborations avec artistes, designers et artisans — un modèle qui privilégie la qualité des projets sur leur quantité.</p>
     </div>
     <div class="home-intro-right" style="display:flex; flex-direction:column; justify-content:center;">
       <p style="font-family:var(--serif); font-size:16px; line-height:1.8; color:var(--gray-text); max-width:360px; font-style:italic;">Structure indépendante développant des projets à la croisée de l'art contemporain, de la mode et de l'édition.</p>
@@ -1180,7 +1179,7 @@ footer nav a:hover { color: var(--black); }
 <div class="page" id="page-artistes">
   <div class="page-header">
     <h2>Artistes & collaborateurs</h2>
-    <p>Peu d'artistes, fortement accompagnés — une approche curatoriale construite dans la durée.</p>
+    <p>Forma Mantis travaille avec un cercle restreint d'artistes, choisis pour la durée. Pas de représentation exclusive — une logique d'accompagnement, de projet en projet.</p>
   </div>
   <div class="artists-grid">
     <div class="artist-card">
@@ -1271,8 +1270,8 @@ footer nav a:hover { color: var(--black); }
   <div class="about-manifeste">
     <div class="about-manifeste-left">
       <h3>Manifeste</h3>
-      <p>Forma Mantis repose sur une conviction simple : l'art se pense mieux à l'écart des circuits normés, dans des lieux qui ont une histoire, avec des gens qui ont une sensibilité.</p>
-      <p>Ni galerie, ni bureau de production, ni label — quelque chose de plus organique. Un réseau de confiance, des projets cohérents, une économie maîtrisée. La rareté comme choix, la qualité comme seule contrainte.</p>
+      <p>Forma Mantis est né d'une conviction : les projets les plus intéressants se font en dehors des circuits habituels. Dans des lieux qui ont une histoire. Avec des gens qui ont une exigence.</p>
+      <p>Ni galerie au sens classique, ni agence — quelque chose de plus direct. Un réseau de confiance, une économie maîtrisée, une programmation choisie. La rareté comme méthode.</p>
     </div>
     <div class="about-manifeste-right">
       <h3>Axes de travail</h3>
@@ -1292,17 +1291,17 @@ footer nav a:hover { color: var(--black); }
       <div class="about-person-body">
         <div class="about-person-role">Direction artistique & création</div>
         <div class="about-person-name">Valentine Gauthier</div>
-        <div class="about-person-bio">Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Son travail considère le vêtement comme acte de pensée — une féminité non normative, un engagement écologique pionnier, un dialogue profond avec l'art contemporain. Travaille en lien avec des galeries de référence et défend un nouveau luxe fondé sur la transparence, la petite série et la matière vivante.</div>
+        <div class="about-person-bio">Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.</div>
       </div>
     </div>
   <div class="about-person">
-      <div class="about-person-img" style="height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--gray-light);">
-        <img style="height:300px;width:300px;object-fit:cover;object-position:center 15%;border-radius:0;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
+      <div class="about-person-img" style="height:300px;background:var(--gray-light);display:flex;align-items:center;justify-content:center;">
+        <img style="height:240px;width:240px;object-fit:cover;object-position:center 18%;border-radius:0;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
       </div>
       <div class="about-person-body">
         <div class="about-person-role">Direction artistique & curatoriale</div>
         <div class="about-person-name">Thomas Bernard</div>
-        <div class="about-person-bio">Commissaire d'exposition, auteur et directeur artistique. Développe des projets à la croisée de l'art contemporain, du design et de l'édition. Construit des récits, accompagne des artistes, structure des visions. Formé à l'histoire de l'art et aux métiers du livre, il a exercé dans plusieurs structures culturelles indépendantes avant de fonder Forma Mantis.</div>
+        <div class="about-person-bio">Commissaire d'exposition et directeur artistique. Fondateur de la Galerie Thomas Bernard — Cortex Athletico (Paris, 2003–2023), membre du CPGA et de Paris Gallery Map. Vingt ans à accompagner des artistes, construire des expositions, développer des collections. Forma Mantis prolonge ce travail sous une forme plus libre.</div>
       </div>
     </div>
     </div>
@@ -1322,8 +1321,8 @@ footer nav a:hover { color: var(--black); }
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Quimperlé, Bretagne</p>
-      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">3 quai Brizeux. Un bâtiment du XVIIe siècle, sur la Laïta, à quelques kilomètres de la mer.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;">Quimperlé est une ville à part. Construite au confluent de l'Isole et de l'Ellé — qui forment ici la Laïta —, elle a la particularité rare d'être bâtie autour de ses rivières plutôt que de leur tourner le dos. Le quai Brizeux longe l'eau depuis le XVIIe siècle. Les maisons qui y sont posées n'ont pas bougé.</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Quimperlé est construite au confluent de l'Isole et de l'Ellé. Le quai Brizeux longe la rivière depuis le XVIIe siècle.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;">Le numéro 3 est un bâtiment de cette époque — pierre de taille, cheminée monumentale, rez-de-quai voûté qui donne directement sur l'eau. Quarante minutes de Lorient, deux heures de Paris. La mer à dix kilomètres.</p>
       <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Le numéro 3 est l'un de ces bâtiments. Pierre de taille, poutres d'origine, cheminée monumentale, fenêtres sur la rivière. En dessous, un rez-de-quai sous arches gothiques — non compté dans la surface officielle — qui donne directement sur l'eau.</p>
       <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:16px;">Quimperlé est à quarante minutes de Lorient, deux heures de Paris en TGV. La mer est à dix kilomètres.</p>
     </div>
@@ -1553,7 +1552,7 @@ footer nav a:hover { color: var(--black); }
 
 <!-- ══ CHARLES MASON — GALERIE NEC ══ -->
 <div class="page" id="page-mason">
-  <div class="hero" style="height:400px;">
+  <div class="hero" style="height:420px;">
     <img class="img-cover" src="charles_mason_sculpture.jpg" alt="Charles Mason — sculpture, Galerie NEC">
     <div class="hero-overlay"></div>
     <div class="hero-bottom">
@@ -1634,7 +1633,7 @@ footer nav a:hover { color: var(--black); }
 
 <!-- ══ LA JEUNESSE A TOUJOURS RAISON ══ -->
 <div class="page" id="page-jeunesse">
-  <div class="hero" style="height:400px;">
+  <div class="hero" style="height:420px;">
     <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/16/vue-expo-1.jpg" alt="La jeunesse a toujours raison — vue d'exposition">
     <div class="hero-overlay"></div>
     <div class="hero-bottom">
@@ -1692,7 +1691,7 @@ footer nav a:hover { color: var(--black); }
 
 <!-- ══ LES NYMPHÉAS — STROUK ══ -->
 <div class="page" id="page-nympheas">
-  <div class="hero" style="height:400px;">
+  <div class="hero" style="height:420px;">
     <img class="img-cover" src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2710/usr/exhibitions/images/exhibitions/14/strouk-nymphe-as-1003-hd.jpg" alt="Les Nymphéas — Vue d'exposition, Galerie Strouk 2025">
     <div class="hero-overlay"></div>
     <div class="hero-bottom">
@@ -1763,8 +1762,8 @@ footer nav a:hover { color: var(--black); }
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Prendre contact</p>
-      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, partenaires, presse.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;">Chaque rencontre est une conversation. Pas de rendez-vous standardisé — une disponibilité réelle, en fonction des projets en cours.</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, artistes, partenaires.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;">Chaque rencontre est une conversation, pas une présentation.</p>
       <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:16px;">Pour les demandes urgentes ou les rendez-vous en galerie, contacter directement par email.</p>
       <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;">
         <a href="mailto:contact@formamantis.com" class="btn-outline" style="display:inline-block;width:fit-content;">contact@formamantis.com</a>
@@ -1922,58 +1921,83 @@ function nav(id) {
   window.scrollTo(0, 0);
 }
 
-function toggleMobileNav() {
-  document.querySelector('header').classList.toggle('mobile-nav-open');
-}
-
 let currentLang = 'fr';
+const langs = ['fr', 'en', 'jp'];
 
 const t = {
   fr: {
     'n-accueil': 'Accueil',
     'n-projets': 'Projets',
-    'n-editions': 'Éditions',
     'n-artistes': 'Artistes',
     'n-apropos': 'À propos',
     'n-contact': 'Contact',
+    'n-rdv': 'Rendez-vous',
+    'n-journal': 'Journal',
     'hero-sub': 'Art contemporain — Mode — Édition',
     'hero-label': 'Direction artistique',
-    'home-p1': 'Forma Mantis est une structure indépendante développant des projets à la croisée de l’art contemporain, de la mode et de l’édition.',
-    'home-p2': 'Expositions dans des lieux atypiques, éditions limitées, résidences, collaborations avec artistes, designers et artisans — un modèle alternatif, ancré dans ses territoires.',
+    'home-p1': 'Forma Mantis développe des expositions, des éditions et des projets culturels sur mesure. Une structure indépendante fondée par Valentine Gauthier et Thomas Bernard.',
+    'home-p2': 'Expositions dans des lieux atypiques, éditions limitées, résidences et collaborations avec artistes, designers et artisans — un modèle qui privilégie la qualité des projets sur leur quantité.',
     'projets-title': 'Projets',
     'projets-sub': 'Expositions, résidences et situations — pensées en relation avec leurs lieux.',
     'contact-title': 'Contact',
     'contact-intro': 'Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.',
     'about-h2': 'Une structure indépendante<br>à la croisée des formes',
     'about-sub': 'Art contemporain, mode, édition — sans hiérarchie entre les disciplines',
-    'lang-btn': 'Fr / En',
+    'lang-btn': 'Fr',
   },
   en: {
     'n-accueil': 'Home',
     'n-projets': 'Projects',
-    'n-editions': 'Editions',
     'n-artistes': 'Artists',
     'n-apropos': 'About',
     'n-contact': 'Contact',
+    'n-rdv': 'Appointments',
+    'n-journal': 'Journal',
     'hero-sub': 'Contemporary Art — Fashion — Publishing',
     'hero-label': 'Artistic direction',
-    'home-p1': 'Forma Mantis is an independent structure developing projects at the intersection of contemporary art, fashion and publishing.',
-    'home-p2': 'Exhibitions in unconventional spaces, limited editions, residencies, collaborations with artists, designers and craftspeople — an alternative model, rooted in its territories.',
+    'home-p1': 'Forma Mantis develops exhibitions, editions and bespoke cultural projects. An independent structure founded by Valentine Gauthier and Thomas Bernard.',
+    'home-p2': 'Exhibitions in unconventional spaces, limited editions, residencies and collaborations with artists, designers and craftspeople — a model that prioritises the quality of projects over their quantity.',
     'projets-title': 'Projects',
     'projets-sub': 'Exhibitions, residencies and situations — conceived in relation to their locations.',
     'contact-title': 'Contact',
     'contact-intro': 'Forma Mantis develops collaborations with artists, collectors, institutions and private partners.',
     'about-h2': 'An independent structure<br>at the intersection of forms',
     'about-sub': 'Contemporary art, fashion, publishing — without hierarchy between disciplines',
-    'lang-btn': 'En / Fr',
+    'lang-btn': 'En',
+  },
+  jp: {
+    'n-accueil': 'ホーム',
+    'n-projets': 'プロジェクト',
+    'n-artistes': 'アーティスト',
+    'n-apropos': 'について',
+    'n-contact': 'コンタクト',
+    'n-rdv': '予約',
+    'n-journal': 'ジャーナル',
+    'hero-sub': '現代アート — ファッション — 出版',
+    'hero-label': 'アーティスティックディレクション',
+    'home-p1': 'Forma Mantisは展覧、出版、文化プロジェクトを手がける独立構造。Valentine GauthierとThomas Bernardにより設立。',
+    'home-p2': '独自の空間での展覧、限定版、レジデンシー、アーティストやデザイナーとのコラボレーション。プロジェクトの質を重視するモデル。',
+    'projets-title': 'プロジェクト',
+    'projets-sub': '展覧、レジデンシー、シチュエーション。場所との対話の中で生まれるプロジェクト。',
+    'contact-title': 'コンタクト',
+    'contact-intro': 'Forma Mantisはアーティスト、コレクター、機関、民間パートナーとのコラボレーション。',
+    'about-h2': '形式の交点に立つ<br>独立構造',
+    'about-sub': '現代アート、ファッション、出版。分野間の階層なし。',
+    'lang-btn': '日本語',
   }
 };
 
-function toggleLang() {
-  currentLang = currentLang === 'fr' ? 'en' : 'fr';
+function cycleLang() {
+  const idx = langs.indexOf(currentLang);
+  currentLang = langs[(idx + 1) % langs.length];
+  document.getElementById('lang-btn').textContent = t[currentLang]['lang-btn'];
+  applyTranslations();
+}
+
+function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (t[currentLang][key] !== undefined) {
+    if (t[currentLang] && t[currentLang][key] !== undefined) {
       if (t[currentLang][key].includes('<br>')) {
         el.innerHTML = t[currentLang][key];
       } else {
@@ -1981,6 +2005,10 @@ function toggleLang() {
       }
     }
   });
+}
+
+function toggleMobileNav() {
+  document.querySelector('header').classList.toggle('mobile-nav-open');
 }
 </script>
 </body>

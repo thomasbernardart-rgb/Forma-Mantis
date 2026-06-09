@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Forma Mantis</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -737,6 +737,33 @@ footer nav { gap: 24px; }
 footer nav a { font-size: 10px; color: var(--gray-muted); text-decoration: none; }
 footer nav a:hover { color: var(--black); }
 
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 20px;
+  border-left: 0.5px solid var(--gray-light);
+}
+.lang-btn {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.lang-btn:hover { color: var(--black); }
+.active-lang { color: var(--black) !important; }
+.lang-sep {
+  font-size: 10px;
+  color: var(--gray-light);
+}
+
+/* ── RESPONSIVE FLUID WIDTH ── */
+html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+.page { width: 100%; }
+header { width: 100%; }
+
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-thumb { background: var(--gray-mid); }
 [data-en] { }
@@ -1269,12 +1296,12 @@ footer nav a:hover { color: var(--black); }
 
   <div class="about-manifeste">
     <div class="about-manifeste-left">
-      <h3>Manifeste</h3>
+      <h3><span data-i18n="about-manifeste">Manifeste</span></h3>
       <p>Forma Mantis est né d'une conviction : les projets les plus intéressants se font en dehors des circuits habituels. Dans des lieux qui ont une histoire. Avec des gens qui ont une exigence.</p>
       <p>Ni galerie au sens classique, ni agence — quelque chose de plus direct. Un réseau de confiance, une économie maîtrisée, une programmation choisie. La rareté comme méthode.</p>
     </div>
     <div class="about-manifeste-right">
-      <h3>Axes de travail</h3>
+      <h3><span data-i18n="about-axes">Axes de travail</span></h3>
       <div class="about-axe"><span>Exposition</span><p>Des lieux atypiques, une scénographie précise, peu d'œuvres mais bien choisies.</p></div>
       <div class="about-axe"><span>Édition</span><p>Livrets, estampes, objets hybrides — des pièces produites en conscience.</p></div>
       <div class="about-axe"><span>Réseau</span><p>Dîners, rencontres, séjours — l'hospitalité comme forme de transmission.</p></div>
@@ -1283,7 +1310,7 @@ footer nav a:hover { color: var(--black); }
     </div>
   </div>
 
-  <div class="section-label">Direction artistique</div>
+  <div class="section-label" data-i18n="section-da">Direction artistique</div>
   <div class="about-duo">
 <div class="about-person">
       <div class="about-person-img" style="height:200px;background:var(--gray-light);">
@@ -1922,7 +1949,6 @@ function nav(id) {
 }
 
 let currentLang = 'fr';
-const langs = ['fr', 'en', 'jp'];
 
 const t = {
   fr: {
@@ -1943,7 +1969,21 @@ const t = {
     'contact-intro': 'Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.',
     'about-h2': 'Une structure indépendante<br>à la croisée des formes',
     'about-sub': 'Art contemporain, mode, édition — sans hiérarchie entre les disciplines',
-    'lang-btn': 'Fr',
+    'about-manifeste': 'Manifeste',
+    'about-axes': 'Axes de travail',
+    'axe-expo': "Des lieux atypiques, une scénographie précise, peu d'œuvres mais bien choisies.",
+    'axe-edition': 'Livrets, estampes, objets hybrides — des pièces produites en conscience.',
+    'axe-reseau': "Dîners, rencontres, séjours — l'hospitalité comme forme de transmission.",
+    'axe-territoire': 'Ancrage territorial fort, diffusion internationale.',
+    'axe-economie': 'Modèle autonome, non subventionné, fondé sur la vente directe et les partenariats.',
+    'section-da': 'Direction artistique',
+    'rdv-title': 'Rendez-vous',
+    'rdv-sub': "Rencontres, visites d'exposition, présentations d'éditions — sur demande.",
+    'journal-title': 'Journal',
+    'journal-sub': 'Le processus curatorial — comment un projet naît, comment un artiste est accompagné.',
+    'quimperle-label': 'Quimperlé, Bretagne',
+    'un-lieu': 'Un lieu',
+    'evenement': 'Événement en cours',
   },
   en: {
     'n-accueil': 'Home',
@@ -1963,7 +2003,21 @@ const t = {
     'contact-intro': 'Forma Mantis develops collaborations with artists, collectors, institutions and private partners.',
     'about-h2': 'An independent structure<br>at the intersection of forms',
     'about-sub': 'Contemporary art, fashion, publishing — without hierarchy between disciplines',
-    'lang-btn': 'En',
+    'about-manifeste': 'Manifesto',
+    'about-axes': 'Fields of work',
+    'axe-expo': 'Unconventional venues, precise scenography, few works but well chosen.',
+    'axe-edition': 'Booklets, prints, hybrid objects — pieces produced with care.',
+    'axe-reseau': 'Dinners, meetings, stays — hospitality as a form of transmission.',
+    'axe-territoire': 'Strong territorial roots, international reach.',
+    'axe-economie': 'Autonomous model, unsubsidised, based on direct sales and partnerships.',
+    'section-da': 'Artistic direction',
+    'rdv-title': 'Appointments',
+    'rdv-sub': 'Meetings, exhibition visits, edition presentations — on request.',
+    'journal-title': 'Journal',
+    'journal-sub': 'The curatorial process — how a project is born, how an artist is supported.',
+    'quimperle-label': 'Quimperlé, Brittany',
+    'un-lieu': 'A place',
+    'evenement': 'Current event',
   },
   jp: {
     'n-accueil': 'ホーム',
@@ -1978,19 +2032,34 @@ const t = {
     'home-p1': 'Forma Mantisは展覧、出版、文化プロジェクトを手がける独立構造。Valentine GauthierとThomas Bernardにより設立。',
     'home-p2': '独自の空間での展覧、限定版、レジデンシー、アーティストやデザイナーとのコラボレーション。プロジェクトの質を重視するモデル。',
     'projets-title': 'プロジェクト',
-    'projets-sub': '展覧、レジデンシー、シチュエーション。場所との対話の中で生まれるプロジェクト。',
+    'projets-sub': '展覧、レジデンシー、シチュエーション。場所との対話から生まれるプロジェクト。',
     'contact-title': 'コンタクト',
     'contact-intro': 'Forma Mantisはアーティスト、コレクター、機関、民間パートナーとのコラボレーション。',
     'about-h2': '形式の交点に立つ<br>独立構造',
     'about-sub': '現代アート、ファッション、出版。分野間の階層なし。',
-    'lang-btn': '日本語',
-  }
+    'about-manifeste': 'マニフェスト',
+    'about-axes': '活動の軸',
+    'axe-expo': '独自の場所、精密な展示構造、少数の選り抜かれた作品。',
+    'axe-edition': '冊子、版画、ハイブリッドなオブジェ — 意識をもって制作された作品。',
+    'axe-reseau': '够食会、交流、宿泊 — ホスピタリティを伝達の形式として。',
+    'axe-territoire': '地域に根ざした活動、国際的な発信。',
+    'axe-economie': '自立モデル、直接販売とパートナーシップに基づく。',
+    'section-da': 'アーティスティックディレクション',
+    'rdv-title': '予約',
+    'rdv-sub': '面会、展覧訪問、出版物のプレゼンテーション — 要望に応じて。',
+    'journal-title': 'ジャーナル',
+    'journal-sub': 'キュレートリアルプロセス — プロジェクトの誕生、アーティストとの協務。',
+    'quimperle-label': 'キンペルレ、ブルターニュ',
+    'un-lieu': '場所',
+    'evenement': '現在のイベント',
+  },
 };
 
-function cycleLang() {
-  const idx = langs.indexOf(currentLang);
-  currentLang = langs[(idx + 1) % langs.length];
-  document.getElementById('lang-btn').textContent = t[currentLang]['lang-btn'];
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active-lang'));
+  const btn = document.getElementById('btn-' + lang);
+  if (btn) btn.classList.add('active-lang');
   applyTranslations();
 }
 

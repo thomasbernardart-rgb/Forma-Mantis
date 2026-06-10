@@ -1061,7 +1061,7 @@ header { width: 100%; }
       <a onclick="nav('editions')">Éditions</a>
       <a onclick="nav('apropos')">À propos</a>
     </nav>
-    <p>Paris</p>
+    <p><span data-i18n="footer-loc">Paris</span></p>
   </footer>
 </div>
 
@@ -1219,8 +1219,8 @@ header { width: 100%; }
 <!-- ══ ARTISTES ══ -->
 <div class="page" id="page-artistes">
   <div class="page-header">
-    <h2>Artistes & collaborateurs</h2>
-    <p>Forma Mantis travaille avec un cercle restreint d'artistes, choisis pour la durée. Pas de représentation exclusive — une logique d'accompagnement, de projet en projet.</p>
+    <h2 data-i18n="artistes-title">Artistes & collaborateurs</h2>
+    <p data-i18n="artistes-sub">Forma Mantis travaille avec un cercle restreint d'artistes, choisis pour la durée. Pas de représentation exclusive — une logique d'accompagnement, de projet en projet.</p>
   </div>
   <div class="artists-grid">
     <div class="artist-card">
@@ -1311,8 +1311,8 @@ header { width: 100%; }
   <div class="about-manifeste">
     <div class="about-manifeste-left">
       <h3><span data-i18n="about-manifeste">Manifeste</span></h3>
-      <p>Forma Mantis est né d'une conviction : les projets les plus intéressants se font en dehors des circuits habituels. Dans des lieux qui ont une histoire. Avec des gens qui ont une exigence.</p>
-      <p>Ni galerie au sens classique, ni agence — quelque chose de plus direct. Un réseau de confiance, une économie maîtrisée, une programmation choisie. La rareté comme méthode.</p>
+      <p data-i18n="about-p1">Forma Mantis est né d'une conviction : les projets les plus intéressants se font en dehors des circuits habituels. Dans des lieux qui ont une histoire. Avec des gens qui ont une exigence.</p>
+      <p data-i18n="about-p2">Ni galerie au sens classique, ni agence — quelque chose de plus direct. Un réseau de confiance, une économie maîtrisée, une programmation choisie. La rareté comme méthode.</p>
     </div>
     <div class="about-manifeste-right">
       <h3><span data-i18n="about-axes">Axes de travail</span></h3>
@@ -1327,21 +1327,22 @@ header { width: 100%; }
   <div class="section-label" data-i18n="section-da">Direction artistique</div>
   <div class="about-duo">
 <div class="about-person">
-      <div class="about-person-img" style="height:200px;background:var(--gray-light);">
+      <div class="about-person-img">
+        <img class="img-cover" style="object-position:center 15%;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
       </div>
       <div class="about-person-body">
-        <div class="about-person-role">Direction artistique & création</div>
+        <div class="about-person-role" data-i18n="val-role">Direction artistique & création</div>
         <div class="about-person-name">Valentine Gauthier</div>
-        <div class="about-person-bio">Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.</div>
+        <div class="about-person-bio" data-i18n="val-bio">Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.</div>
       </div>
     </div>
   <div class="about-person">
       <div class="about-person-img" style="background:var(--gray-light);">
       </div>
       <div class="about-person-body">
-        <div class="about-person-role">Direction artistique & curatoriale</div>
+        <div class="about-person-role" data-i18n="tb-role">Direction artistique & curatoriale</div>
         <div class="about-person-name">Thomas Bernard</div>
-        <div class="about-person-bio">Commissaire d'exposition et directeur artistique. Fondateur de la Galerie Thomas Bernard — Cortex Athletico (Paris, 2003–2023), membre du CPGA et de Paris Gallery Map. Vingt ans à accompagner des artistes, construire des expositions, développer des collections. Forma Mantis prolonge ce travail sous une forme plus libre.</div>
+        <div class="about-person-bio" data-i18n="tb-bio">Commissaire d'exposition et directeur artistique. Fondateur de la Galerie Thomas Bernard — Cortex Athletico (Paris, 2003–2023), membre du CPGA et de Paris Gallery Map. Vingt ans à accompagner des artistes, construire des expositions, développer des collections. Forma Mantis prolonge ce travail sous une forme plus libre.</div>
       </div>
     </div>
     </div>
@@ -1399,7 +1400,7 @@ header { width: 100%; }
       </div>
       <div style="border-top:0.5px solid var(--gray-light);padding-top:20px;">
         <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:8px;">Statut</p>
-        <p style="font-family:var(--serif);font-size:14px;font-style:italic;color:var(--gray-muted);">Acquisition en cours — ouverture envisagée 2027</p>
+        <p style="font-family:var(--serif);font-size:14px;font-style:italic;color:var(--gray-muted);" data-i18n="quimperle-statut">Acquisition en cours — ouverture envisagée 2027</p>
       </div>
     </div>
   </div>
@@ -1425,7 +1426,7 @@ header { width: 100%; }
       <div class="contact-block"><span>Localisation</span><p>Paris, France</p></div>
     </div>
     <div class="contact-right">
-      <h3>Écrire un message</h3>
+      <h3 data-i18n="contact-msg-title">Écrire un message</h3>
       <div class="form-field"><label>Nom & prénom</label><input type="text"/></div>
       <div class="form-field"><label>Email</label><input type="email"/></div>
       <div class="form-field">
@@ -1799,20 +1800,82 @@ header { width: 100%; }
     <p data-i18n="biblio-sub">Livrets, estampes, objets — des pièces conçues en lien direct avec les projets.</p>
   </div>
 
+  <!-- INTRO -->
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;" data-i18n="biblio-politique-label">Politique éditoriale</p>
-      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);" data-i18n="biblio-p1">Des objets, des livrets, des pièces — conçus en lien direct avec les projets.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;" data-i18n="biblio-p2">Petites séries, tirages limités et numérotés, production artisanale. Chaque édition est pensée comme une extension du travail d'exposition.</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);" data-i18n="biblio-concept-h">Rééditer des livres essentiels. Les faire accompagner par un artiste.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;" data-i18n="biblio-concept-p">Chaque édition Forma Mantis réunit un texte fondateur et un artiste invité à le traverser visuellement. Un ex-libris original signé, une préface inédite, une reliure cousue. Tirage de tête numéroté à 50 exemplaires — puis tirage courant à 150.</p>
     </div>
     <div style="padding:56px 48px;">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;" data-i18n="biblio-note-label">Note</p>
-      <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.75;" data-i18n="biblio-note">Tous les tirages sont limités, numérotés et signés. Les commandes se font par email ou lors des événements Forma Mantis. Chaque pièce est emballée et expédiée à la main.</p>
+      <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.75;" data-i18n="biblio-note">Tirages de tête : 50 exemplaires numérotés, ex-libris original signé par l'artiste, reliure cousue, impression sur papier naturel non couché. Tirage courant : 150 exemplaires. Commandes par email.</p>
     </div>
   </div>
 
-  <div style="padding:48px;border-bottom:0.5px solid var(--gray-light);">
-    <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--gray-text);text-align:center;" data-i18n="biblio-coming">Les éditions seront présentées prochainement.</p>
+  <div class="section-label" data-i18n="biblio-collections-label">Éditions de collection</div>
+
+  <!-- ÉDITION 01 : The Unknown Craftsman -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);" onclick="nav('biblio-01')" class="project-row" style="cursor:pointer;">
+    <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);">
+      <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.88);" src="biblio_01_unknown_craftsman.jpg" alt="The Unknown Craftsman — Édition 01">
+    </div>
+    <div style="padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Bibliothèque Forma Mantis — Édition 01</p>
+      <p style="font-family:var(--serif);font-size:28px;color:var(--black);font-style:italic;line-height:1.2;">The Unknown Craftsman</p>
+      <p style="font-family:var(--serif);font-size:16px;color:var(--black);margin-top:8px;">Soetsu Yanagi</p>
+      <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);font-style:italic;margin-top:4px;">Illustré par Valentine Gauthier</p>
+      <div style="margin-top:24px;border-top:0.5px solid var(--gray-light);padding-top:20px;">
+        <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.75;">Publié en anglais en 1972, <em>The Unknown Craftsman</em> est l'un des textes fondateurs du mouvement Mingei. Yanagi y défend une idée simple : la beauté naît souvent du geste juste, répété, anonyme, transmis au fil du temps.</p>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:24px;align-items:baseline;">
+        <p style="font-family:var(--serif);font-size:22px;color:var(--black);">180 €</p>
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">Tirage de tête 50 ex. / Tirage courant 150 ex.</p>
+      </div>
+      <a class="btn-outline" onclick="nav('contact')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
+    </div>
+  </div>
+
+  <!-- ÉDITION 02 : Design for the Real World -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);" onclick="nav('biblio-02')" class="project-row" style="cursor:pointer;">
+    <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);">
+      <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.88);" src="biblio_02_design_real_world.jpg" alt="Design for the Real World — Édition 02">
+    </div>
+    <div style="padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Bibliothèque Forma Mantis — Édition 02</p>
+      <p style="font-family:var(--serif);font-size:28px;color:var(--black);font-style:italic;line-height:1.2;">Design for the Real World</p>
+      <p style="font-family:var(--serif);font-size:16px;color:var(--black);margin-top:8px;">Victor Papanek</p>
+      <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);font-style:italic;margin-top:4px;">Illustré par Ronan Bouroullec</p>
+      <div style="margin-top:24px;border-top:0.5px solid var(--gray-light);padding-top:20px;">
+        <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.75;">Publié en 1971, <em>Design for the Real World</em> est devenu un manifeste incontournable. Victor Papanek y défend une idée radicale : le design n'est pas un luxe, mais une responsabilité sociale.</p>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:24px;align-items:baseline;">
+        <p style="font-family:var(--serif);font-size:22px;color:var(--black);">180 €</p>
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">Tirage de tête 50 ex. / Tirage courant 150 ex.</p>
+      </div>
+      <a class="btn-outline" onclick="nav('contact')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
+    </div>
+  </div>
+
+  <!-- ÉDITION 03 : The Hard Life -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);" onclick="nav('biblio-03')" class="project-row" style="cursor:pointer;">
+    <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);">
+      <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.88);" src="biblio_03_hard_life.jpg" alt="The Hard Life — Édition 03">
+    </div>
+    <div style="padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
+      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Bibliothèque Forma Mantis — Édition 03</p>
+      <p style="font-family:var(--serif);font-size:28px;color:var(--black);font-style:italic;line-height:1.2;">The Hard Life</p>
+      <p style="font-family:var(--serif);font-size:16px;color:var(--black);margin-top:8px;">Robert E. Lee</p>
+      <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);font-style:italic;margin-top:4px;">Illustré par Benoît Maire</p>
+      <div style="margin-top:24px;border-top:0.5px solid var(--gray-light);padding-top:20px;">
+        <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.75;">Publié en 1964, <em>The Hard Life</em> est le récit sobre et lumineux d'un choix radical : quitter la ville pour apprendre à vivre avec ses mains, au rythme des saisons. Un livre essentiel, à la fois manuel, journal et méditation sur l'autonomie.</p>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:24px;align-items:baseline;">
+        <p style="font-family:var(--serif);font-size:22px;color:var(--black);">180 €</p>
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">Tirage de tête 50 ex. / Tirage courant 150 ex.</p>
+      </div>
+      <a class="btn-outline" onclick="nav('contact')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
+    </div>
   </div>
 
   <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
@@ -1823,7 +1886,7 @@ header { width: 100%; }
   <footer>
     <p>Forma Mantis — 2025</p>
     <nav><a onclick="nav('projets')" data-i18n="n-projets">Projets</a><a onclick="nav('contact')" data-i18n="n-contact">Contact</a><a onclick="nav('apropos')" data-i18n="n-apropos">À propos</a></nav>
-    <p>Paris</p>
+    <p data-i18n="footer-loc">Paris</p>
   </footer>
 </div>
 
@@ -1837,8 +1900,8 @@ header { width: 100%; }
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Prendre contact</p>
-      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, artistes, partenaires.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;">Chaque rencontre est une conversation, pas une présentation.</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);" data-i18n="rdv-p1">Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, artistes, partenaires.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;" data-i18n="rdv-p2">Chaque rencontre est une conversation, pas une présentation.</p>
       <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:16px;">Pour les demandes urgentes ou les rendez-vous en galerie, contacter directement par email.</p>
       <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;">
         <a href="mailto:contact@formamantis.com" class="btn-outline" style="display:inline-block;width:fit-content;">contact@formamantis.com</a>
@@ -1927,9 +1990,9 @@ header { width: 100%; }
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">À propos du Journal</p>
-      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);">Une traçabilité curatoriale — les coulisses de chaque projet.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;">Le Journal documente ce que les expositions ne montrent pas : la rencontre avec un artiste, le choix d'un lieu, l'écriture d'un texte, la fabrication d'une édition. Ce qui précède et ce qui suit.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:16px;">Ni catalogue, ni communiqué. Un carnet de bord.</p>
+      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);" data-i18n="journal-h">Une traçabilité curatoriale — les coulisses de chaque projet.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:20px;" data-i18n="journal-p1">Le Journal documente ce que les expositions ne montrent pas : la rencontre avec un artiste, le choix d'un lieu, l'écriture d'un texte, la fabrication d'une édition. Ce qui précède et ce qui suit.</p>
+      <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--gray-text);margin-top:16px;" data-i18n="journal-p2">Ni catalogue, ni communiqué. Un carnet de bord.</p>
     </div>
     <div style="padding:56px 48px;">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Prochainement</p>
@@ -2003,6 +2066,7 @@ const t = {
     'n-accueil': 'Accueil',
     'n-projets': 'Projets',
     'n-artistes': 'Artistes',
+    'n-bibliotheque': 'Bibliothèque',
     'n-apropos': 'À propos',
     'n-contact': 'Contact',
     'n-rdv': 'Rendez-vous',
@@ -2013,40 +2077,59 @@ const t = {
     'home-p2': 'Expositions dans des lieux atypiques, éditions limitées, résidences et collaborations avec artistes, designers et artisans — un modèle qui privilégie la qualité des projets sur leur quantité.',
     'projets-title': 'Projets',
     'projets-sub': 'Expositions, résidences et situations — pensées en relation avec leurs lieux.',
-    'contact-title': 'Contact',
-    'contact-intro': 'Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.',
     'about-h2': 'Une structure indépendante<br>à la croisée des formes',
     'about-sub': 'Art contemporain, mode, édition — sans hiérarchie entre les disciplines',
     'about-manifeste': 'Manifeste',
     'about-axes': 'Axes de travail',
-    'axe-expo': "Des lieux atypiques, une scénographie précise, peu d'œuvres mais bien choisies.",
-    'axe-edition': 'Livrets, estampes, objets hybrides — des pièces produites en conscience.',
-    'axe-reseau': "Dîners, rencontres, séjours — l'hospitalité comme forme de transmission.",
-    'axe-territoire': 'Ancrage territorial fort, diffusion internationale.',
-    'axe-economie': 'Modèle autonome, non subventionné, fondé sur la vente directe et les partenariats.',
+    'about-p1': "Forma Mantis est né d'une conviction : les projets les plus intéressants se font en dehors des circuits habituels. Dans des lieux qui ont une histoire. Avec des gens qui ont une exigence.",
+    'about-p2': 'Ni galerie au sens classique, ni agence — quelque chose de plus direct. Un réseau de confiance, une économie maîtrisée, une programmation choisie. La rareté comme méthode.',
     'section-da': 'Direction artistique',
+    'val-role': 'Direction artistique & création',
+    'val-bio': "Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.",
+    'tb-role': 'Direction artistique & curatoriale',
+    'tb-bio': "Commissaire d'exposition et directeur artistique. Fondateur de la Galerie Thomas Bernard — Cortex Athletico (Paris, 2003–2023), membre du CPGA et de Paris Gallery Map. Vingt ans à accompagner des artistes, construire des expositions, développer des collections. Forma Mantis prolonge ce travail sous une forme plus libre.",
+    'un-lieu': 'Un lieu',
+    'quimperle-label': 'Quimperlé, Bretagne',
+    'quimperle-statut': 'Acquisition en cours — ouverture envisagée 2027',
+    'artistes-title': 'Artistes & collaborateurs',
+    'artistes-sub': "Forma Mantis travaille avec un cercle restreint d'artistes, choisis pour la durée. Pas de représentation exclusive — une logique d'accompagnement, de projet en projet.",
+    'contact-title': 'Contact',
+    'contact-intro': 'Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.',
+    'contact-msg-title': 'Écrire un message',
+    'form-name': 'Nom & prénom',
+    'form-email': 'Email',
+    'form-subject': 'Objet',
+    'form-message': 'Message',
+    'form-send': 'Envoyer',
     'rdv-title': 'Rendez-vous',
     'rdv-sub': "Rencontres, visites d'exposition, présentations d'éditions — sur demande.",
+    'rdv-p1': 'Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, artistes, partenaires.',
+    'rdv-p2': 'Chaque rencontre est une conversation, pas une présentation.',
+    'evenement': 'Événement en cours',
     'journal-title': 'Journal',
     'journal-sub': 'Le processus curatorial — comment un projet naît, comment un artiste est accompagné.',
-    'quimperle-label': 'Quimperlé, Bretagne',
-    'un-lieu': 'Un lieu',
-    'evenement': 'Événement en cours',
-    'n-bibliotheque': 'Bibliothèque',
+    'journal-h': 'Une traçabilité curatoriale — les coulisses de chaque projet.',
+    'journal-p1': "Le Journal documente ce que les expositions ne montrent pas : la rencontre avec un artiste, le choix d'un lieu, l'écriture d'un texte, la fabrication d'une édition. Ce qui précède et ce qui suit.",
+    'journal-p2': 'Ni catalogue, ni communiqué. Un carnet de bord.',
     'biblio-sub': 'Livrets, estampes, objets — des pièces conçues en lien direct avec les projets.',
-    'biblio-politique-label': 'Politique éditoriale',
     'biblio-p1': 'Des objets, des livrets, des pièces — conçus en lien direct avec les projets.',
     'biblio-p2': 'Petites séries, tirages limités et numérotés, production artisanale.',
-    'biblio-note-label': 'Note',
     'biblio-note': 'Tous les tirages sont limités, numérotés et signés. Commandes par email ou lors des événements Forma Mantis.',
     'biblio-coming': 'Les éditions seront présentées prochainement.',
     'biblio-order': "Les commandes se font par email. Envoi dans toute la France et à l'international.",
     'biblio-btn': 'Commander par email',
+    'footer-loc': 'Paris',
+    'biblio-concept-h': 'Rééditer des livres essentiels. Les faire accompagner par un artiste.',
+    'biblio-concept-p': 'Chaque édition Forma Mantis réunit un texte fondateur et un artiste invité à le traverser visuellement. Un ex-libris original signé, une préface inédite, une reliure cousue. Tirage de tête numéroté à 50 exemplaires — puis tirage courant à 150.',
+    'biblio-note': "Tirages de tête : 50 exemplaires numérotés, ex-libris original signé par l'artiste, reliure cousue, impression sur papier naturel non couché. Tirage courant : 150 exemplaires. Commandes par email.",
+    'biblio-collections-label': 'Éditions de collection',
+    'biblio-btn': 'Réserver un exemplaire',
   },
   en: {
     'n-accueil': 'Home',
     'n-projets': 'Projects',
     'n-artistes': 'Artists',
+    'n-bibliotheque': 'Library',
     'n-apropos': 'About',
     'n-contact': 'Contact',
     'n-rdv': 'Appointments',
@@ -2057,79 +2140,116 @@ const t = {
     'home-p2': 'Exhibitions in unconventional spaces, limited editions, residencies and collaborations with artists, designers and craftspeople — a model that prioritises the quality of projects over their quantity.',
     'projets-title': 'Projects',
     'projets-sub': 'Exhibitions, residencies and situations — conceived in relation to their locations.',
-    'contact-title': 'Contact',
-    'contact-intro': 'Forma Mantis develops collaborations with artists, collectors, institutions and private partners.',
     'about-h2': 'An independent structure<br>at the intersection of forms',
     'about-sub': 'Contemporary art, fashion, publishing — without hierarchy between disciplines',
     'about-manifeste': 'Manifesto',
     'about-axes': 'Fields of work',
-    'axe-expo': 'Unconventional venues, precise scenography, few works but well chosen.',
-    'axe-edition': 'Booklets, prints, hybrid objects — pieces produced with care.',
-    'axe-reseau': 'Dinners, meetings, stays — hospitality as a form of transmission.',
-    'axe-territoire': 'Strong territorial roots, international reach.',
-    'axe-economie': 'Autonomous model, unsubsidised, based on direct sales and partnerships.',
+    'about-p1': 'Forma Mantis was born from a conviction: the most interesting projects happen outside conventional circuits. In places with history. With people who have standards.',
+    'about-p2': 'Neither gallery in the classical sense, nor agency — something more direct. A network of trust, a controlled economy, a chosen programme. Rarity as method.',
     'section-da': 'Artistic direction',
+    'val-role': 'Artistic direction & creation',
+    'val-bio': 'Parisian fashion designer, founder of Valentine Gauthier (2007) and Value (2023). Twenty years of collections built on a rare conviction in fashion: clothing as an act of thought. Pioneer ecological commitment, regular collaboration with the contemporary art world — Perrotin, Thaddaeus Ropac, Gagosian.',
+    'tb-role': 'Artistic & curatorial direction',
+    'tb-bio': 'Exhibition curator and artistic director. Founder of Galerie Thomas Bernard — Cortex Athletico (Paris, 2003–2023), member of the CPGA and Paris Gallery Map. Twenty years accompanying artists, building exhibitions, developing collections. Forma Mantis extends this work in a freer form.',
+    'un-lieu': 'A place',
+    'quimperle-label': 'Quimperlé, Brittany',
+    'quimperle-statut': 'Acquisition in progress — opening planned 2027',
+    'artistes-title': 'Artists & collaborators',
+    'artistes-sub': 'Forma Mantis works with a small circle of artists, chosen for the long term. No exclusive representation — a logic of support, project by project.',
+    'contact-title': 'Contact',
+    'contact-intro': 'Forma Mantis develops collaborations with artists, collectors, institutions and private partners.',
+    'contact-msg-title': 'Send a message',
+    'form-name': 'Full name',
+    'form-email': 'Email',
+    'form-subject': 'Subject',
+    'form-message': 'Message',
+    'form-send': 'Send',
     'rdv-title': 'Appointments',
     'rdv-sub': 'Meetings, exhibition visits, edition presentations — on request.',
+    'rdv-p1': 'Forma Mantis receives by appointment — collectors, institutions, artists, partners.',
+    'rdv-p2': 'Every meeting is a conversation, not a presentation.',
+    'evenement': 'Current event',
     'journal-title': 'Journal',
     'journal-sub': 'The curatorial process — how a project is born, how an artist is supported.',
-    'quimperle-label': 'Quimperlé, Brittany',
-    'un-lieu': 'A place',
-    'evenement': 'Current event',
-    'n-bibliotheque': 'Library',
+    'journal-h': 'Curatorial traceability — behind the scenes of each project.',
+    'journal-p1': "The Journal documents what exhibitions don't show: meeting an artist, choosing a venue, writing a text, making an edition. What comes before and after.",
+    'journal-p2': 'Neither catalogue nor press release. A logbook.',
     'biblio-sub': 'Booklets, prints, objects — pieces conceived in direct relation to the projects.',
-    'biblio-politique-label': 'Editorial policy',
     'biblio-p1': 'Objects, booklets, pieces — conceived in direct relation to the projects.',
     'biblio-p2': 'Small series, limited and numbered editions, artisanal production.',
-    'biblio-note-label': 'Note',
     'biblio-note': 'All editions are limited, numbered and signed. Orders by email or at Forma Mantis events.',
     'biblio-coming': 'Editions will be presented shortly.',
     'biblio-order': 'Orders by email. Shipping throughout France and internationally.',
     'biblio-btn': 'Order by email',
+    'footer-loc': 'Paris',
+    'biblio-concept-h': 'Reediting essential books. Accompanied by an artist.',
+    'biblio-concept-p': 'Each Forma Mantis edition brings together a founding text and an artist invited to traverse it visually. An original signed ex-libris, a new preface, sewn binding. Numbered head edition of 50 copies — then standard edition of 150.',
+    'biblio-note': 'Head editions: 50 numbered copies, original ex-libris signed by the artist, sewn binding, natural uncoated paper. Standard edition: 150 copies. Orders by email.',
+    'biblio-collections-label': 'Collection editions',
+    'biblio-btn': 'Reserve a copy',
   },
   jp: {
     'n-accueil': 'ホーム',
     'n-projets': 'プロジェクト',
     'n-artistes': 'アーティスト',
+    'n-bibliotheque': 'ライブラリー',
     'n-apropos': 'について',
     'n-contact': 'コンタクト',
     'n-rdv': '予約',
     'n-journal': 'ジャーナル',
     'hero-sub': '現代アート — ファッション — 出版',
     'hero-label': 'アーティスティックディレクション',
-    'home-p1': 'Forma Mantisは展覧、出版、文化プロジェクトを手がける独立構造。Valentine GauthierとThomas Bernardにより設立。',
-    'home-p2': '独自の空間での展覧、限定版、レジデンシー、アーティストやデザイナーとのコラボレーション。プロジェクトの質を重視するモデル。',
+    'home-p1': 'Forma Mantisは展覧会、出版、文化プロジェクトを手がける独立構造です。Valentine GauthierとThomas Bernardにより設立。',
+    'home-p2': '独自の空間での展覧会、限定版、レジデンシー、アーティストやデザイナーとのコラボレーション。プロジェクトの質を重視するモデル。',
     'projets-title': 'プロジェクト',
-    'projets-sub': '展覧、レジデンシー、シチュエーション。場所との対話から生まれるプロジェクト。',
-    'contact-title': 'コンタクト',
-    'contact-intro': 'Forma Mantisはアーティスト、コレクター、機関、民間パートナーとのコラボレーション。',
+    'projets-sub': '展覧会、レジデンシー、シチュエーション。場所との対話から生まれるプロジェクト。',
     'about-h2': '形式の交点に立つ<br>独立構造',
     'about-sub': '現代アート、ファッション、出版。分野間の階層なし。',
     'about-manifeste': 'マニフェスト',
     'about-axes': '活動の軸',
-    'axe-expo': '独自の場所、精密な展示構造、少数の選り抜かれた作品。',
-    'axe-edition': '冊子、版画、ハイブリッドなオブジェ — 意識をもって制作された作品。',
-    'axe-reseau': '够食会、交流、宿泊 — ホスピタリティを伝達の形式として。',
-    'axe-territoire': '地域に根ざした活動、国際的な発信。',
-    'axe-economie': '自立モデル、直接販売とパートナーシップに基づく。',
+    'about-p1': 'Forma Mantisは確信から生まれました：最も興味深いプロジェクトは慣習的な回路の外で生まれる。歴史のある場所で。高い基準を持つ人々と。',
+    'about-p2': '古典的なギャラリーでもエージェンシーでもない——より直接的な何か。信頼のネットワーク、管理された経済、選ばれたプログラム。希少性を方法として。',
     'section-da': 'アーティスティックディレクション',
-    'rdv-title': '予約',
-    'rdv-sub': '面会、展覧訪問、出版物のプレゼンテーション — 要望に応じて。',
-    'journal-title': 'ジャーナル',
-    'journal-sub': 'キュレートリアルプロセス — プロジェクトの誕生、アーティストとの協務。',
-    'quimperle-label': 'キンペルレ、ブルターニュ',
+    'val-role': 'アーティスティックディレクション & 創作',
+    'val-bio': 'パリのファッションデザイナー、Valentine Gauthier（2007年）とValue（2023年）の創設者。ファッションにおける稀な確信に基づく20年のコレクション：衣服は思考の行為。先駆的なエコロジーへの取り組み。',
+    'tb-role': 'アーティスティック & キュレーター',
+    'tb-bio': '展覧会キュレーター、アーティスティックディレクター。Galerie Thomas Bernard — Cortex Athletico（パリ、2003〜2023年）の創設者。20年にわたるアーティストへの伴走。Forma Mantisはこの活動をより自由な形で継続します。',
     'un-lieu': '場所',
+    'quimperle-label': 'カンペルレ、ブルターニュ',
+    'quimperle-statut': '取得進行中 — 2027年開業予定',
+    'artistes-title': 'アーティスト & コラボレーター',
+    'artistes-sub': 'Forma Mantisは長期的に選ばれた少数のアーティストと協働します。独占的な表現ではなく、プロジェクトごとのサポートの論理。',
+    'contact-title': 'コンタクト',
+    'contact-intro': 'Forma Mantisはアーティスト、コレクター、機関、民間パートナーとのコラボレーションを展開しています。',
+    'contact-msg-title': 'メッセージを送る',
+    'form-name': 'お名前',
+    'form-email': 'メール',
+    'form-subject': '件名',
+    'form-message': 'メッセージ',
+    'form-send': '送信',
+    'rdv-title': '予約',
+    'rdv-sub': '面会、展覧会訪問、エディションのプレゼンテーション — ご要望に応じて。',
+    'rdv-p1': 'Forma Mantisは予約制で対応しています——コレクター、機関、アーティスト、パートナー。',
+    'rdv-p2': 'すべての面会は会話であり、プレゼンテーションではありません。',
     'evenement': '現在のイベント',
-    'n-bibliotheque': 'ライブラリー',
-    'biblio-sub': '冊子、版画、オブジェ — プロジェクトと連動した作品。',
-    'biblio-politique-label': '編集方針',
-    'biblio-p1': 'オブジェ、冊子、作品 — プロジェクトと結びついた小数の作品。',
-    'biblio-p2': '限定版、手作りの制作。',
-    'biblio-note-label': 'ノート',
-    'biblio-note': '全てのエディションは限定部数、番号付き、サイン入り。メールまたはイベントで注文。',
+    'journal-title': 'ジャーナル',
+    'journal-sub': 'キュレーターのプロセス——プロジェクトの誕生、アーティストとの協働。',
+    'journal-h': 'キュレーターの透明性——各プロジェクトの舞台裏。',
+    'journal-p1': 'ジャーナルは展覧会が見せないものを記録します：アーティストとの出会い、場所の選択、テキストの執筆、エディションの制作。',
+    'journal-p2': 'カタログでも広報文でもない。航海日誌。',
+    'biblio-sub': '冊子、版画、オブジェ——プロジェクトと直接結びついた作品。',
+    'biblio-p1': 'オブジェ、冊子、作品——プロジェクトと直接結びついて構想されたもの。',
+    'biblio-p2': '小シリーズ、限定・番号付きエディション、職人的な制作。',
+    'biblio-note': 'すべてのエディションは限定、番号付き、サイン入り。メールまたはForma Mantisイベントで注文。',
     'biblio-coming': 'エディションは近日公開予定。',
     'biblio-order': 'メールで注文。フランス全土および海外発送。',
     'biblio-btn': 'メールで注文',
+    'footer-loc': 'パリ',
+    'biblio-concept-h': '重要な書籍の復刊。アーティストとともに。',
+    'biblio-concept-p': 'Forma Mantisの各エディションは、創設的なテキストとそれを視覚的に横断するアーティストを結びつけます。オリジナルの署名入り蔵書票、新しい序文、手縫い製本。50部限定の頭部版、続いて150部の通常版。',
+    'biblio-note': '頭部版：50部番号付き、アーティスト署名入りオリジナル蔵書票、手縫い製本、天然非塗工紙。通常版：150部。メールで注文。',
+    'biblio-collections-label': 'コレクションエディション',
+    'biblio-btn': '予約する',
   },
 };
 

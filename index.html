@@ -995,6 +995,38 @@ header { width: 100%; }
   height: 1px;
   background: var(--black);
 }
+
+/* ── LIGHTBOX ── */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,9,0.95);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox-overlay.active {
+  display: flex;
+}
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+.lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: var(--sans);
+  z-index: 1001;
+}
 </style>
 </head>
 <body>
@@ -1021,7 +1053,7 @@ header { width: 100%; }
     </div>
   </nav>
 </header>
-<div class="site-wrap">
+<div class="site-wrap" id="site-wrap">
 
 <!-- ══ ACCUEIL ══ -->
 <div class="page active" id="page-accueil">
@@ -1786,7 +1818,7 @@ header { width: 100%; }
   <!-- ÉDITION 01 : The Unknown Craftsman -->
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);" onclick="nav('biblio-01')" class="project-row" style="cursor:pointer;">
     <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);">
-      <img style="width:100%;height:100%;object-fit:contain;padding:24px;background:#f0eeea;" src="biblio_01_unknown_craftsman.jpg" alt="The Unknown Craftsman — Édition 01">
+      <img style="width:100%;height:100%;object-fit:contain;padding:24px;background:#f0eeea;cursor:zoom-in;" src="biblio_01_unknown_craftsman.jpg" alt="The Unknown Craftsman — Édition 01" onclick="openLightbox(this.src, this.alt)">
     </div>
     <div style="padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Bibliothèque Forma Mantis — Édition 01</p>
@@ -1807,7 +1839,7 @@ header { width: 100%; }
   <!-- ÉDITION 02 : Design for the Real World -->
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);" onclick="nav('biblio-02')" class="project-row" style="cursor:pointer;">
     <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);">
-      <img style="width:100%;height:100%;object-fit:contain;padding:24px;background:#f0eeea;" src="biblio_02_design_real_world.jpg" alt="Design for the Real World — Édition 02">
+      <img style="width:100%;height:100%;object-fit:contain;padding:24px;background:#f0eeea;cursor:zoom-in;" src="biblio_02_design_real_world.jpg" alt="Design for the Real World — Édition 02" onclick="openLightbox(this.src, this.alt)">
     </div>
     <div style="padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Bibliothèque Forma Mantis — Édition 02</p>
@@ -1828,7 +1860,7 @@ header { width: 100%; }
   <!-- ÉDITION 03 : The Hard Life -->
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);" onclick="nav('biblio-03')" class="project-row" style="cursor:pointer;">
     <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);">
-      <img style="width:100%;height:100%;object-fit:contain;padding:24px;background:#f0eeea;" src="biblio_03_hard_life.jpg" alt="The Hard Life — Édition 03">
+      <img style="width:100%;height:100%;object-fit:contain;padding:24px;background:#f0eeea;cursor:zoom-in;" src="biblio_03_hard_life.jpg" alt="The Hard Life — Édition 03" onclick="openLightbox(this.src, this.alt)">
     </div>
     <div style="padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Bibliothèque Forma Mantis — Édition 03</p>
@@ -2029,453 +2061,253 @@ function nav(id) {
   window.scrollTo(0, 0);
 }
 
-let currentLang = 'fr';
+function openLightbox(src, alt) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt || '';
+  document.getElementById('lightbox').classList.add('active');
+  event.stopPropagation();
+}
 
-const t = {
-  fr: {
-    'badge-en-cours': 'En cours',
-    'badge-2026': '2026',
-    'badge-recent': 'Récent',
-    'badge-passee': 'Passée',
-    'badge-avenir': 'À venir',
-    'label-lieu': 'Lieu',
-    'label-dates': 'Dates',
-    'label-commissaire': 'Commissaire',
-    'label-artiste': 'Artiste',
-    'label-format': 'Format',
-    'label-tirage': 'Tirage',
-    'label-galerie': 'Galerie',
-    'label-type': 'Type',
-    'label-artistes': 'Artistes',
-    'mason-desc': "Exposition monographique de l'artiste britannique Charles Mason à la Galerie NEC (Nilsson & Chiglien), Paris Marais. Sculptures, installations et œuvres sur papier. Commissariat Thomas Bernard.",
-    'crespel-desc': 'Un travail pictural entre dévoilement et retenue, le net et le flou. Texte de présentation signé Thomas Bernard.',
-    'nympheas-desc': "Autour de l'héritage de Claude Monet — une vision contemporaine fondée sur les notions de surface et de profondeur. Six artistes réunis par Thomas Bernard : Vincent Beaurin, Christophe Doucet, Vincent Gicquel, Ludivine Gonthier, Orsten Groom, Marlène Mocquet.",
-    'jeunesse-desc': "STROUK × ENSBA — Une sélection de plus de trente artistes issus de l'École nationale supérieure des beaux-arts de Paris. Organisée par Alain Berland avec la complicité de Thomas Bernard.",
-    'mason-about-label': 'À propos',
-    'mason-p1': 'Charles Mason a inscrit son travail dans une tradition profondément ancrée dans la sculpture anglaise, marquée par une attention particulière à la relation entre forme, espace et expérience sensible.',
-    'mason-p2': "À la manière des figures majeures comme Henry Moore ou Antony Gormley, il ne s'agit pas tellement de représenter mais faire advenir une présence, souvent silencieuse, presque méditative.",
-    'mason-cta': 'Pour toute demande sur cette exposition, contacter Forma Mantis.',
-    'mason-note': 'Les visuels de cette exposition seront ajoutés prochainement.',
-    'mason-note-label': 'Note',
-    'mason-artiste-label': 'Artiste',
-    'mason-artiste-val': 'Charles Mason',
-    'mason-artiste-sub': 'Artiste britannique',
-    'mason-galerie-label': 'Galerie',
-    'mason-format-label': 'Format',
-    'mason-format-val': 'Sculptures, installations\nExposition monographique\nCommissariat Thomas Bernard',
-    'nous-contacter': 'Nous contacter',
-    'crespel-texte-label': 'Texte de présentation',
-    'crespel-artiste-label': 'Artiste',
-    'crespel-galerie-label': 'Galerie',
-    'crespel-dates-label': 'Dates',
-    'crespel-repr-label': 'Représentation',
-    'crespel-lien-label': 'Lien Forma Mantis',
-    'crespel-lien-text': "Cédrix Crespel a rejoint la Galerie Rabouan Moussion avec le soutien de Thomas Bernard. Cette exposition marque le début d'une collaboration au long cours.",
-    'crespel-vues': "Vues d'exposition",
-    'crespel-courtesy': "Courtesy de l'artiste et de la Galerie Rabouan Moussion, Paris — Photos : HD",
-    'crespel-l-artiste': "L'artiste",
-    'crespel-contact-label': 'Contact',
-    'crespel-contact-text': 'Pour toute demande concernant les œuvres, contacter directement la Galerie Rabouan Moussion ou Forma Mantis.',
-    'crespel-cta': "Pour toute demande d'information sur les œuvres, les disponibilités ou les conditions d'acquisition, contacter Forma Mantis ou directement la Galerie Rabouan Moussion.",
-    'nympheas-paradigme': 'La surface comme paradigme de la modernité',
-    'nympheas-commissaire': 'Commissariat : Thomas Bernard',
-    'nympheas-lieu-val': 'Galerie Strouk\n2 avenue Matignon, 75008 Paris',
-    'nympheas-dates-val': '24 janvier – 8 mars 2025',
-    'nympheas-vues': "Vues d'exposition",
-    'nympheas-courtesy': 'Courtesy Galerie Strouk, Paris — Les Nymphéas : Miroirs des profondeurs, 24 janvier – 8 mars 2025',
-    'nympheas-cta': 'Pour en savoir plus sur les artistes ou les œuvres, contacter Forma Mantis ou la Galerie Strouk.',
-    'jeunesse-presentation': 'Présentation',
-    'jeunesse-h': 'Une célébration de la créativité de plus de trente artistes issus des Beaux-Arts de Paris.',
-    'jeunesse-lieu-val': 'Galerie Strouk\n5 rue du Mail, 75002 Paris',
-    'jeunesse-dates-val': '10 – 14 décembre 2024\nVernissage lundi 9 décembre à partir de 18h',
-    'jeunesse-complicite': 'Projet développé avec la complicité de Thomas Bernard.',
-    'jeunesse-vues': "Vues d'exposition",
-    'jeunesse-courtesy': 'Courtesy Galerie Strouk, Paris — STROUK × ENSBA, décembre 2024',
-    'jeunesse-cta': 'Pour en savoir plus sur les artistes exposés ou les projets nés de cette collaboration, contacter Forma Mantis.',
-    'axe-expo-label': 'Exposition',
-    'axe-expo-text': "Des lieux atypiques, une scénographie précise, peu d'œuvres mais bien choisies.",
-    'axe-edition-label': 'Édition',
-    'axe-edition-text': 'Livrets, estampes, objets hybrides — des pièces produites en conscience.',
-    'axe-reseau-label': 'Réseau',
-    'axe-reseau-text': "Dîners, rencontres, séjours — l'hospitalité comme forme de transmission.",
-    'axe-territoire-label': 'Territoire',
-    'axe-territoire-text': 'Ancrage territorial fort, diffusion internationale.',
-    'axe-economie-label': 'Économie',
-    'axe-economie-text': 'Modèle autonome, non subventionné, fondé sur la vente directe et les partenariats.',
-    'quimperle-p1': "Le numéro 3 est un bâtiment de cette époque — pierre de taille, cheminée monumentale, rez-de-quai voûté qui donne directement sur l'eau. Quarante minutes de Lorient, deux heures de Paris. La mer à dix kilomètres.",
-    'quimperle-h': "Quimperlé est construite au confluent de l'Isole et de l'Ellé. Le quai Brizeux longe la rivière depuis le XVIIe siècle.",
-    'quimperle-projet-label': 'Le projet',
-    'quimperle-prog-label': 'Programme envisagé',
-    'quimperle-statut-label': 'Statut',
-    'quimperle-prog-1': 'Expositions dans le rez-de-quai voûté',
-    'quimperle-prog-2': "Résidences d'artistes — printemps et automne",
-    'quimperle-prog-3': 'Dîners & rencontres du réseau',
-    'quimperle-prog-4': 'Espace de vente des éditions Forma Mantis',
-    'quimperle-prog-5': 'Café — ouvert au public',
-    'quimperle-projet-p1': "Forma Mantis est en cours d'acquisition de ce bâtiment. L'intention est simple : un lieu de travail, d'exposition et de résidence. Un endroit où les artistes peuvent rester, où les projets peuvent se faire, où les gens peuvent se réunir.",
-    'quimperle-projet-p2': 'Pas un espace institutionnel. Une maison qui travaille.',
-    'rdv-prendre-label': 'Prendre contact',
-    'rdv-email-label': 'Pour les demandes urgentes ou les rendez-vous en galerie, contacter directement par email.',
-    'rdv-coming': 'Le système de prise de rendez-vous en ligne sera disponible prochainement.',
-    'rdv-types-label': 'Types de rendez-vous',
-    'rdv-type1-name': "Visite d'exposition",
-    'rdv-type1-sub': 'Présentation privée avec Thomas Bernard',
-    'rdv-type2-name': 'Présentation des éditions',
-    'rdv-type2-sub': 'Découverte des tirages disponibles',
-    'rdv-type3-name': 'Entretien presse',
-    'rdv-type4-name': 'Dîner & rencontre réseau',
-    'rdv-type4-sub': 'Sur invitation',
-    'rdv-sur-demande': 'Sur demande',
-    'rdv-invitation': 'Invitation',
-    'rdv-loc-label': 'Localisation',
-    'rdv-loc-sub': "En galerie ou à l'atelier, selon les projets en cours",
-    'vente-ete-label': 'Collaboration — Valentine Gauthier',
-    'vente-ete-p1': 'Trois soirées sur invitation. Mercredi 3, jeudi 4 et vendredi 5 juin de 18h à 21h. Les inscriptions sont limitées chaque soir pour garder un moment agréable et fluide.',
-    'contact-dir-label': 'Direction artistique',
-    'contact-gen-label': 'Contact général',
-    'contact-press-label': 'Presse & partenariats',
-    'contact-ed-label': 'Commandes éditions',
-    'contact-loc-label': 'Localisation',
-    'contact-loc-val': 'Paris, France',
-    'form-opt1': 'Projet / collaboration',
-    'form-opt2': 'Commande éditions',
-    'form-opt3': 'Presse & partenariat',
-    'form-opt4': 'Autre',
-    'artist1-origin': 'Paris, France',
-    'artist1-bio': "Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.",
-    'artist1-tags': 'Mode — Direction artistique — Textile',
-    'journal-avenir': 'À venir',
-    'journal-about-label': 'À propos du Journal',
-    'journal-prochainement-label': 'Prochainement',
-    'journal-prochainement': "Le Journal sera alimenté au fil des projets. Premières entrées à venir — rencontre avec Cédrix Crespel, genèse de l'exposition Entre deux cœurs.",
-    'journal-rencontre': 'Rencontre',
-    'journal-processus': 'Processus',
-    'journal-edition': 'Édition',
-    'journal-entry1-title': "La première fois que j'ai vu le travail de Cédrix Crespel",
-    'journal-entry1-sub': 'Thomas Bernard — à paraître',
-    'journal-entry2-title': 'Comment les Nymphéas ont trouvé leur forme',
-    'journal-entry2-sub': "Genèse de l'exposition — Galerie Strouk, 2025 — à paraître",
-    'journal-entry3-title': 'Fabriquer un livret à la main',
-    'journal-entry3-sub': "De la typographie à l'impression risograph — à paraître",
-    'biblio-concept-h': 'Rééditer des livres essentiels. Les faire accompagner par un artiste.',
-    'biblio-concept-p': 'Chaque édition Forma Mantis réunit un texte fondateur et un artiste invité à le traverser visuellement. Un ex-libris original signé, une préface inédite, une reliure cousue. Tirage de tête numéroté à 50 exemplaires — puis tirage courant à 150.',
-    'biblio-collections-label': 'Éditions de collection',
-    'biblio-edition-label': 'Bibliothèque Forma Mantis — Édition',
-    'biblio-illustre': 'Illustré par',
-    'biblio-tete': 'Tirage de tête 50 ex. / Tirage courant 150 ex.',
-    'biblio-reserver': 'Réserver un exemplaire',
-    'footer-copy': 'Forma Mantis — 2025',
-    'footer-loc': 'Paris',
-    'home-kpi-right': 'Art contemporain, mode, édition — Paris & Bretagne.',
-    'artiste-avenir': 'Artiste à venir',
-    'artiste-avenir-label': 'Prochainement',
-    'artiste-avenir-bio': "Forma Mantis travaille avec un cercle restreint d'artistes. Les profils seront présentés au fil des collaborations.",
-  },
-  en: {
-    'badge-en-cours': 'In progress',
-    'badge-2026': '2026',
-    'badge-recent': 'Recent',
-    'badge-passee': 'Past',
-    'badge-avenir': 'Upcoming',
-    'label-lieu': 'Location',
-    'label-dates': 'Dates',
-    'label-commissaire': 'Curator',
-    'label-artiste': 'Artist',
-    'label-format': 'Format',
-    'label-tirage': 'Edition',
-    'label-galerie': 'Gallery',
-    'label-type': 'Type',
-    'label-artistes': 'Artists',
-    'mason-desc': 'Solo exhibition of British artist Charles Mason at Galerie NEC (Nilsson & Chiglien), Paris Marais. Sculptures, installations and works on paper. Curated by Thomas Bernard.',
-    'crespel-desc': 'A pictorial work between revelation and restraint, the sharp and the blurred. Presentation text signed by Thomas Bernard.',
-    'nympheas-desc': 'Around the legacy of Claude Monet — a contemporary vision based on the notions of surface and depth. Six artists brought together by Thomas Bernard: Vincent Beaurin, Christophe Doucet, Vincent Gicquel, Ludivine Gonthier, Orsten Groom, Marlène Mocquet.',
-    'jeunesse-desc': 'STROUK × ENSBA — A selection of over thirty artists from the École nationale supérieure des beaux-arts de Paris. Organised by Alain Berland with the complicity of Thomas Bernard.',
-    'mason-about-label': 'About',
-    'mason-p1': "Charles Mason's work is rooted in a tradition deeply embedded in English sculpture, marked by particular attention to the relationship between form, space and sensory experience.",
-    'mason-p2': 'Like major figures such as Henry Moore or Antony Gormley, the aim is less to represent than to bring forth a presence, often silent, almost meditative.',
-    'mason-cta': 'For any enquiry about this exhibition, contact Forma Mantis.',
-    'mason-note': 'Visuals for this exhibition will be added shortly.',
-    'mason-note-label': 'Note',
-    'mason-artiste-label': 'Artist',
-    'mason-artiste-val': 'Charles Mason',
-    'mason-artiste-sub': 'British artist',
-    'mason-galerie-label': 'Gallery',
-    'mason-format-label': 'Format',
-    'mason-format-val': 'Sculptures, installations\nSolo exhibition\nCurated by Thomas Bernard',
-    'nous-contacter': 'Contact us',
-    'crespel-texte-label': 'Presentation text',
-    'crespel-artiste-label': 'Artist',
-    'crespel-galerie-label': 'Gallery',
-    'crespel-dates-label': 'Dates',
-    'crespel-repr-label': 'Representation',
-    'crespel-lien-label': 'Forma Mantis connection',
-    'crespel-lien-text': 'Cédrix Crespel joined the Galerie Rabouan Moussion with the support of Thomas Bernard. This exhibition marks the beginning of a long-term collaboration.',
-    'crespel-vues': 'Exhibition views',
-    'crespel-courtesy': 'Courtesy of the artist and Galerie Rabouan Moussion, Paris — Photos: HD',
-    'crespel-l-artiste': 'The artist',
-    'crespel-contact-label': 'Contact',
-    'crespel-contact-text': 'For any enquiry concerning the works, contact Galerie Rabouan Moussion or Forma Mantis directly.',
-    'crespel-cta': 'For any information on the works, availability or acquisition conditions, contact Forma Mantis or Galerie Rabouan Moussion directly.',
-    'nympheas-paradigme': 'Surface as a paradigm of modernity',
-    'nympheas-commissaire': 'Curated by Thomas Bernard',
-    'nympheas-lieu-val': 'Galerie Strouk\n2 avenue Matignon, 75008 Paris',
-    'nympheas-dates-val': '24 January – 8 March 2025',
-    'nympheas-vues': 'Exhibition views',
-    'nympheas-courtesy': 'Courtesy Galerie Strouk, Paris — Les Nymphéas : Miroirs des profondeurs, 24 January – 8 March 2025',
-    'nympheas-cta': 'To find out more about the artists or works, contact Forma Mantis or Galerie Strouk.',
-    'jeunesse-presentation': 'Presentation',
-    'jeunesse-h': 'A celebration of the creativity of over thirty artists from the Beaux-Arts de Paris.',
-    'jeunesse-lieu-val': 'Galerie Strouk\n5 rue du Mail, 75002 Paris',
-    'jeunesse-dates-val': '10 – 14 December 2024\nOpening Monday 9 December from 6pm',
-    'jeunesse-complicite': 'Project developed with the complicity of Thomas Bernard.',
-    'jeunesse-vues': 'Exhibition views',
-    'jeunesse-courtesy': 'Courtesy Galerie Strouk, Paris — STROUK × ENSBA, December 2024',
-    'jeunesse-cta': 'To find out more about the artists exhibited or projects born from this collaboration, contact Forma Mantis.',
-    'axe-expo-label': 'Exhibition',
-    'axe-expo-text': 'Unconventional venues, precise scenography, few works but well chosen.',
-    'axe-edition-label': 'Publishing',
-    'axe-edition-text': 'Booklets, prints, hybrid objects — pieces produced with care.',
-    'axe-reseau-label': 'Network',
-    'axe-reseau-text': 'Dinners, meetings, stays — hospitality as a form of transmission.',
-    'axe-territoire-label': 'Territory',
-    'axe-territoire-text': 'Strong territorial roots, international reach.',
-    'axe-economie-label': 'Economy',
-    'axe-economie-text': 'Autonomous model, unsubsidised, based on direct sales and partnerships.',
-    'quimperle-p1': 'Number 3 is a building of that era — cut stone, monumental fireplace, vaulted ground floor opening directly onto the water. Forty minutes from Lorient, two hours from Paris. The sea ten kilometres away.',
-    'quimperle-h': 'Quimperlé is built at the confluence of the Isole and Ellé rivers. The quai Brizeux has followed the river since the 17th century.',
-    'quimperle-projet-label': 'The project',
-    'quimperle-prog-label': 'Planned programme',
-    'quimperle-statut-label': 'Status',
-    'quimperle-prog-1': 'Exhibitions in the vaulted ground floor',
-    'quimperle-prog-2': 'Artist residencies — spring and autumn',
-    'quimperle-prog-3': 'Dinners & network meetings',
-    'quimperle-prog-4': 'Sales space for Forma Mantis editions',
-    'quimperle-prog-5': 'Café — open to the public',
-    'quimperle-projet-p1': 'Forma Mantis is in the process of acquiring this building. The intention is simple: a place for work, exhibition and residency. Somewhere artists can stay, projects can take shape, people can gather.',
-    'quimperle-projet-p2': 'Not an institutional space. A house that works.',
-    'rdv-prendre-label': 'Get in touch',
-    'rdv-email-label': 'For urgent requests or gallery appointments, contact directly by email.',
-    'rdv-coming': 'The online appointment system will be available shortly.',
-    'rdv-types-label': 'Types of appointments',
-    'rdv-type1-name': 'Exhibition visit',
-    'rdv-type1-sub': 'Private presentation with Thomas Bernard',
-    'rdv-type2-name': 'Edition presentation',
-    'rdv-type2-sub': 'Discovery of available editions',
-    'rdv-type3-name': 'Press interview',
-    'rdv-type4-name': 'Dinner & network meeting',
-    'rdv-type4-sub': 'By invitation',
-    'rdv-sur-demande': 'On request',
-    'rdv-invitation': 'Invitation',
-    'rdv-loc-label': 'Location',
-    'rdv-loc-sub': 'At the gallery or studio, according to current projects',
-    'vente-ete-label': 'Collaboration — Valentine Gauthier',
-    'vente-ete-p1': 'Three evenings by invitation. Wednesday 3, Thursday 4 and Friday 5 June from 6pm to 9pm. Registrations are limited each evening.',
-    'contact-dir-label': 'Artistic direction',
-    'contact-gen-label': 'General enquiries',
-    'contact-press-label': 'Press & partnerships',
-    'contact-ed-label': 'Edition orders',
-    'contact-loc-label': 'Location',
-    'contact-loc-val': 'Paris, France',
-    'form-opt1': 'Project / collaboration',
-    'form-opt2': 'Edition orders',
-    'form-opt3': 'Press & partnership',
-    'form-opt4': 'Other',
-    'artist1-origin': 'Paris, France',
-    'artist1-bio': 'Fashion designer, founder of Valentine Gauthier (2007) and Value (2023). Clothing as an act of thought — free femininity, ecological commitment, constant dialogue with contemporary art.',
-    'artist1-tags': 'Fashion — Artistic direction — Textile',
-    'journal-avenir': 'Coming soon',
-    'journal-about-label': 'About the Journal',
-    'journal-prochainement-label': 'Coming soon',
-    'journal-prochainement': 'The Journal will be updated as projects unfold. First entries coming — meeting Cédrix Crespel, genesis of the exhibition Entre deux cœurs.',
-    'journal-rencontre': 'Meeting',
-    'journal-processus': 'Process',
-    'journal-edition': 'Edition',
-    'journal-entry1-title': 'The first time I saw the work of Cédrix Crespel',
-    'journal-entry1-sub': 'Thomas Bernard — forthcoming',
-    'journal-entry2-title': 'How the Nymphéas found their form',
-    'journal-entry2-sub': 'Genesis of the exhibition — Galerie Strouk, 2025 — forthcoming',
-    'journal-entry3-title': 'Making a booklet by hand',
-    'journal-entry3-sub': 'From typography to risograph printing — forthcoming',
-    'biblio-concept-h': 'Reediting essential books. Accompanied by an artist.',
-    'biblio-concept-p': 'Each Forma Mantis edition brings together a founding text and an artist invited to traverse it visually. An original signed ex-libris, a new preface, sewn binding. Numbered head edition of 50 copies — then standard edition of 150.',
-    'biblio-collections-label': 'Collection editions',
-    'biblio-edition-label': 'Forma Mantis Library — Edition',
-    'biblio-illustre': 'Illustrated by',
-    'biblio-tete': 'Head edition 50 copies / Standard edition 150 copies',
-    'biblio-reserver': 'Reserve a copy',
-    'footer-copy': 'Forma Mantis — 2025',
-    'footer-loc': 'Paris',
-    'home-kpi-right': 'Contemporary art, fashion, publishing — Paris & Brittany.',
-    'artiste-avenir': 'Artist coming soon',
-    'artiste-avenir-label': 'Coming soon',
-    'artiste-avenir-bio': 'Forma Mantis works with a small circle of artists. Profiles will be presented as collaborations develop.',
-  },
-  jp: {
-    'badge-en-cours': '進行中',
-    'badge-2026': '2026',
-    'badge-recent': '最近',
-    'badge-passee': '終了',
-    'badge-avenir': '予定',
-    'label-lieu': '場所',
-    'label-dates': '日程',
-    'label-commissaire': 'キュレーター',
-    'label-artiste': 'アーティスト',
-    'label-format': 'フォーマット',
-    'label-tirage': '版数',
-    'label-galerie': 'ギャラリー',
-    'label-type': 'タイプ',
-    'label-artistes': 'アーティスト',
-    'mason-desc': '英国人アーティスト、チャールズ・メイソンの個展。Galerie NEC（ニルソン＆シグリアン）、パリ・マレ地区。彫刻、インスタレーション、紙上の作品。キュレーション：トーマス・ベルナール。',
-    'crespel-desc': '開示と抑制、鮮明と曖昧の間にある絵画作品。Thomas Bernard署名のプレゼンテーションテキスト。',
-    'nympheas-desc': 'クロード・モネの遺産をめぐって——表面と深さという概念に基づく現代的なビジョン。Thomas Bernardが集めた6人のアーティスト。',
-    'jeunesse-desc': 'STROUK × ENSBA — パリ国立高等美術学校出身の30名以上のアーティストの選出。Alain BerlandとThomas Bernardの協力により企画。',
-    'mason-about-label': 'について',
-    'mason-p1': 'チャールズ・メイソンの作品は、形態、空間、感覚的体験の関係に特別な注意を払う英国彫刻の伝統に深く根ざしています。',
-    'mason-p2': 'ヘンリー・ムーアやアントニー・ゴームリーのような主要な芸術家と同様に、表現することよりも、しばしば沈黙した、ほぼ瞑想的な存在感を生み出すことが目的です。',
-    'mason-cta': 'この展覧会に関するお問い合わせはForma Mantisまで。',
-    'mason-note': 'この展覧会のビジュアルは近日追加予定。',
-    'mason-note-label': 'ノート',
-    'mason-artiste-label': 'アーティスト',
-    'mason-artiste-val': 'チャールズ・メイソン',
-    'mason-artiste-sub': '英国人アーティスト',
-    'mason-galerie-label': 'ギャラリー',
-    'mason-format-label': 'フォーマット',
-    'mason-format-val': '彫刻、インスタレーション\n個展\nキュレーション：Thomas Bernard',
-    'nous-contacter': 'お問い合わせ',
-    'crespel-texte-label': 'プレゼンテーションテキスト',
-    'crespel-artiste-label': 'アーティスト',
-    'crespel-galerie-label': 'ギャラリー',
-    'crespel-dates-label': '日程',
-    'crespel-repr-label': '代表',
-    'crespel-lien-label': 'Forma Mantisとの関係',
-    'crespel-lien-text': 'セドリック・クレスペルはThomas Bernardのサポートによりギャラリー・ラブアン・ムッシオンに参加しました。',
-    'crespel-vues': '展示風景',
-    'crespel-courtesy': 'アーティストとGalerie Rabouan Moussion（パリ）提供 — 写真：HD',
-    'crespel-l-artiste': 'アーティスト',
-    'crespel-contact-label': 'コンタクト',
-    'crespel-contact-text': '作品に関するお問い合わせは、Galerie Rabouan MoussionまたはForma Mantisに直接ご連絡ください。',
-    'crespel-cta': '作品、入手可能性、取得条件に関する情報はForma MantisまたはGalerie Rabouan Moussionへ。',
-    'nympheas-paradigme': '近代性のパラダイムとしての表面',
-    'nympheas-commissaire': 'キュレーション：Thomas Bernard',
-    'nympheas-lieu-val': 'Galerie Strouk\n2 avenue Matignon, 75008 パリ',
-    'nympheas-dates-val': '2025年1月24日 – 3月8日',
-    'nympheas-vues': '展示風景',
-    'nympheas-courtesy': 'Galerie Strouk（パリ）提供',
-    'nympheas-cta': 'アーティストや作品についての詳細はForma MantisまたはGalerie Stroukへ。',
-    'jeunesse-presentation': 'プレゼンテーション',
-    'jeunesse-h': 'パリ美術学校出身の30名以上のアーティストの創造性を称える展覧会。',
-    'jeunesse-lieu-val': 'Galerie Strouk\nパリ2区',
-    'jeunesse-dates-val': '2024年12月10〜14日\nオープニング：12月9日（月）18時〜',
-    'jeunesse-complicite': 'Thomas Bernardの協力のもと開発されたプロジェクト。',
-    'jeunesse-vues': '展示風景',
-    'jeunesse-courtesy': 'Galerie Strouk（パリ）提供 — STROUK × ENSBA、2024年12月',
-    'jeunesse-cta': '展示アーティストやコラボレーションから生まれたプロジェクトについてはForma Mantisへ。',
-    'axe-expo-label': '展覧会',
-    'axe-expo-text': '独自の場所、精密な展示構成、少数の厳選された作品。',
-    'axe-edition-label': '出版',
-    'axe-edition-text': '冊子、版画、ハイブリッドなオブジェ——意識を持って制作された作品。',
-    'axe-reseau-label': 'ネットワーク',
-    'axe-reseau-text': '夕食会、交流、宿泊——伝達の形としてのホスピタリティ。',
-    'axe-territoire-label': '領域',
-    'axe-territoire-text': '地域に根ざした活動、国際的な発信。',
-    'axe-economie-label': '経済',
-    'axe-economie-text': '自立的モデル、助成金なし、直接販売とパートナーシップに基づく。',
-    'quimperle-p1': '3番地はその時代の建物——切り石、モニュメンタルな暖炉、水面に直接面したアーチ型の1階。ロリアンから40分、パリから2時間。海まで10キロ。',
-    'quimperle-h': 'カンペルレはイゾールとエレ川の合流点に建設された町。ブリゾー埠頭は17世紀から川に沿って続いています。',
-    'quimperle-projet-label': 'プロジェクト',
-    'quimperle-prog-label': '予定プログラム',
-    'quimperle-statut-label': 'ステータス',
-    'quimperle-prog-1': 'アーチ型1階での展覧会',
-    'quimperle-prog-2': 'アーティスト・レジデンシー——春と秋',
-    'quimperle-prog-3': '夕食会 & ネットワーク交流',
-    'quimperle-prog-4': 'Forma Mantisエディション販売スペース',
-    'quimperle-prog-5': 'カフェ——一般公開',
-    'quimperle-projet-p1': 'Forma Mantisはこの建物の取得を進めています。目的はシンプルです：仕事、展覧会、滞在のための場所。',
-    'quimperle-projet-p2': '制度的な空間ではない。働く家。',
-    'rdv-prendre-label': 'お問い合わせ',
-    'rdv-email-label': '緊急のご要望またはギャラリーでのアポイントメントは直接メールでお問い合わせください。',
-    'rdv-coming': 'オンライン予約システムは近日公開予定です。',
-    'rdv-types-label': '予約の種類',
-    'rdv-type1-name': '展覧会訪問',
-    'rdv-type1-sub': 'Thomas Bernardとのプライベートプレゼンテーション',
-    'rdv-type2-name': 'エディションのプレゼンテーション',
-    'rdv-type2-sub': '入手可能なエディションのご紹介',
-    'rdv-type3-name': 'プレスインタビュー',
-    'rdv-type4-name': '夕食会 & ネットワーク交流',
-    'rdv-type4-sub': '招待制',
-    'rdv-sur-demande': '要望に応じて',
-    'rdv-invitation': '招待',
-    'rdv-loc-label': '場所',
-    'rdv-loc-sub': '進行中のプロジェクトに応じて、ギャラリーまたはアトリエにて',
-    'vente-ete-label': 'コラボレーション — Valentine Gauthier',
-    'vente-ete-p1': '招待制の3夜。6月3日（水）、4日（木）、5日（金）、18時〜21時。各夜の登録数は限られています。',
-    'contact-dir-label': 'アーティスティックディレクション',
-    'contact-gen-label': '一般お問い合わせ',
-    'contact-press-label': 'プレス & パートナーシップ',
-    'contact-ed-label': 'エディション注文',
-    'contact-loc-label': '所在地',
-    'contact-loc-val': 'パリ、フランス',
-    'form-opt1': 'プロジェクト / コラボレーション',
-    'form-opt2': 'エディション注文',
-    'form-opt3': 'プレス & パートナーシップ',
-    'form-opt4': 'その他',
-    'artist1-origin': 'パリ、フランス',
-    'artist1-bio': 'ファッションデザイナー、Valentine Gauthier（2007年）とValue（2023年）の創設者。思考の行為としての衣服——自由な女性性、エコロジーへの取り組み、現代アートとの絶え間ない対話。',
-    'artist1-tags': 'ファッション — アーティスティックディレクション — テキスタイル',
-    'journal-avenir': '近日公開',
-    'journal-about-label': 'ジャーナルについて',
-    'journal-prochainement-label': '近日公開',
-    'journal-prochainement': 'ジャーナルはプロジェクトの進行とともに更新されます。最初のエントリー近日公開。',
-    'journal-rencontre': '出会い',
-    'journal-processus': 'プロセス',
-    'journal-edition': 'エディション',
-    'journal-entry1-title': 'セドリック・クレスペルの作品を初めて見たとき',
-    'journal-entry1-sub': 'Thomas Bernard — 近日公開',
-    'journal-entry2-title': '《睡蓮》がその形を見つけた方法',
-    'journal-entry2-sub': '展覧会の誕生——Galerie Strouk、2025年——近日公開',
-    'journal-entry3-title': '手で冊子を作る',
-    'journal-entry3-sub': 'タイポグラフィからリソグラフ印刷まで——近日公開',
-    'biblio-concept-h': '重要な書籍の復刊。アーティストとともに。',
-    'biblio-concept-p': 'Forma Mantisの各エディションは、創設的なテキストとアーティストを結びつけます。50部限定の頭部版、続いて150部の通常版。',
-    'biblio-collections-label': 'コレクションエディション',
-    'biblio-edition-label': 'Forma Mantisライブラリー — エディション',
-    'biblio-illustre': 'イラスト',
-    'biblio-tete': '頭部版50部 / 通常版150部',
-    'biblio-reserver': '予約する',
-    'footer-copy': 'Forma Mantis — 2025',
-    'footer-loc': 'パリ',
-    'home-kpi-right': '現代アート、ファッション、出版——パリ & ブルターニュ。',
-    'artiste-avenir': 'アーティスト近日公開',
-    'artiste-avenir-label': '近日公開',
-    'artiste-avenir-bio': 'Forma Mantisは少数のアーティストと協働します。プロフィールはコラボレーションの進展とともに公開されます。',
-  },
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+let currentLang = 'fr';
+let originalTexts = new Map();
+
+const textMap = {
+  'Accueil': { en: 'Home', jp: 'ホーム' },
+  'Projets': { en: 'Projects', jp: 'プロジェクト' },
+  'Artistes': { en: 'Artists', jp: 'アーティスト' },
+  'Bibliothèque': { en: 'Library', jp: 'ライブラリー' },
+  'À propos': { en: 'About', jp: 'について' },
+  'Contact': { en: 'Contact', jp: 'コンタクト' },
+  'Rendez-vous': { en: 'Appointments', jp: '予約' },
+  'Journal': { en: 'Journal', jp: 'ジャーナル' },
+  'Instagram': { en: 'Instagram', jp: 'Instagram' },
+  'En cours': { en: 'In progress', jp: '進行中' },
+  'Passée': { en: 'Past', jp: '終了' },
+  'À venir': { en: 'Upcoming', jp: '予定' },
+  'Récent': { en: 'Recent', jp: '最近' },
+  '2026': { en: '2026', jp: '2026' },
+  'Lieu': { en: 'Location', jp: '場所' },
+  'Dates': { en: 'Dates', jp: '日程' },
+  'Commissaire': { en: 'Curator', jp: 'キュレーター' },
+  'Artiste': { en: 'Artist', jp: 'アーティスト' },
+  'Format': { en: 'Format', jp: 'フォーマット' },
+  'Galerie': { en: 'Gallery', jp: 'ギャラリー' },
+  'Localisation': { en: 'Location', jp: '所在地' },
+  'Statut': { en: 'Status', jp: 'ステータス' },
+  'Note': { en: 'Note', jp: 'ノート' },
+  'Art contemporain — Mode — Édition': { en: 'Contemporary Art — Fashion — Publishing', jp: '現代アート — ファッション — 出版' },
+  'Direction artistique': { en: 'Artistic direction', jp: 'アーティスティックディレクション' },
+  'Forma Mantis développe des expositions, des éditions et des projets culturels sur mesure. Une structure indépendante fondée par Valentine Gauthier et Thomas Bernard.': { en: 'Forma Mantis develops exhibitions, editions and bespoke cultural projects. An independent structure founded by Valentine Gauthier and Thomas Bernard.', jp: 'Forma Mantisは展覧会、出版、文化プロジェクトを手がける独立構造です。Valentine GauthierとThomas Bernardにより設立。' },
+  'Expositions dans des lieux atypiques, éditions limitées, résidences et collaborations avec artistes, designers et artisans — un modèle qui privilégie la qualité des projets sur leur quantité.': { en: 'Exhibitions in unconventional spaces, limited editions, residencies and collaborations with artists, designers and craftspeople — a model that prioritises the quality of projects over their quantity.', jp: '独自の空間での展覧会、限定版、レジデンシー、アーティストやデザイナーとのコラボレーション。プロジェクトの質を重視するモデル。' },
+  'Art contemporain, mode, édition — Paris & Bretagne.': { en: 'Contemporary art, fashion, publishing — Paris & Brittany.', jp: '現代アート、ファッション、出版——パリ & ブルターニュ。' },
+  'Expositions, résidences et situations — pensées en relation avec leurs lieux.': { en: 'Exhibitions, residencies and situations — conceived in relation to their locations.', jp: '展覧会、レジデンシー、シチュエーション。場所との対話から生まれるプロジェクト。' },
+  "Exposition monographique de l'artiste britannique Charles Mason à la Galerie NEC (Nilsson & Chiglien), Paris Marais. Sculptures, installations et œuvres sur papier. Commissariat Thomas Bernard.": { en: 'Solo exhibition of British artist Charles Mason at Galerie NEC, Paris Marais. Sculptures, installations and works on paper. Curated by Thomas Bernard.', jp: '英国人アーティスト、チャールズ・メイソンの個展。Galerie NEC、パリ・マレ地区。キュレーション：Thomas Bernard。' },
+  'Un travail pictural entre dévoilement et retenue, le net et le flou. Texte de présentation signé Thomas Bernard.': { en: 'A pictorial work between revelation and restraint, the sharp and the blurred. Presentation text by Thomas Bernard.', jp: '開示と抑制の間にある絵画作品。Thomas Bernard署名のプレゼンテーションテキスト。' },
+  "Autour de l'héritage de Claude Monet — une vision contemporaine fondée sur les notions de surface et de profondeur. Six artistes réunis par Thomas Bernard : Vincent Beaurin, Christophe Doucet, Vincent Gicquel, Ludivine Gonthier, Orsten Groom, Marlène Mocquet.": { en: 'Around the legacy of Claude Monet — a contemporary vision based on the notions of surface and depth. Six artists brought together by Thomas Bernard.', jp: 'クロード・モネの遺産をめぐって。Thomas Bernardが集めた6人のアーティスト。' },
+  "STROUK × ENSBA — Une sélection de plus de trente artistes issus de l'École nationale supérieure des beaux-arts de Paris. Organisée par Alain Berland avec la complicité de Thomas Bernard, cette exposition célèbre une génération d'une audace formelle et narrative qui défie les conventions.": { en: 'STROUK × ENSBA — A selection of over thirty artists from the École nationale supérieure des beaux-arts de Paris. Organised by Alain Berland with Thomas Bernard.', jp: 'STROUK × ENSBA — パリ国立高等美術学校出身の30名以上のアーティストの選出。' },
+  'Artistes & collaborateurs': { en: 'Artists & collaborators', jp: 'アーティスト & コラボレーター' },
+  "Forma Mantis travaille avec un cercle restreint d'artistes, choisis pour la durée. Pas de représentation exclusive — une logique d'accompagnement, de projet en projet.": { en: 'Forma Mantis works with a small circle of artists, chosen for the long term. No exclusive representation — a logic of support, project by project.', jp: 'Forma Mantisは長期的に選ばれた少数のアーティストと協働します。独占的な表現ではなく、プロジェクトごとのサポートの論理。' },
+  "Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.": { en: 'Parisian fashion designer, founder of Valentine Gauthier (2007) and Value (2023). Twenty years of collections built on a rare conviction: clothing as an act of thought. Pioneer ecological commitment, regular collaboration with the contemporary art world — Perrotin, Thaddaeus Ropac, Gagosian.', jp: 'パリのファッションデザイナー。ファッションにおける稀な確信に基づく20年のコレクション。先駆的なエコロジーへの取り組み。' },
+  'Artiste à venir': { en: 'Artist coming soon', jp: 'アーティスト近日公開' },
+  'Prochainement': { en: 'Coming soon', jp: '近日公開' },
+  "Forma Mantis travaille avec un cercle restreint d'artistes. Les profils seront présentés au fil des collaborations.": { en: 'Forma Mantis works with a small circle of artists. Profiles will be presented as collaborations develop.', jp: 'Forma Mantisは少数のアーティストと協働します。プロフィールはコラボレーションの進展とともに公開されます。' },
+  'Une structure indépendante<br>à la croisée des formes': { en: 'An independent structure<br>at the intersection of forms', jp: '形式の交点に立つ<br>独立構造' },
+  'Art contemporain, mode, édition — sans hiérarchie entre les disciplines': { en: 'Contemporary art, fashion, publishing — without hierarchy between disciplines', jp: '現代アート、ファッション、出版。分野間の階層なし。' },
+  'Manifeste': { en: 'Manifesto', jp: 'マニフェスト' },
+  "Forma Mantis est né d'une conviction : les projets les plus intéressants se font en dehors des circuits habituels. Dans des lieux qui ont une histoire. Avec des gens qui ont une exigence.": { en: 'Forma Mantis was born from a conviction: the most interesting projects happen outside conventional circuits. In places with history. With people who have standards.', jp: 'Forma Mantisは確信から生まれました：最も興味深いプロジェクトは慣習的な回路の外で生まれる。' },
+  'Ni galerie au sens classique, ni agence — quelque chose de plus direct. Un réseau de confiance, une économie maîtrisée, une programmation choisie. La rareté comme méthode.': { en: 'Neither gallery in the classical sense, nor agency — something more direct. A network of trust, a controlled economy, a chosen programme. Rarity as method.', jp: '古典的なギャラリーでもエージェンシーでもない——より直接的な何か。希少性を方法として。' },
+  'Axes de travail': { en: 'Fields of work', jp: '活動の軸' },
+  'Exposition': { en: 'Exhibition', jp: '展覧会' },
+  "Des lieux atypiques, une scénographie précise, peu d'œuvres mais bien choisies.": { en: 'Unconventional venues, precise scenography, few works but well chosen.', jp: '独自の場所、精密な展示構成、少数の厳選された作品。' },
+  'Édition': { en: 'Publishing', jp: '出版' },
+  'Livrets, estampes, objets hybrides — des pièces produites en conscience.': { en: 'Booklets, prints, hybrid objects — pieces produced with care.', jp: '冊子、版画、ハイブリッドなオブジェ——意識を持って制作された作品。' },
+  'Réseau': { en: 'Network', jp: 'ネットワーク' },
+  "Dîners, rencontres, séjours — l'hospitalité comme forme de transmission.": { en: 'Dinners, meetings, stays — hospitality as a form of transmission.', jp: '夕食会、交流、宿泊——伝達の形としてのホスピタリティ。' },
+  'Territoire': { en: 'Territory', jp: '領域' },
+  'Ancrage territorial fort, diffusion internationale.': { en: 'Strong territorial roots, international reach.', jp: '地域に根ざした活動、国際的な発信。' },
+  'Économie': { en: 'Economy', jp: '経済' },
+  'Modèle autonome, non subventionné, fondé sur la vente directe et les partenariats.': { en: 'Autonomous model, unsubsidised, based on direct sales and partnerships.', jp: '自立的モデル、直接販売とパートナーシップに基づく。' },
+  'Direction artistique & création': { en: 'Artistic direction & creation', jp: 'アーティスティックディレクション & 創作' },
+  'Direction artistique & curatoriale': { en: 'Artistic & curatorial direction', jp: 'アーティスティック & キュレーター' },
+  "Commissaire d'exposition et directeur artistique. Fondateur de la Galerie Thomas Bernard — Cortex Athletico (Paris, 2003–2023), membre du CPGA et de Paris Gallery Map. Vingt ans à accompagner des artistes, construire des expositions, développer des collections. Forma Mantis prolonge ce travail sous une forme plus libre.": { en: 'Exhibition curator and artistic director. Founder of Galerie Thomas Bernard — Cortex Athletico (Paris, 2003–2023), member of the CPGA and Paris Gallery Map. Twenty years accompanying artists, building exhibitions, developing collections. Forma Mantis extends this work in a freer form.', jp: '展覧会キュレーター、アーティスティックディレクター。Galerie Thomas Bernard — Cortex Athletico（パリ、2003〜2023年）の創設者。Forma Mantisはこの活動をより自由な形で継続します。' },
+  'Un lieu': { en: 'A place', jp: '場所' },
+  'Quimperlé, Bretagne': { en: 'Quimperlé, Brittany', jp: 'カンペルレ、ブルターニュ' },
+  "Quimperlé est construite au confluent de l'Isole et de l'Ellé. Le quai Brizeux longe la rivière depuis le XVIIe siècle.": { en: 'Quimperlé is built at the confluence of the Isole and Ellé rivers. The quai Brizeux has followed the river since the 17th century.', jp: 'カンペルレはイゾールとエレ川の合流点に建設された町。ブリゾー埠頭は17世紀から川に沿って続いています。' },
+  "Le numéro 3 est un bâtiment de cette époque — pierre de taille, cheminée monumentale, rez-de-quai voûté qui donne directement sur l'eau. Quarante minutes de Lorient, deux heures de Paris. La mer à dix kilomètres.": { en: 'Number 3 is a building of that era — cut stone, monumental fireplace, vaulted ground floor opening directly onto the water. Forty minutes from Lorient, two hours from Paris. The sea ten kilometres away.', jp: '3番地はその時代の建物——切り石、モニュメンタルな暖炉、水面に直接面したアーチ型の1階。ロリアンから40分、パリから2時間。海まで10キロ。' },
+  'Le projet': { en: 'The project', jp: 'プロジェクト' },
+  "Forma Mantis est en cours d'acquisition de ce bâtiment. L'intention est simple : un lieu de travail, d'exposition et de résidence. Un endroit où les artistes peuvent rester, où les projets peuvent se faire, où les gens peuvent se réunir.": { en: 'Forma Mantis is in the process of acquiring this building. The intention is simple: a place for work, exhibition and residency. Somewhere artists can stay, projects can take shape, people can gather.', jp: 'Forma Mantisはこの建物の取得を進めています。目的はシンプルです：仕事、展覧会、滞在のための場所。' },
+  'Pas un espace institutionnel. Une maison qui travaille.': { en: 'Not an institutional space. A house that works.', jp: '制度的な空間ではない。働く家。' },
+  'Programme envisagé': { en: 'Planned programme', jp: '予定プログラム' },
+  'Expositions dans le rez-de-quai voûté': { en: 'Exhibitions in the vaulted ground floor', jp: 'アーチ型1階での展覧会' },
+  "Résidences d'artistes — printemps et automne": { en: 'Artist residencies — spring and autumn', jp: 'アーティスト・レジデンシー——春と秋' },
+  'Dîners & rencontres du réseau': { en: 'Dinners & network meetings', jp: '夕食会 & ネットワーク交流' },
+  'Espace de vente des éditions Forma Mantis': { en: 'Sales space for Forma Mantis editions', jp: 'Forma Mantisエディション販売スペース' },
+  'Café — ouvert au public': { en: 'Café — open to the public', jp: 'カフェ——一般公開' },
+  'Acquisition en cours — ouverture envisagée 2027': { en: 'Acquisition in progress — opening planned 2027', jp: '取得進行中 — 2027年開業予定' },
+  'Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.': { en: 'Forma Mantis develops collaborations with artists, collectors, institutions and private partners.', jp: 'Forma Mantisはアーティスト、コレクター、機関、民間パートナーとのコラボレーションを展開しています。' },
+  'Contact général': { en: 'General enquiries', jp: '一般お問い合わせ' },
+  'Presse & partenariats': { en: 'Press & partnerships', jp: 'プレス & パートナーシップ' },
+  'Commandes éditions': { en: 'Edition orders', jp: 'エディション注文' },
+  'Paris, France': { en: 'Paris, France', jp: 'パリ、フランス' },
+  'Écrire un message': { en: 'Send a message', jp: 'メッセージを送る' },
+  'Nom & prénom': { en: 'Full name', jp: 'お名前' },
+  '— Sélectionner —': { en: '— Select —', jp: '— 選択 —' },
+  'Projet / collaboration': { en: 'Project / collaboration', jp: 'プロジェクト / コラボレーション' },
+  'Commande éditions': { en: 'Edition orders', jp: 'エディション注文' },
+  'Presse & partenariat': { en: 'Press & partnership', jp: 'プレス & パートナーシップ' },
+  'Autre': { en: 'Other', jp: 'その他' },
+  'Message': { en: 'Message', jp: 'メッセージ' },
+  'Envoyer': { en: 'Send', jp: '送信' },
+  'Prendre contact': { en: 'Get in touch', jp: 'お問い合わせ' },
+  'Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, artistes, partenaires.': { en: 'Forma Mantis receives by appointment — collectors, institutions, artists, partners.', jp: 'Forma Mantisは予約制で対応しています——コレクター、機関、アーティスト、パートナー。' },
+  'Chaque rencontre est une conversation, pas une présentation.': { en: 'Every meeting is a conversation, not a presentation.', jp: 'すべての面会は会話であり、プレゼンテーションではありません。' },
+  'Pour les demandes urgentes ou les rendez-vous en galerie, contacter directement par email.': { en: 'For urgent requests or gallery appointments, contact directly by email.', jp: '緊急のご要望またはギャラリーでのアポイントメントは直接メールでお問い合わせください。' },
+  'Le système de prise de rendez-vous en ligne sera disponible prochainement.': { en: 'The online appointment system will be available shortly.', jp: 'オンライン予約システムは近日公開予定です。' },
+  'Types de rendez-vous': { en: 'Types of appointments', jp: '予約の種類' },
+  "Visite d'exposition": { en: 'Exhibition visit', jp: '展覧会訪問' },
+  'Présentation privée avec Thomas Bernard': { en: 'Private presentation with Thomas Bernard', jp: 'Thomas Bernardとのプライベートプレゼンテーション' },
+  'Présentation des éditions': { en: 'Edition presentation', jp: 'エディションのプレゼンテーション' },
+  'Découverte des tirages disponibles': { en: 'Discovery of available editions', jp: '入手可能なエディションのご紹介' },
+  'Entretien presse': { en: 'Press interview', jp: 'プレスインタビュー' },
+  'Dîner & rencontre réseau': { en: 'Dinner & network meeting', jp: '夕食会 & ネットワーク交流' },
+  'Sur invitation': { en: 'By invitation', jp: '招待制' },
+  'Sur demande': { en: 'On request', jp: '要望に応じて' },
+  'Invitation': { en: 'Invitation', jp: '招待' },
+  'Événement en cours': { en: 'Current event', jp: '現在のイベント' },
+  'Collaboration — Valentine Gauthier': { en: 'Collaboration — Valentine Gauthier', jp: 'コラボレーション — Valentine Gauthier' },
+  'Trois soirées sur invitation. Mercredi 3, jeudi 4 et vendredi 5 juin de 18h à 21h. Les inscriptions sont limitées chaque soir pour garder un moment agréable et fluide.': { en: 'Three evenings by invitation. Wednesday 3, Thursday 4 and Friday 5 June from 6pm to 9pm. Registrations are limited each evening.', jp: '招待制の3夜。6月3〜5日、18時〜21時。各夜の登録数は限られています。' },
+  'Le processus curatorial — comment un projet naît, comment un artiste est accompagné.': { en: 'The curatorial process — how a project is born, how an artist is supported.', jp: 'キュレーターのプロセス——プロジェクトの誕生、アーティストとの協働。' },
+  'À propos du Journal': { en: 'About the Journal', jp: 'ジャーナルについて' },
+  'Une traçabilité curatoriale — les coulisses de chaque projet.': { en: 'Curatorial traceability — behind the scenes of each project.', jp: 'キュレーターの透明性——各プロジェクトの舞台裏。' },
+  "Le Journal documente ce que les expositions ne montrent pas : la rencontre avec un artiste, le choix d'un lieu, l'écriture d'un texte, la fabrication d'une édition. Ce qui précède et ce qui suit.": { en: "The Journal documents what exhibitions don't show: meeting an artist, choosing a venue, writing a text, making an edition. What comes before and after.", jp: 'ジャーナルは展覧会が見せないものを記録します：アーティストとの出会い、場所の選択、テキストの執筆。' },
+  'Ni catalogue, ni communiqué. Un carnet de bord.': { en: 'Neither catalogue nor press release. A logbook.', jp: 'カタログでも広報文でもない。航海日誌。' },
+  "Le Journal sera alimenté au fil des projets. Premières entrées à venir — rencontre avec Cédrix Crespel, genèse de l'exposition Entre deux cœurs.": { en: 'The Journal will be updated as projects unfold. First entries coming — meeting Cédrix Crespel, genesis of the exhibition Entre deux cœurs.', jp: 'ジャーナルはプロジェクトの進行とともに更新されます。最初のエントリー近日公開。' },
+  'Rencontre': { en: 'Meeting', jp: '出会い' },
+  'Processus': { en: 'Process', jp: 'プロセス' },
+  "La première fois que j'ai vu le travail de Cédrix Crespel": { en: 'The first time I saw the work of Cédrix Crespel', jp: 'セドリック・クレスペルの作品を初めて見たとき' },
+  'Thomas Bernard — à paraître': { en: 'Thomas Bernard — forthcoming', jp: 'Thomas Bernard — 近日公開' },
+  'Comment les Nymphéas ont trouvé leur forme': { en: 'How the Nymphéas found their form', jp: '《睡蓮》がその形を見つけた方法' },
+  "Genèse de l'exposition — Galerie Strouk, 2025 — à paraître": { en: 'Genesis of the exhibition — Galerie Strouk, 2025 — forthcoming', jp: '展覧会の誕生——Galerie Strouk、2025年——近日公開' },
+  'Fabriquer un livret à la main': { en: 'Making a booklet by hand', jp: '手で冊子を作る' },
+  "De la typographie à l'impression risograph — à paraître": { en: 'From typography to risograph printing — forthcoming', jp: 'タイポグラフィからリソグラフ印刷まで——近日公開' },
+  'Rééditer des livres essentiels. Les faire accompagner par un artiste.': { en: 'Reediting essential books. Accompanied by an artist.', jp: '重要な書籍の復刊。アーティストとともに。' },
+  'Chaque édition Forma Mantis réunit un texte fondateur et un artiste invité à le traverser visuellement. Un ex-libris original signé, une préface inédite, une reliure cousue. Tirage de tête numéroté à 50 exemplaires — puis tirage courant à 150.': { en: 'Each Forma Mantis edition brings together a founding text and an artist invited to traverse it visually. An original signed ex-libris, a new preface, sewn binding. Numbered head edition of 50 copies — then standard edition of 150.', jp: 'Forma Mantisの各エディションは、創設的なテキストとアーティストを結びつけます。50部限定の頭部版、続いて150部の通常版。' },
+  'Politique éditoriale': { en: 'Editorial policy', jp: '編集方針' },
+  "Tirages de tête : 50 exemplaires numérotés, ex-libris original signé par l'artiste, reliure cousue, impression sur papier naturel non couché. Tirage courant : 150 exemplaires. Commandes par email.": { en: 'Head editions: 50 numbered copies, original ex-libris signed by the artist, sewn binding, natural uncoated paper. Standard edition: 150 copies. Orders by email.', jp: '頭部版：50部番号付き、アーティスト署名入りオリジナル蔵書票、手縫い製本。通常版：150部。メールで注文。' },
+  'Éditions de collection': { en: 'Collection editions', jp: 'コレクションエディション' },
+  'Bibliothèque Forma Mantis — Édition 01': { en: 'Forma Mantis Library — Edition 01', jp: 'Forma Mantisライブラリー — エディション01' },
+  'Bibliothèque Forma Mantis — Édition 02': { en: 'Forma Mantis Library — Edition 02', jp: 'Forma Mantisライブラリー — エディション02' },
+  'Bibliothèque Forma Mantis — Édition 03': { en: 'Forma Mantis Library — Edition 03', jp: 'Forma Mantisライブラリー — エディション03' },
+  'Illustré par Valentine Gauthier': { en: 'Illustrated by Valentine Gauthier', jp: 'イラスト：Valentine Gauthier' },
+  'Illustré par Ronan Bouroullec': { en: 'Illustrated by Ronan Bouroullec', jp: 'イラスト：Ronan Bouroullec' },
+  'Illustré par Benoît Maire': { en: 'Illustrated by Benoît Maire', jp: 'イラスト：Benoît Maire' },
+  'Tirage de tête 50 ex. / Tirage courant 150 ex.': { en: 'Head edition 50 copies / Standard edition 150 copies', jp: '頭部版50部 / 通常版150部' },
+  'Réserver un exemplaire': { en: 'Reserve a copy', jp: '予約する' },
+  "Les commandes se font par email. Envoi dans toute la France et à l'international.": { en: 'Orders by email. Shipping throughout France and internationally.', jp: 'メールで注文。フランス全土および海外発送。' },
+  'Commander par email': { en: 'Order by email', jp: 'メールで注文' },
+  'Charles Mason a inscrit son travail dans une tradition profondément ancrée dans la sculpture anglaise, marquée par une attention particulière à la relation entre forme, espace et expérience sensible.': { en: "Charles Mason's work is rooted in a tradition deeply embedded in English sculpture, marked by particular attention to the relationship between form, space and sensory experience.", jp: 'チャールズ・メイソンの作品は英国彫刻の伝統に深く根ざしています。' },
+  'Artiste britannique': { en: 'British artist', jp: '英国人アーティスト' },
+  'Sculptures, installations\nExposition monographique\nCommissariat Thomas Bernard': { en: 'Sculptures, installations\nSolo exhibition\nCurated by Thomas Bernard', jp: '彫刻、インスタレーション\n個展\nキュレーション：Thomas Bernard' },
+  'Les visuels de cette exposition seront ajoutés prochainement.': { en: 'Visuals for this exhibition will be added shortly.', jp: 'この展覧会のビジュアルは近日追加予定。' },
+  'Pour toute demande sur cette exposition, contacter Forma Mantis.': { en: 'For any enquiry about this exhibition, contact Forma Mantis.', jp: 'この展覧会に関するお問い合わせはForma Mantisまで。' },
+  'Nous contacter': { en: 'Contact us', jp: 'お問い合わせ' },
+  'Texte de présentation': { en: 'Presentation text', jp: 'プレゼンテーションテキスト' },
+  "Vues d'exposition": { en: 'Exhibition views', jp: '展示風景' },
+  "L'artiste": { en: 'The artist', jp: 'アーティスト' },
+  'Pour toute demande concernant les œuvres, contacter directement la Galerie Rabouan Moussion ou Forma Mantis.': { en: 'For any enquiry concerning the works, contact Galerie Rabouan Moussion or Forma Mantis directly.', jp: '作品に関するお問い合わせはGalerie Rabouan MoussionまたはForma Mantisに直接ご連絡ください。' },
+  "Pour toute demande d'information sur les œuvres, les disponibilités ou les conditions d'acquisition, contacter Forma Mantis ou directement la Galerie Rabouan Moussion.": { en: 'For any information on works, availability or acquisition conditions, contact Forma Mantis or Galerie Rabouan Moussion directly.', jp: '作品、入手可能性、取得条件に関する情報はForma MantisまたはGalerie Rabouan Moussionへ。' },
+  'Lien Forma Mantis': { en: 'Forma Mantis connection', jp: 'Forma Mantisとの関係' },
+  "Cédrix Crespel a rejoint la Galerie Rabouan Moussion avec le soutien de Thomas Bernard. Cette exposition marque le début d'une collaboration au long cours.": { en: 'Cédrix Crespel joined Galerie Rabouan Moussion with the support of Thomas Bernard. This exhibition marks the beginning of a long-term collaboration.', jp: 'セドリック・クレスペルはThomas Bernardのサポートによりギャラリーに参加しました。' },
+  'La surface comme paradigme de la modernité': { en: 'Surface as a paradigm of modernity', jp: '近代性のパラダイムとしての表面' },
+  'Commissariat : Thomas Bernard': { en: 'Curated by Thomas Bernard', jp: 'キュレーション：Thomas Bernard' },
+  'Pour en savoir plus sur les artistes ou les œuvres, contacter Forma Mantis ou la Galerie Strouk.': { en: 'To find out more about the artists or works, contact Forma Mantis or Galerie Strouk.', jp: 'アーティストや作品についての詳細はForma MantisまたはGalerie Stroukへ。' },
+  'Présentation': { en: 'Presentation', jp: 'プレゼンテーション' },
+  'Une célébration de la créativité de plus de trente artistes issus des Beaux-Arts de Paris.': { en: 'A celebration of the creativity of over thirty artists from the Beaux-Arts de Paris.', jp: 'パリ美術学校出身の30名以上のアーティストの創造性を称える展覧会。' },
+  'Projet développé avec la complicité de Thomas Bernard.': { en: 'Project developed with the complicity of Thomas Bernard.', jp: 'Thomas Bernardの協力のもと開発されたプロジェクト。' },
+  'Pour en savoir plus sur les artistes exposés ou les projets nés de cette collaboration, contacter Forma Mantis.': { en: 'To find out more about the artists or projects born from this collaboration, contact Forma Mantis.', jp: '展示アーティストやコラボレーションから生まれたプロジェクトについてはForma Mantisへ。' },
+  'Paris': { en: 'Paris', jp: 'パリ' },
+  'Forma Mantis — 2025': { en: 'Forma Mantis — 2025', jp: 'Forma Mantis — 2025' },
+  'Galerie Rabouan Moussion ↗': { en: 'Galerie Rabouan Moussion ↗', jp: 'Galerie Rabouan Moussion ↗' },
+  'Galerie Strouk ↗': { en: 'Galerie Strouk ↗', jp: 'Galerie Strouk ↗' },
+  'Galerie NEC ↗': { en: 'Galerie NEC ↗', jp: 'Galerie NEC ↗' },
 };
+
+
+// Walk all text nodes and replace
+function walkAndTranslate(lang) {
+  const walker = document.createTreeWalker(
+    document.getElementById('site-wrap') || document.body,
+    NodeFilter.SHOW_TEXT,
+    null, false
+  );
+  
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  
+  nodes.forEach(node => {
+    const parent = node.parentNode;
+    if (!parent) return;
+    const tag = parent.tagName;
+    // Skip script, style, input placeholders
+    if (['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA'].includes(tag)) return;
+    
+    const originalKey = node._originalText || node.textContent.trim();
+    if (!originalKey || originalKey.length < 2) return;
+    
+    if (lang === 'fr') {
+      // Restore original
+      if (node._originalText) {
+        node.textContent = node._originalText;
+      }
+      return;
+    }
+    
+    // Store original
+    if (!node._originalText) {
+      node._originalText = node.textContent.trim();
+    }
+    
+    const translation = textMap[node._originalText];
+    if (translation && translation[lang]) {
+      // Preserve surrounding whitespace
+      const ws_before = node.textContent.match(/^\s*/)[0];
+      const ws_after = node.textContent.match(/\s*$/)[0];
+      node.textContent = ws_before + translation[lang] + ws_after;
+    }
+  });
+}
 
 function setLang(lang) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active-lang'));
   const btn = document.getElementById('btn-' + lang);
   if (btn) btn.classList.add('active-lang');
-  applyTranslations();
-}
-
-function applyTranslations() {
+  
+  // Also apply data-i18n attributes
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[currentLang] && t[currentLang][key] !== undefined) {
-      if (t[currentLang][key].includes('<br>')) {
-        el.innerHTML = t[currentLang][key];
-      } else {
-        el.textContent = t[currentLang][key];
-      }
-    }
+    // handled by walkAndTranslate
   });
+  
+  walkAndTranslate(lang);
 }
 
 function toggleMobileNav() {
   document.querySelector('header').classList.toggle('mobile-nav-open');
 }
+
 </script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">Fermer ×</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
 </div><!-- /site-wrap -->
 </body>
 </html>

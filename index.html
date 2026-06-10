@@ -1047,7 +1047,7 @@ header { width: 100%; }
       <p data-i18n="home-p2">Expositions dans des lieux atypiques, éditions limitées, résidences et collaborations avec artistes, designers et artisans — un modèle qui privilégie la qualité des projets sur leur quantité.</p>
     </div>
     <div class="home-intro-right" style="display:flex; flex-direction:column; justify-content:center;">
-      <p style="font-family:var(--serif); font-size:16px; line-height:1.8; color:var(--gray-text); max-width:360px; font-style:italic;">Structure indépendante développant des projets à la croisée de l'art contemporain, de la mode et de l'édition.</p>
+      <p style="font-family:var(--serif); font-size:16px; line-height:1.8; color:var(--gray-text); max-width:360px; font-style:italic;" data-i18n="home-kpi-right">Art contemporain, mode, édition — Paris & Bretagne.</p>
     </div>
   </div>
 
@@ -1058,7 +1058,6 @@ header { width: 100%; }
     <p>Forma Mantis — 2025</p>
     <nav>
       <a onclick="nav('contact')">Contact</a>
-      <a onclick="nav('editions')">Éditions</a>
       <a onclick="nav('apropos')">À propos</a>
     </nav>
     <p><span data-i18n="footer-loc">Paris</span></p>
@@ -1138,7 +1137,8 @@ header { width: 100%; }
 
   <footer>
     <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
+    <nav><a onclick="nav('contact')">Contact</a>
+<a onclick="nav('apropos')">À propos</a></nav>
     <p>Paris</p>
   </footer>
 </div>
@@ -1230,69 +1230,35 @@ header { width: 100%; }
       <div class="artist-body">
         <div class="artist-origin">Paris, France</div>
         <div class="artist-name">Valentine Gauthier</div>
-        <div class="artist-bio">Créatrice de mode, fondatrice de Valentine Gauthier (2007) et Value (2023). Le vêtement comme acte de pensée — féminité libre, engagement écologique, dialogue constant avec l'art contemporain.</div>
+        <div class="artist-bio" data-i18n="artist1-bio">Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.</div>
         <div class="artist-tags"><span class="artist-tag">Mode</span><span class="artist-tag">Direction artistique</span><span class="artist-tag">Textile</span></div>
       </div>
     </div>
     <div class="artist-card">
-      <div class="artist-img">
-        <img class="img-cover" src="https://images.unsplash.com/photo-1536924430914-91f9e2041b83?w=600&q=80&fit=crop" alt="Artiste sculpture">
+      <div class="artist-img" style="background:var(--gray-light);display:flex;align-items:center;justify-content:center;">
+        <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-text);text-align:center;padding:20px;" data-i18n="artiste-avenir">Artiste à venir</p>
       </div>
       <div class="artist-body">
-        <div class="artist-origin">Bretagne, France</div>
-        <div class="artist-name">Artiste associé·e n°1</div>
-        <div class="artist-bio">Pratique articulée autour du paysage, de la mémoire des lieux et des matériaux trouvés. Sculpture et installation in situ. Exposé dans plusieurs centres d'art régionaux.</div>
-        <div class="artist-tags"><span class="artist-tag">Sculpture</span><span class="artist-tag">Installation</span><span class="artist-tag">In situ</span></div>
+        <div class="artist-origin" data-i18n="artiste-avenir-label">Prochainement</div>
+        <div class="artist-name" data-i18n="artiste-avenir">Artiste à venir</div>
+        <div class="artist-bio" data-i18n="artiste-avenir-bio">Forma Mantis travaille avec un cercle restreint d'artistes. Les profils seront présentés au fil des collaborations.</div>
       </div>
     </div>
-    <div class="artist-card">
-      <div class="artist-img">
-        <img class="img-cover" src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=600&q=80&fit=crop" alt="Artiste photographie">
+    <div class="artist-card" style="border-right:none;">
+      <div class="artist-img" style="background:var(--gray-light);display:flex;align-items:center;justify-content:center;">
+        <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-text);text-align:center;padding:20px;" data-i18n="artiste-avenir">Artiste à venir</p>
       </div>
       <div class="artist-body">
-        <div class="artist-origin">Europe du Nord</div>
-        <div class="artist-name">Artiste associé·e n°2</div>
-        <div class="artist-bio">Photographe et éditeur interrogeant les formes de diffusion de l'image. Plusieurs livres d'artiste publiés. Le livre comme espace autonome de création.</div>
-        <div class="artist-tags"><span class="artist-tag">Photographie</span><span class="artist-tag">Édition</span><span class="artist-tag">Livre d'artiste</span></div>
-      </div>
-    </div>
-    <div class="artist-card">
-      <div class="artist-img">
-        <img class="img-cover" src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?w=600&q=80&fit=crop" alt="Graveur">
-      </div>
-      <div class="artist-body">
-        <div class="artist-origin">France / Portugal</div>
-        <div class="artist-name">Artiste associé·e n°3</div>
-        <div class="artist-bio">Dessinateur et graveur. Séries de petits formats au croisement du botanique et de l'abstraction géométrique. Contribue aux éditions Forma Mantis.</div>
-        <div class="artist-tags"><span class="artist-tag">Dessin</span><span class="artist-tag">Gravure</span><span class="artist-tag">Éditions</span></div>
-      </div>
-    </div>
-    <div class="artist-card">
-      <div class="artist-img">
-        <img class="img-cover" src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80&fit=crop" alt="Céramique">
-      </div>
-      <div class="artist-body">
-        <div class="artist-origin">France</div>
-        <div class="artist-name">Artisan·e associé·e</div>
-        <div class="artist-bio">Céramiste formé·e aux Beaux-Arts et à Sèvres. Pièces fonctionnelles en petites séries, en dialogue avec les projets d'exposition. Collaborations mode et design.</div>
-        <div class="artist-tags"><span class="artist-tag">Céramique</span><span class="artist-tag">Design</span><span class="artist-tag">Petite série</span></div>
-      </div>
-    </div>
-    <div class="artist-card" style="border-right:none">
-      <div class="artist-img">
-        <img class="img-cover" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80&fit=crop" alt="Critique d'art">
-      </div>
-      <div class="artist-body">
-        <div class="artist-origin">Paris & international</div>
-        <div class="artist-name">Critique & auteur·e</div>
-        <div class="artist-bio">Auteur·e et critique d'art. Collabore aux textes des publications et catalogues Forma Mantis. Participe aux dîners et rencontres du réseau Forma Mantis.</div>
-        <div class="artist-tags"><span class="artist-tag">Critique</span><span class="artist-tag">Écriture</span><span class="artist-tag">Conférences</span></div>
+        <div class="artist-origin" data-i18n="artiste-avenir-label">Prochainement</div>
+        <div class="artist-name" data-i18n="artiste-avenir">Artiste à venir</div>
+        <div class="artist-bio" data-i18n="artiste-avenir-bio">Forma Mantis travaille avec un cercle restreint d'artistes. Les profils seront présentés au fil des collaborations.</div>
       </div>
     </div>
   </div>
   <footer>
     <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
+    <nav><a onclick="nav('contact')">Contact</a>
+<a onclick="nav('apropos')">À propos</a></nav>
     <p>Paris</p>
   </footer>
 </div>
@@ -1300,7 +1266,7 @@ header { width: 100%; }
 <!-- ══ À PROPOS ══ -->
 <div class="page" id="page-apropos">
   <div class="about-hero">
-    <img class="img-cover" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80&fit=crop&crop=center" alt="Mer de Bretagne">
+    <img class="img-cover" src="quimperle_salon.jpg" alt="Quimperlé — 3 quai Brizeux">
     <div class="about-hero-overlay"></div>
     <div class="about-hero-text">
       <h2 data-i18n="about-h2">Une structure indépendante<br>à la croisée des formes</h2>
@@ -1407,7 +1373,8 @@ header { width: 100%; }
 
   <footer>
     <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('projets')">Projets</a></nav>
+    <nav><a onclick="nav('contact')">Contact</a>
+<a onclick="nav('projets')">Projets</a></nav>
     <p>Paris</p>
   </footer>
 </div>
@@ -1445,7 +1412,8 @@ header { width: 100%; }
   </div>
   <footer>
     <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('apropos')">À propos</a></nav>
+    <nav><a onclick="nav('projets')">Projets</a>
+<a onclick="nav('apropos')">À propos</a></nav>
     <p>Paris</p>
   </footer>
 </div>
@@ -1975,7 +1943,8 @@ header { width: 100%; }
 
   <footer>
     <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a></nav>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a>
+</nav>
     <p>Paris</p>
   </footer>
 </div>
@@ -2043,7 +2012,8 @@ header { width: 100%; }
 
   <footer>
     <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a><a onclick="nav('editions')">Éditions</a></nav>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a>
+</nav>
     <p>Paris</p>
   </footer>
 </div>
@@ -2172,7 +2142,7 @@ const t = {
     'form-opt3': 'Presse & partenariat',
     'form-opt4': 'Autre',
     'artist1-origin': 'Paris, France',
-    'artist1-bio': "Créatrice de mode, fondatrice de Valentine Gauthier (2007) et Value (2023). Le vêtement comme acte de pensée — féminité libre, engagement écologique, dialogue constant avec l'art contemporain.",
+    'artist1-bio': "Créatrice de mode parisienne, fondatrice de Valentine Gauthier (2007) et Value (2023). Vingt ans de collections construites sur une conviction rare dans la mode : le vêtement comme acte de pensée. Engagement écologique pionnier, collaboration régulière avec les scènes de l'art contemporain — Perrotin, Thaddaeus Ropac, Gagosian.",
     'artist1-tags': 'Mode — Direction artistique — Textile',
     'journal-avenir': 'À venir',
     'journal-about-label': 'À propos du Journal',
@@ -2196,6 +2166,10 @@ const t = {
     'biblio-reserver': 'Réserver un exemplaire',
     'footer-copy': 'Forma Mantis — 2025',
     'footer-loc': 'Paris',
+    'home-kpi-right': 'Art contemporain, mode, édition — Paris & Bretagne.',
+    'artiste-avenir': 'Artiste à venir',
+    'artiste-avenir-label': 'Prochainement',
+    'artiste-avenir-bio': "Forma Mantis travaille avec un cercle restreint d'artistes. Les profils seront présentés au fil des collaborations.",
   },
   en: {
     'badge-en-cours': 'In progress',
@@ -2331,6 +2305,10 @@ const t = {
     'biblio-reserver': 'Reserve a copy',
     'footer-copy': 'Forma Mantis — 2025',
     'footer-loc': 'Paris',
+    'home-kpi-right': 'Contemporary art, fashion, publishing — Paris & Brittany.',
+    'artiste-avenir': 'Artist coming soon',
+    'artiste-avenir-label': 'Coming soon',
+    'artiste-avenir-bio': 'Forma Mantis works with a small circle of artists. Profiles will be presented as collaborations develop.',
   },
   jp: {
     'badge-en-cours': '進行中',
@@ -2466,6 +2444,10 @@ const t = {
     'biblio-reserver': '予約する',
     'footer-copy': 'Forma Mantis — 2025',
     'footer-loc': 'パリ',
+    'home-kpi-right': '現代アート、ファッション、出版——パリ & ブルターニュ。',
+    'artiste-avenir': 'アーティスト近日公開',
+    'artiste-avenir-label': '近日公開',
+    'artiste-avenir-bio': 'Forma Mantisは少数のアーティストと協働します。プロフィールはコラボレーションの進展とともに公開されます。',
   },
 };
 

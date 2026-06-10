@@ -1207,6 +1207,14 @@ header { width: 100%; }
 
 <!-- ══ PROJETS ══ -->
 <div class="page" id="page-projets">
+  <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-timber-roof.jpg" alt="Projets">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
+    <div style="position:absolute;bottom:24px;left:48px;">
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Projets</h2>
+    </div>
+  </div>
+
   <div class="page-header">
     <h2 data-i18n="projets-title">Projets</h2>
     <p data-i18n="projets-sub">Expositions, résidences et situations — pensées en relation avec leurs lieux.</p>
@@ -1230,7 +1238,7 @@ header { width: 100%; }
 
   <div class="project-row" onclick="nav('crespel')" style="cursor:pointer;">
     <div class="project-row-img">
-      <img class="img-cover" src="Entre_deux_coeurs-6410_-_HD.jpg" alt="Cédrix Crespel — Entre deux cœurs">
+      <img class="img-cover" src="crespel_01.jpg" alt="Cédrix Crespel — Entre deux cœurs">
     </div>
     <div class="project-row-body">
       <div class="project-row-meta">Exposition — Galerie Rabouan Moussion <span class="status-badge active">2026</span></div>
@@ -1450,6 +1458,14 @@ header { width: 100%; }
 
 <!-- ══ CONTACT ══ -->
 <div class="page" id="page-contact">
+  <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-moonlit-pond.jpg" alt="Contact">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
+    <div style="position:absolute;bottom:24px;left:48px;">
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Contact</h2>
+    </div>
+  </div>
+
   <div class="contact-wrap">
     <div class="contact-left">
       <h2 data-i18n="contact-title">Contact</h2>
@@ -1759,6 +1775,14 @@ header { width: 100%; }
 
 <!-- ══ BIBLIOTHÈQUE ══ -->
 <div class="page" id="page-bibliotheque">
+  <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-moss-waterfall.jpg" alt="Bibliothèque">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
+    <div style="position:absolute;bottom:24px;left:48px;">
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Bibliothèque</h2>
+    </div>
+  </div>
+
 
 
   <!-- ÉDITION 01 : The Unknown Craftsman -->
@@ -1838,6 +1862,14 @@ header { width: 100%; }
 
 <!-- ══ RENDEZ-VOUS ══ -->
 <div class="page" id="page-rdv">
+  <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-marsh-sunset.jpg" alt="Rendez-vous">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
+    <div style="position:absolute;bottom:24px;left:48px;">
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Rendez-vous</h2>
+    </div>
+  </div>
+
   <div class="page-header">
     <h2 style="font-family:var(--serif);font-weight:400;">Rendez-vous</h2>
     <p>Rencontres, visites d'exposition, présentations d'éditions — sur demande.</p>
@@ -1929,6 +1961,14 @@ header { width: 100%; }
 
 <!-- ══ JOURNAL ══ -->
 <div class="page" id="page-journal">
+  <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-salt-landscape.jpg" alt="Journal">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
+    <div style="position:absolute;bottom:24px;left:48px;">
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Journal</h2>
+    </div>
+  </div>
+
   <div class="page-header">
     <h2 style="font-family:var(--serif);font-weight:400;">Journal</h2>
     <p>Le processus curatorial — comment un projet naît, comment un artiste est accompagné.</p>
@@ -2191,67 +2231,47 @@ const textMap = {
 // Walk all text nodes and replace
 function walkAndTranslate(lang) {
   const root = document.getElementById('site-wrap') || document.body;
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
   
-  const nodes = [];
-  while (walker.nextNode()) nodes.push(walker.currentNode);
-  
-  nodes.forEach(node => {
-    const parent = node.parentNode;
-    if (!parent) return;
-    const tag = parent.tagName;
-    if (['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'OPTION'].includes(tag)) return;
-    
-    const trimmed = node.textContent.trim();
-    if (!trimmed || trimmed.length < 2) return;
-    
-    if (lang === 'fr') {
-      if (node._originalText !== undefined) {
-        const ws_before = node._originalText.match(/^\s*/)[0];
-        const ws_after = node._originalText.match(/\s*$/)[0];
-        node.textContent = ws_before + node._originalText.trim() + ws_after;
+  function processNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const parent = node.parentNode;
+      if (!parent) return;
+      const tag = parent.tagName;
+      if (!tag || ['SCRIPT','STYLE','INPUT','TEXTAREA','OPTION'].includes(tag)) return;
+      
+      const trimmed = node.textContent.trim();
+      if (!trimmed || trimmed.length < 2) return;
+      
+      if (lang === 'fr') {
+        if (node._orig !== undefined) {
+          node.textContent = node.textContent.replace(node.textContent.trim(), node._orig);
+        }
+        return;
       }
-      return;
+      
+      if (node._orig === undefined) node._orig = trimmed;
+      
+      const t = textMap[node._orig];
+      if (t && t[lang]) {
+        const ws_b = node.textContent.match(/^\s*/)[0];
+        const ws_a = node.textContent.match(/\s*$/)[0];
+        node.textContent = ws_b + t[lang] + ws_a;
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      node.childNodes.forEach(processNode);
     }
-    
-    // Store original French text on first translation
-    if (node._originalText === undefined) {
-      node._originalText = trimmed;
-    }
-    
-    // Look up by original French text
-    const lookupKey = node._originalText;
-    const translation = textMap[lookupKey];
-    if (translation && translation[lang]) {
-      const ws_before = node.textContent.match(/^\s*/)[0];
-      const ws_after = node.textContent.match(/\s*$/)[0];
-      node.textContent = ws_before + translation[lang] + ws_after;
-    }
-  });
+  }
   
-  // Also handle placeholder attributes
-  document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
-    if (lang === 'fr') {
-      if (el._origPlaceholder) el.placeholder = el._origPlaceholder;
-      return;
-    }
-    if (!el._origPlaceholder) el._origPlaceholder = el.placeholder;
-    const t = textMap[el._origPlaceholder];
-    if (t && t[lang]) el.placeholder = t[lang];
-  });
+  processNode(root);
   
   // Handle select options
   document.querySelectorAll('select option').forEach(opt => {
-    if (lang === 'fr') {
-      if (opt._origText) opt.textContent = opt._origText;
-      return;
-    }
-    if (!opt._origText) opt._origText = opt.textContent.trim();
-    const t = textMap[opt._origText];
+    if (lang === 'fr') { if (opt._orig) opt.textContent = opt._orig; return; }
+    if (!opt._orig) opt._orig = opt.textContent.trim();
+    const t = textMap[opt._orig];
     if (t && t[lang]) opt.textContent = t[lang];
   });
 }
-
 function setLang(lang) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active-lang'));

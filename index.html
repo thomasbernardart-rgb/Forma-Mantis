@@ -1027,6 +1027,67 @@ header { width: 100%; }
   font-family: var(--sans);
   z-index: 1001;
 }
+
+/* ── CAROUSEL ── */
+.hero-carousel {
+  position: relative;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  background: #1a1a18;
+}
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.carousel-slide.active {
+  opacity: 1;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) brightness(0.88);
+}
+.carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14,14,13,0.6) 0%, transparent 50%);
+  z-index: 1;
+}
+.carousel-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 40px 48px;
+  z-index: 2;
+}
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 3;
+}
+.carousel-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.carousel-dot.active {
+  background: rgba(255,255,255,0.9);
+}
+@media (max-width: 768px) {
+  .carousel-bottom { padding: 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -1057,11 +1118,51 @@ header { width: 100%; }
 
 <!-- ══ ACCUEIL ══ -->
 <div class="page active" id="page-accueil">
-  <div class="hero">
-    <!-- Côte bretonne, Unsplash libre de droits -->
-    <img class="img-cover" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80&fit=crop" alt="Mer de Bretagne">
-    <div class="hero-overlay"></div>
-    <div class="hero-bottom">
+  <div class="hero-carousel" id="hero-carousel">
+  <div class="carousel-slide active">
+    <img src="forma-mantis-marsh-sunset.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-amsterdam-canal-night.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-turquoise-water.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-salt-landscape.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-timber-roof.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-moonlit-pond.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-cite-des-peintres.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-waterfall.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-rocky-hillside.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-moss-waterfall.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-rocky-path.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-fishing-boat.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-mushrooms.jpg" alt="Forma Mantis">
+  </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-shrimp-fisherman.jpg" alt="Forma Mantis">
+  </div>
+    <div class="carousel-overlay"></div>
+    <div class="carousel-bottom">
       <div class="hero-title">
         <p data-i18n="hero-sub">Art contemporain — Mode — Édition</p>
         <h1>Forma Mantis</h1>
@@ -1071,6 +1172,23 @@ header { width: 100%; }
         <p>Valentine Gauthier<br>& Thomas Bernard</p>
       </div>
     </div>
+    <div class="carousel-dots">
+  <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+  <div class="carousel-dot" onclick="goToSlide(1)"></div>
+  <div class="carousel-dot" onclick="goToSlide(2)"></div>
+  <div class="carousel-dot" onclick="goToSlide(3)"></div>
+  <div class="carousel-dot" onclick="goToSlide(4)"></div>
+  <div class="carousel-dot" onclick="goToSlide(5)"></div>
+  <div class="carousel-dot" onclick="goToSlide(6)"></div>
+  <div class="carousel-dot" onclick="goToSlide(7)"></div>
+  <div class="carousel-dot" onclick="goToSlide(8)"></div>
+  <div class="carousel-dot" onclick="goToSlide(9)"></div>
+  <div class="carousel-dot" onclick="goToSlide(10)"></div>
+  <div class="carousel-dot" onclick="goToSlide(11)"></div>
+  <div class="carousel-dot" onclick="goToSlide(12)"></div>
+  <div class="carousel-dot" onclick="goToSlide(13)"></div>
+    </div>
+  </div>
   </div>
 
   <div class="home-intro">
@@ -2059,6 +2177,8 @@ function nav(id) {
   const el = document.getElementById('n-' + id);
   if (el) el.classList.add('active');
   window.scrollTo(0, 0);
+  // Close mobile nav
+  document.querySelector('header').classList.remove('mobile-nav-open');
 }
 
 function openLightbox(src, alt) {
@@ -2300,6 +2420,36 @@ function setLang(lang) {
 function toggleMobileNav() {
   document.querySelector('header').classList.toggle('mobile-nav-open');
 }
+
+
+// ── CAROUSEL ──
+const carouselImages = 14;
+let carouselIndex = 0;
+let carouselTimer = null;
+
+function goToSlide(n) {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  slides[carouselIndex].classList.remove('active');
+  dots[carouselIndex].classList.remove('active');
+  carouselIndex = (n + carouselImages) % carouselImages;
+  slides[carouselIndex].classList.add('active');
+  dots[carouselIndex].classList.add('active');
+}
+
+function nextSlide() {
+  goToSlide(carouselIndex + 1);
+}
+
+function startCarousel() {
+  carouselTimer = setInterval(nextSlide, 6000);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('hero-carousel')) {
+    startCarousel();
+  }
+});
 
 </script>
 

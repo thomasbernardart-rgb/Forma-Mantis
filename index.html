@@ -1161,6 +1161,9 @@ header { width: 100%; }
   <div class="carousel-slide">
     <img src="forma-mantis-shrimp-fisherman.jpg" alt="Forma Mantis">
   </div>
+  <div class="carousel-slide">
+    <img src="forma-mantis-sunset-bretagne.jpg" alt="Forma Mantis — coucher de soleil Bretagne">
+  </div>
     <div class="carousel-overlay"></div>
     <div class="carousel-bottom">
       <div class="hero-title">
@@ -1187,6 +1190,7 @@ header { width: 100%; }
   <div class="carousel-dot" onclick="goToSlide(11)"></div>
   <div class="carousel-dot" onclick="goToSlide(12)"></div>
   <div class="carousel-dot" onclick="goToSlide(13)"></div>
+  <div class="carousel-dot" onclick="goToSlide(14)"></div>
     </div>
   </div>
   </div>
@@ -1444,7 +1448,7 @@ header { width: 100%; }
   <div class="about-duo">
 <div class="about-person">
       <div class="about-person-img">
-        <img class="img-cover" style="object-fit:cover;object-position:50% 25%;width:100%;height:100%;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
+        <img class="img-cover" style="object-fit:cover;object-position:center 30%;width:100%;height:100%;" src="portrait_tb_vg.jpg" alt="Valentine Gauthier & Thomas Bernard">
       </div>
       <div class="about-person-body">
         <div class="about-person-role" data-i18n="val-role">Direction artistique & création</div>
@@ -1893,19 +1897,6 @@ header { width: 100%; }
     <p data-i18n="biblio-sub">Livrets, estampes, objets — des pièces conçues en lien direct avec les projets.</p>
   </div>
 
-  <!-- INTRO -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
-    <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
-      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;" data-i18n="biblio-politique-label">Politique éditoriale</p>
-      <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);" data-i18n="biblio-concept-h">Rééditer des livres essentiels. Les faire accompagner par un artiste.</p>
-      <p style="font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--gray-text);margin-top:20px;" data-i18n="biblio-concept-p">Chaque édition Forma Mantis réunit un texte fondateur et un artiste invité à le traverser visuellement. Un ex-libris original signé, une préface inédite, une reliure cousue. Tirage de tête numéroté à 50 exemplaires — puis tirage courant à 150.</p>
-    </div>
-    <div style="padding:56px 48px;">
-      <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;" data-i18n="biblio-note-label">Note</p>
-      <p style="font-family:var(--serif);font-size:14px;color:var(--gray-text);line-height:1.75;" data-i18n="biblio-note">Tirages de tête : 50 exemplaires numérotés, ex-libris original signé par l'artiste, reliure cousue, impression sur papier naturel non couché. Tirage courant : 150 exemplaires. Commandes par email.</p>
-    </div>
-  </div>
-
   <div class="section-label" data-i18n="biblio-collections-label">Éditions de collection</div>
 
   <!-- ÉDITION 01 : The Unknown Craftsman -->
@@ -2152,8 +2143,9 @@ function nav(id) {
   const el = document.getElementById('n-' + id);
   if (el) el.classList.add('active');
   window.scrollTo(0, 0);
-  // Close mobile nav
+  // Close mobile nav and scroll to top
   document.querySelector('header').classList.remove('mobile-nav-open');
+  window.scrollTo({top: 0, behavior: "smooth"});
 }
 
 function openLightbox(src, alt) {
@@ -2418,7 +2410,7 @@ function toggleMobileNav() {
 
 
 // ── CAROUSEL ──
-const carouselImages = 14;
+const carouselImages = 15;
 let carouselIndex = 0;
 let carouselTimer = null;
 

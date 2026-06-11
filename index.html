@@ -2043,6 +2043,13 @@ header { width: 100%; }
 </div>
 
 
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">Fermer ×</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+</div><!-- /site-wrap -->
+
 <script>
 function nav(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -2334,13 +2341,6 @@ document.addEventListener('touchend', e => {
 }, {passive: true});
 
 </script>
-
-<!-- LIGHTBOX -->
-<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close">Fermer ×</span>
-  <img id="lightbox-img" src="" alt="">
-</div>
-</div><!-- /site-wrap -->
 </body>
 </html>
 

@@ -787,12 +787,18 @@ header { width: 100%; }
     display: none;
   }
 
+  .mobile-nav-btn {
+    display: flex !important;
+    z-index: 200;
+  }
+
   .page {
     padding-top: 52px;
   }
 
   /* HERO */
   .hero { height: 70vh; }
+  .hero-carousel { height: 70vh; }
   .hero-bottom {
     flex-direction: column;
     align-items: flex-start;
@@ -957,7 +963,7 @@ header { width: 100%; }
 
   /* Mobile nav hamburger */
   .mobile-nav-btn {
-    display: flex !important;
+    display: none;
   }
 
   .mobile-nav-open nav {
@@ -967,6 +973,7 @@ header { width: 100%; }
     top: 52px;
     left: 0;
     right: 0;
+    z-index: 999;
     background: var(--white);
     border-bottom: 0.5px solid var(--gray-light);
     padding: 20px 24px;
@@ -2078,13 +2085,18 @@ function goToSlide(n) {
 
 function nextSlide() { goToSlide(carouselIndex + 1); }
 
-document.addEventListener('DOMContentLoaded', function() {
+// Start carousel and store baselines — try both events for mobile reliability
+function initPage() {
   if (document.querySelector('.carousel-slide')) {
     setInterval(nextSlide, 6000);
   }
-  // Store FR baselines after DOM ready
   storeFRBaselines();
-});
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPage);
+} else {
+  initPage();
+}
 
 // ── TRANSLATION SYSTEM ──
 // Approach: store original FR innerHTML per page, then do full string replacement
@@ -2312,6 +2324,17 @@ function setLang(lang) {
 function toggleMobileNav() {
   document.querySelector('header').classList.toggle('mobile-nav-open');
 }
+
+// Touch/swipe support for carousel on mobile
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50 && document.querySelector('.hero-carousel')) {
+    if (diff > 0) nextSlide(); else goToSlide(carouselIndex - 1);
+  }
+}, {passive: true});
+
 </script>
 
 <!-- LIGHTBOX -->

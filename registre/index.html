@@ -221,6 +221,13 @@ tfoot td{font-weight:600;border-top:1px solid var(--ink)}
 .phone .media video{width:100%;height:100%;object-fit:cover}
 .phone .cap{padding:10px 12px 14px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:180px;overflow:auto}
 .nav .grp{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:16px 10px 4px}
+.nav .plus-t{margin-top:10px;color:var(--ink);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.nav .plus-t .count{font-size:14px;letter-spacing:0}
+.nav button.sub{padding-left:22px}
+.morelist .plus-row{font-weight:600}
+.morelist .plus-row::after{content:"+";font-size:20px;line-height:1}
+.morelist .plus-row[aria-expanded="true"]::after{content:"−"}
+.morelist button.sub{padding-left:20px;font-size:15px}
 .mhead,.fab,.doors.tiles{display:none}
 .ev.ev-task{border-left-style:dashed;border-left-color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent)}
 .mcell .l.ev-task{border-left-color:var(--ok)}
@@ -417,7 +424,7 @@ function applyRow(rub,id,data){
   const sk=Object.keys(STORES).find(k=>STORES[k].rub===rub);
   if(sk){ const st=S.st[sk]; if(data) st.map.set(id,{id,...data}); else st.map.delete(id); st.dirty=true; return; }
   if(LISTS.includes(rub)){ const a=(S[rub]||[]).filter(x=>x.id!==id); if(data) a.push({id,...data}); S[rub]=a; return; }
-  if(rub==="reglages"&&id==="general"){ S.reglages=data||{}; } }
+  if(rub==="reglages"&&id==="general"){ S.reglages=data||{}; setTimeout(()=>setupCalendars(),50); } }
 async function writeRows(rows){
   const ups=rows.filter(r=>r.data), dels=rows.filter(r=>!r.data);
   for(let i=0;i<ups.length;i+=400){ const {error}=await SB.from("fiches").upsert(ups.slice(i,i+400).map(r=>({rubrique:r.rubrique,id:r.id,data:r.data}))); if(error) throw sbErr(error); }
@@ -647,22 +654,26 @@ function renderLogin(){ const card=$("#login-card"); const last=(()=>{ try{ retu
   setTimeout(()=>{ const f=loginMode==="nouveau"||(last&&loginMode==="login")?$("#lg-pw"):$("#lg-id"); if(f&&document.activeElement!==f) f.focus(); }); }
 async function claimIdentity(){ }
 
-/* ---------- Agendas Google ---------- */
-let gcalUnsubs=[], gcalKey="";
+/* ---------- Agendas Google (adresses iCal secrètes, lues par le serveur) ---------- */
+let gcalKey="", gcalBusy=false;
 function calList(){ const r=S.reglages; const v=(k,d)=>(k in r)?r[k]:d; return [["thomas",v("cal_thomas","thomas.bernard.art@gmail.com"),"Thomas"],["valentine",v("cal_valentine","valentinegauthier.atelier@gmail.com"),"Valentine"],["valentine2",v("cal_valentine2",CAL_V2_DEFAULT),"Valentine"]].filter(c=>c[1]); }
+function icsList(){ const r=S.reglages||{}; return [["thomas","Thomas",r.ics_thomas],["valentine","Valentine",r.ics_valentine],["valentine2","Valentine",r.ics_valentine2]].filter(c=>c[2]); }
 function normEvents(payload,owner){ const out=[]; for(const e of (payload&&payload.events)||[]){ if(e.status==="cancelled") continue; if(String(e.description||"").includes("Registre Maison Saint Sauveur")) continue;
   const base={summary:e.summary||"(Sans titre)",location:e.location||"",owner,link:e.htmlLink||""};
   if(e.start&&e.start.dateTime){ out.push({...base,date:e.start.dateTime.slice(0,10),heure:e.start.dateTime.slice(11,16),fin:e.end&&e.end.dateTime?e.end.dateTime.slice(11,16):""}); }
   else if(e.start&&e.start.date){ let d=e.start.date; const end=(e.end&&e.end.date)||addDays(d,1); let n=0; while(d<end&&n<31){ out.push({...base,date:d,heure:"",allday:true}); d=addDays(d,1); n++; } } } return out; }
 function gcalRange(){ const t=today(); const r=S.f.agRef||t; let a=addDays(t,-30), b=addDays(t,35); const ra=addDays(weekStart(r.slice(0,8)+"01"),-7), rb=addDays(r.slice(0,8)+"01",50); if(ra<a) a=ra; if(rb>b) b=rb; const wa=addDays(weekStart(r),-1), wb=addDays(weekStart(r),8); if(wa<a) a=wa; if(wb>b) b=wb; return [a,b]; }
-function gcalInput(id){ const [a,b]=gcalRange(); return {calendarId:id,startTime:a+"T00:00:00",endTime:b+"T00:00:00",pageSize:250,orderBy:"startTime"}; }
-function setupCalendars(){ if(!MCP) return; const cals=calList(); const key=JSON.stringify([cals,gcalRange()]); if(key===gcalKey) return; gcalKey=key; gcalUnsubs.forEach(u=>u()); gcalUnsubs=[]; S.gcal={}; S.gcalState={};
-  for(const [slot,id,owner] of cals){ S.gcalState[slot]={state:"loading",owner,id};
-    const u=MCP.watchTool("Google Calendar","list_events",gcalInput(id),ev=>{ if(ev.type==="data"){ S.gcal[slot]=normEvents(ev.result.payload,owner); S.gcalState[slot]={state:"ok",owner,id,at:(ev.result.cache&&ev.result.cache.storedAt)||Date.now()}; }
-      else { const code=ev.error.code; if(!["server_unavailable","upstream_error","rate_limited"].includes(code)) S.gcal[slot]=[]; S.gcalState[slot]={state:"error",code,owner,id}; } schedule(); },{refetchInterval:600000});
-    gcalUnsubs.push(u); } }
-async function approveCal(slot){ const st=S.gcalState[slot]; if(!st||!MCP) return; try{ const r=await MCP.callTool("Google Calendar","list_events",gcalInput(st.id)); S.gcal[slot]=normEvents(r.payload,st.owner); S.gcalState[slot]={state:"ok",owner:st.owner,id:st.id,at:Date.now()}; }catch(e){ S.gcalState[slot]={...st,state:"error",code:e.code}; } schedule(); }
-function calMessage(st){ switch(st.code){ case "needs_reauth": return "Google Agenda doit être reconnecté dans claude.ai, Réglages, Connecteurs."; case "server_not_connected": return "Ajoute le connecteur Google Calendar dans claude.ai, Réglages, Connecteurs."; case "selection_required": return "Choisis quel compte Google Calendar utiliser dans la fenêtre de claude.ai."; case "approval_required": return "La lecture de cet agenda attend ton autorisation."; case "not_in_manifest": return "La lecture des agendas n'est pas autorisée pour cette page. Réactive-la dans les permissions de l'artefact."; case "blocked_by_policy": return "La politique de ton organisation bloque cet agenda."; case "tool_error": return "Agenda introuvable ou non partagé avec ce compte."; default: return "Agenda momentanément injoignable, nouvel essai automatique."; } }
+async function setupCalendars(force){ if(!S.session||!DB) return; const cals=icsList();
+  if(!cals.length){ S.gcal={}; S.gcalState={none:{state:"error",code:"no_ics",owner:"",id:""}}; gcalKey=""; schedule(); return; }
+  const [a,b]=gcalRange(); const key=JSON.stringify([cals.map(c=>c[2]),a,b]); if((key===gcalKey&&!force)||gcalBusy) return; gcalKey=key; gcalBusy=true;
+  if(S.gcalState.none) delete S.gcalState.none;
+  try{ const {data,error}=await SB.functions.invoke("agendas",{body:{debut:a,fin:b}}); if(error) throw error;
+    const g={}, st={}; for(const c of (data&&data.cals)||[]){ if(c.error){ g[c.slot]=S.gcal[c.slot]||[]; st[c.slot]={state:"error",code:c.error,owner:c.owner,id:c.owner}; } else { g[c.slot]=normEvents(c,c.owner); st[c.slot]={state:"ok",owner:c.owner,id:c.owner,at:Date.now()}; } }
+    S.gcal=g; S.gcalState=st; }
+  catch(e){ console.warn("agendas",e); for(const [slot,owner] of cals) S.gcalState[slot]={state:"error",code:"server",owner,id:owner}; gcalKey=""; }
+  finally{ gcalBusy=false; } schedule(); }
+async function approveCal(){ setupCalendars(true); }
+function calMessage(st){ switch(st.code){ case "no_ics": return "Pour afficher les agendas Google, colle l'« adresse secrète au format iCal » de chaque agenda dans Réglages."; case "adresse_invalide": return "Cette adresse n'est pas une adresse secrète iCal de Google Agenda. Recopie-la depuis les paramètres de l'agenda."; case "lecture": return "Agenda illisible pour le moment."; case "server": return "Lecture des agendas momentanément impossible. Nouvel essai automatique dans quelques minutes."; default: return /^http_/.test(st.code||"")?"Google refuse cette adresse : elle a peut-être été réinitialisée. Recopie l'adresse secrète iCal dans Réglages.":"Agenda momentanément injoignable."; } }
 
 /* ---------- Agrégation par jour ---------- */
 function dayEntries(d,withGcal=true){ const out=[];
@@ -704,7 +715,7 @@ function todoRow(x){ return h("li",{class:"todo"},h("span",{class:"sev "+x.sev})
 
 /* ---------- Vues ---------- */
 function headBlock(eyebrow,title,tools){ return h("div",{class:"head"},h("div",{class:"titles"},h("p",{class:"eyebrow"},eyebrow),h("h1",{class:"display"},title)),tools?h("div",{class:"toolbar"},tools):""); }
-function calStatusLine(){ if(!MCP) return h("p",{class:"empty"},"Agendas Google : la lecture sera rebranchée dans cette version du registre (étape suivante)."); const sts=Object.entries(S.gcalState); const bad=sts.filter(([,s])=>s.state==="error"); if(!bad.length) return ""; return h("div",{class:"banner"},bad.map(([slot,s])=>h("div",{},h("b",{},"Agenda "+s.owner+" ("+s.id.slice(0,28)+(s.id.length>28?"…":"")+") : "),calMessage(s)," ",s.code==="approval_required"||s.code==="not_in_manifest"?h("button",{type:"button",class:"btn small",onclick:()=>approveCal(slot)},"Autoriser la lecture"):""))); }
+function calStatusLine(){ const bad=Object.entries(S.gcalState).filter(([,x])=>x.state==="error"); if(!bad.length) return ""; return h("div",{class:"banner"},bad.map(([slot,x])=>h("div",{},x.owner?h("b",{},"Agenda "+(slot==="valentine2"?"de Valentine (second)":slot==="valentine"?"de Valentine":"de Thomas")+" : "):"",calMessage(x)," ",x.code==="no_ics"||x.code==="adresse_invalide"||/^http_/.test(x.code||"")?h("button",{type:"button",class:"btn small",onclick:()=>go("reglages")},"Ouvrir les réglages"):""))); }
 
 const VIEWS = {
 fiche(){ const rec=findItemByToken(S.ficheId); const back=h("button",{type:"button",class:"btn small ghost",onclick:()=>go("inventaire")},"← Inventaire");
@@ -904,10 +915,14 @@ reglages(){ const r=S.reglages; const role=myRole(); const m=r.membres||{}; cons
     fld("cal_thomas","Agenda Google de Thomas","text",cal("cal_thomas","thomas.bernard.art@gmail.com")),
     fld("cal_valentine","Agenda Google de Valentine","text",cal("cal_valentine","valentinegauthier.atelier@gmail.com")),
     h("div",{class:"field wide"},h("label",{for:"f-cal_valentine2"},"Second agenda de Valentine"),h("input",{type:"text",id:"f-cal_valentine2",name:"cal_valentine2",value:cal("cal_valentine2",CAL_V2_DEFAULT)}),h("span",{class:"hint"},"Laisse un champ vide pour ne pas lire cet agenda.")),
-    h("div",{class:"field wide"},h("label",{for:"f-qr_base"},"Adresse encodée dans les QR codes"),h("input",{type:"text",id:"f-qr_base",name:"qr_base",value:r.qr_base||"",placeholder:ART_URL}),h("span",{class:"hint"},"Vide : le lien du registre sur claude.ai. Mets ton domaine quand il redirigera vers le registre, avant d'imprimer les étiquettes.")),
+    h("div",{class:"field wide"},h("span",{class:"lbl"},"Adresses secrètes iCal des agendas Google"),h("span",{class:"hint"},"Dans Google Agenda sur ordinateur : roue dentée, Paramètres, clique sur l'agenda à gauche, « Intégrer l'agenda », puis copie l'« Adresse secrète au format iCal ». Elle reste privée : seul le registre la lit.")),
+    fld("ics_thomas","Agenda de Thomas : adresse secrète iCal","text",r.ics_thomas||""),
+    fld("ics_valentine","Agenda de Valentine : adresse secrète iCal","text",r.ics_valentine||""),
+    h("div",{class:"field wide"},h("label",{for:"f-ics_valentine2"},"Second agenda de Valentine : adresse secrète iCal"),h("input",{type:"text",id:"f-ics_valentine2",name:"ics_valentine2",value:r.ics_valentine2||""})),
+    h("div",{class:"field wide"},h("label",{for:"f-qr_base"},"Adresse encodée dans les QR codes"),h("input",{type:"text",id:"f-qr_base",name:"qr_base",value:r.qr_base||"",placeholder:ART_URL}),h("span",{class:"hint"},"Vide : l'adresse actuelle du registre. Mets ton domaine quand il redirigera vers le registre, avant d'imprimer les étiquettes.")),
     h("div",{class:"field wide"},h("label",{class:"check"},h("input",{type:"checkbox",id:"f-recap",name:"recap",checked:!r.recap_off}),"Envoyer le mail chaque matin, vers 7 h 30"))
   );
-  form.addEventListener("submit",async e=>{ e.preventDefault(); const el=form.elements; const vals={ig_compte:el.ig_compte.value.trim().replace(/^@/,""),wa_thomas:el.wa_thomas.value.trim(),wa_valentine:el.wa_valentine.value.trim(),mail_thomas:el.mail_thomas.value.trim(),mail_valentine:el.mail_valentine.value.trim(),cal_thomas:el.cal_thomas.value.trim(),cal_valentine:el.cal_valentine.value.trim(),cal_valentine2:el.cal_valentine2.value.trim(),recap_off:!el.recap.checked,qr_base:el.qr_base.value.trim()}; try{ await saveReglages(vals); toast("Réglages enregistrés."); }catch(x){ toast(errMsg(x)); } });
+  form.addEventListener("submit",async e=>{ e.preventDefault(); const el=form.elements; const vals={ig_compte:el.ig_compte.value.trim().replace(/^@/,""),wa_thomas:el.wa_thomas.value.trim(),wa_valentine:el.wa_valentine.value.trim(),mail_thomas:el.mail_thomas.value.trim(),mail_valentine:el.mail_valentine.value.trim(),cal_thomas:el.cal_thomas.value.trim(),cal_valentine:el.cal_valentine.value.trim(),cal_valentine2:el.cal_valentine2.value.trim(),ics_thomas:el.ics_thomas.value.trim(),ics_valentine:el.ics_valentine.value.trim(),ics_valentine2:el.ics_valentine2.value.trim(),recap_off:!el.recap.checked,qr_base:el.qr_base.value.trim()}; try{ await saveReglages(vals); toast("Réglages enregistrés."); }catch(x){ toast(errMsg(x)); } });
   return h("div",{class:"view"},headBlock("Réglages","Réglages"),
     accesPanel(),
     h("section",{class:"panel"},h("h3",{},"Mail du matin et agendas"),form,h("div",{class:"toolbar"},h("button",{type:"submit",form:"form-reglages",class:"btn primary",disabled:S.readOnly},"Enregistrer les réglages"))),
@@ -1125,7 +1140,9 @@ async function mergeDups(groups){ S.busy={kind:"dup",done:0,total:1,label:"Fusio
 function go(v){ S.view=v; try{ history.replaceState(null,"","#"+v); }catch(e){} render(); scrollTo(0,0); }
 function renderNav(){ const n=$("#nav"); const counts={contacts:contacts().length,inventaire:S.items.length,ventes:S.ventes.filter(v=>v.statut==="Devis"||v.statut==="Accepté"||v.statut==="Facturée").length,agenda:S.taches.filter(k=>k.statut!=="Fait"&&k.date&&k.date<=today()).length};
   const btn=([k,l])=>h("button",{type:"button","aria-current":(S.view===k||(S.view==="fiche"&&k==="inventaire"))?"page":null,onclick:()=>go(k)},l,counts[k]?h("span",{class:"count"},counts[k].toLocaleString("fr-FR")):"");
-  n.replaceChildren(...VIEWS_LIST.filter(([k])=>MAIN_VIEWS.includes(k)).map(btn),h("div",{class:"grp"},"Plus"),...VIEWS_LIST.filter(([k])=>!MAIN_VIEWS.includes(k)).map(btn),SAMPLE?h("div",{class:"grp"},"Claude"):"",SAMPLE?h("button",{type:"button",onclick:()=>openVoice()},"Parler à Claude"):"");
+  const curV=S.view==="fiche"?"inventaire":S.view; const plusOpen=S.f.plusOpen!=null?S.f.plusOpen:!MAIN_VIEWS.includes(curV);
+  const sub=([k,l])=>{ const b=btn([k,l]); b.classList.add("sub"); return b; };
+  n.replaceChildren(...VIEWS_LIST.filter(([k])=>MAIN_VIEWS.includes(k)).map(btn),h("button",{type:"button",class:"plus-t","aria-expanded":plusOpen?"true":"false",onclick:()=>{ S.f.plusOpen=!plusOpen; renderNav(); }},"Plus",h("span",{class:"count"},plusOpen?"−":"+")),...(plusOpen?VIEWS_LIST.filter(([k])=>!MAIN_VIEWS.includes(k)).map(sub):[]),SAMPLE?h("div",{class:"grp"},"Claude"):"",SAMPLE?h("button",{type:"button",onclick:()=>openVoice()},"Parler à Claude"):"");
   $("#rail-who").replaceChildren(...whoDots()); renderMobile(); }
 function viewLabel(v){ if(v==="fiche") return "Fiche technique"; const x=VIEWS_LIST.find(([k])=>k===v); return x?x[1]:""; }
 function renderMobile(){ const mh=$("#mhead"); if(!mh) return; const home=S.view==="accueil";
@@ -1134,7 +1151,7 @@ function renderMobile(){ const mh=$("#mhead"); if(!mh) return; const home=S.view
     h("button",{type:"button",class:"icon-btn","aria-label":"Toutes les rubriques",onclick:openSommaire},"☰"));
   $("#fab").hidden=!S.session||S.readOnly||!S.ready; }
 function doorsEl(){ const t=today(); const sub={agenda:dayEntries(t,false).length+" aujourd'hui",contacts:contacts().length.toLocaleString("fr-FR")+" fiches",inventaire:S.items.filter(i=>i.statut==="Disponible").length+" disponibles",ventes:S.ventes.filter(v=>v.statut==="Devis"||v.statut==="Accepté").length+" devis en cours"};
-  return h("nav",{class:"doors tiles","aria-label":"Rubriques principales"},DOORS.map(([k,l])=>h("button",{type:"button",class:"tile",onclick:()=>go(k)},h("span",{class:"tn"},l),h("span",{class:"tm"},sub[k]||""))),h("button",{type:"button",class:"tile",style:"grid-column:1 / -1;min-height:52px",onclick:openSommaire},h("span",{class:"tm",style:"font-size:14px;color:var(--ink)"},"Plus : expositions, cercles, newsletters, WhatsApp, Instagram, réglages"))); }
+  return h("nav",{class:"doors tiles","aria-label":"Rubriques principales"},DOORS.map(([k,l])=>h("button",{type:"button",class:"tile",onclick:()=>go(k)},h("span",{class:"tn"},l),h("span",{class:"tm"},sub[k]||""))),h("button",{type:"button",class:"tile",style:"grid-column:1 / -1;min-height:52px",onclick:()=>{ somPlus=true; openSommaire(); }},h("span",{class:"tm",style:"font-size:14px;color:var(--ink)"},"Plus"))); }
 
 function closeSheetSafe(){ try{ if(!$("#sheet").hidden) closeSheet(); }catch(e){} }
 /* ---------- Feuilles : sommaire, ajout rapide, voix ---------- */
@@ -1145,7 +1162,12 @@ $("#sheet").addEventListener("mousedown",e=>{ if(e.target.id==="sheet") closeShe
 addEventListener("keydown",e=>{ if(e.key==="Escape"&&!$("#sheet").hidden) closeSheet(); });
 function sheetGo(fn){ return ()=>{ closeSheet(); fn(); }; }
 function openSommaire(){ openSheet("Rubriques",[h("div",{class:"tiles"},DOORS.map(([k,l,m])=>h("button",{type:"button",class:"tile",onclick:sheetGo(()=>go(k))},h("span",{class:"tn"},l),h("span",{class:"tm"},m)))),
-  h("div",{class:"morelist"},h("button",{type:"button",onclick:sheetGo(()=>go("accueil"))},"Aujourd'hui"),...VIEWS_LIST.filter(([k])=>!MAIN_VIEWS.includes(k)).map(([k,l])=>h("button",{type:"button",onclick:sheetGo(()=>go(k))},l)),h("button",{type:"button",onclick:sheetGo(()=>logout("Tu es déconnecté. À bientôt."))},"Se déconnecter"))]); }
+  moreList()]); }
+let somPlus=false;
+function moreList(){ const list=h("div",{class:"morelist"}); const draw=()=>list.replaceChildren(h("button",{type:"button",onclick:sheetGo(()=>go("accueil"))},"Aujourd'hui"),
+    h("button",{type:"button",class:"plus-row","aria-expanded":somPlus?"true":"false",onclick:()=>{ somPlus=!somPlus; draw(); }},"Plus"),
+    ...(somPlus?VIEWS_LIST.filter(([k])=>!MAIN_VIEWS.includes(k)).map(([k,l])=>h("button",{type:"button",class:"sub",onclick:sheetGo(()=>go(k))},l)):[]),
+    h("button",{type:"button",onclick:sheetGo(()=>logout("Tu es déconnecté. À bientôt."))},"Se déconnecter")); draw(); return list; }
 function openQuickAdd(){ openSheet("Ajouter",[h("div",{class:"tiles"},
   SAMPLE?h("button",{type:"button",class:"tile voice",onclick:()=>openVoice()},h("span",{class:"tn"},"Parler à Claude"),h("span",{class:"tm"},"« Tâche chantier jeudi 9 h avec l'électricien »")):"",
   h("button",{type:"button",class:"tile",onclick:sheetGo(()=>openRdv())},h("span",{class:"tn"},"Rendez-vous"),h("span",{class:"tm"},"Visite, essayage, appel")),
@@ -1252,6 +1274,7 @@ async function startSession(sess){ if(!sess) return; const email=String(sess.use
   if(started) return; started=true;
   const {data:mem,error:me}=await SB.from("membres").select("identifiant"); if(me||!mem||!mem.length){ S.dbFailed=true; render(); return; }
   try{ for(const r of ["reglages",...LISTS]) await loadRub(r); S.ready=true; render();
+    setupCalendars(); setInterval(()=>setupCalendars(true),10*60*1000);
     await loadRub("ventes"); await loadRub("items"); schedule(); await loadRub("contacts"); schedule(); }
   catch(e){ console.error(e); S.ready=true; toast("Chargement incomplet. Recharge la page."); schedule(); }
   chan=SB.channel("fiches-direct").on("postgres_changes",{event:"*",schema:"public",table:"fiches"},p=>{ const del=p.eventType==="DELETE"; const r=del?p.old:p.new; if(!r||!r.rubrique) return; applyRow(r.rubrique,r.id,del?null:r.data); schedule(); }).subscribe();

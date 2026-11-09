@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Forma Mantis</title>
+<title>Maison Saint-Sauveur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
@@ -1055,6 +1055,7 @@ header { width: 100%; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 55%;
   filter: saturate(0.85) brightness(0.88);
 }
 .carousel-overlay {
@@ -1100,18 +1101,15 @@ header { width: 100%; }
 <body>
 
 <header>
-  <a class="logo" onclick="nav('accueil')">Forma Mantis</a>
+  <a class="logo" onclick="nav('accueil')">Maison Saint-Sauveur</a>
   <div class="mobile-nav-btn" onclick="toggleMobileNav()" id="hamburger"><span></span><span></span><span></span></div>
   <nav id="main-nav">
     <a onclick="nav('accueil')" id="n-accueil" class="active" data-i18n="n-accueil">Accueil</a>
     <a onclick="nav('projets')" id="n-projets" data-i18n="n-projets">Projets</a>
-    <a onclick="nav('artistes')" id="n-artistes" data-i18n="n-artistes">Artistes</a>
-    <a onclick="nav('bibliotheque')" id="n-bibliotheque" data-i18n="n-bibliotheque">Bibliothèque</a>
-    <a onclick="nav('apropos')" id="n-apropos" data-i18n="n-apropos">À propos</a>
-    <a onclick="nav('contact')" id="n-contact" data-i18n="n-contact">Contact</a>
-    <a onclick="nav('rdv')" id="n-rdv" style="font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0.04em;text-transform:none;color:var(--black);border:0.5px solid var(--black);padding:6px 14px;" data-i18n="n-rdv">Rendez-vous</a>
-    <a onclick="nav('journal')" id="n-journal" data-i18n="n-journal">Journal</a>
-    <a href="https://www.instagram.com/formamantis" target="_blank" style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);text-decoration:none;">Instagram</a>
+    <a onclick="nav('editions')" id="n-editions" data-i18n="n-editions">Éditions</a>
+    <a onclick="nav('contacts')" id="n-contacts" data-i18n="n-contacts">Contacts</a>
+    <a onclick="nav('intramuros')" id="n-intramuros" data-i18n="n-intramuros">Intra-muros</a>
+    <a onclick="nav('extramuros')" id="n-extramuros" data-i18n="n-extramuros">Extra-muros</a>
     <div class="lang-switcher">
       <span onclick="setLang('fr')" id="btn-fr" class="lang-btn active-lang">Fr</span>
       <span class="lang-sep">/</span>
@@ -1126,55 +1124,28 @@ header { width: 100%; }
 <div class="page active" id="page-accueil">
   <div class="hero-carousel" id="hero-carousel">
   <div class="carousel-slide active">
-    <img src="forma-mantis-marsh-sunset.jpg" alt="Forma Mantis">
+    <img src="mss-accueil-04.jpg" alt="Maison Saint-Sauveur">
   </div>
   <div class="carousel-slide">
-    <img src="forma-mantis-amsterdam-canal-night.jpg" alt="Forma Mantis">
+    <img src="mss-accueil-01.jpg" alt="Maison Saint-Sauveur">
   </div>
   <div class="carousel-slide">
-    <img src="forma-mantis-turquoise-water.jpg" alt="Forma Mantis">
+    <img src="mss-accueil-02.jpg" alt="Maison Saint-Sauveur">
   </div>
   <div class="carousel-slide">
-    <img src="forma-mantis-salt-landscape.jpg" alt="Forma Mantis">
+    <img src="mss-accueil-03.jpg" alt="Maison Saint-Sauveur">
   </div>
   <div class="carousel-slide">
-    <img src="forma-mantis-timber-roof.jpg" alt="Forma Mantis">
+    <img src="mss-accueil-06.jpg" alt="Maison Saint-Sauveur">
   </div>
   <div class="carousel-slide">
-    <img src="forma-mantis-moonlit-pond.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-cite-des-peintres.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-waterfall.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-rocky-hillside.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-moss-waterfall.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-rocky-path.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-fishing-boat.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-mushrooms.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-shrimp-fisherman.jpg" alt="Forma Mantis">
-  </div>
-  <div class="carousel-slide">
-    <img src="forma-mantis-sunset-bretagne.jpg" alt="Forma Mantis — coucher de soleil Bretagne">
+    <img src="mss-accueil-05.jpg" alt="Maison Saint-Sauveur">
   </div>
     <div class="carousel-overlay"></div>
     <div class="carousel-bottom">
       <div class="hero-title">
         <p data-i18n="hero-sub">Art contemporain — Mode — Édition</p>
-        <h1>Forma Mantis</h1>
+        <h1>Maison Saint-Sauveur</h1>
       </div>
       <div class="hero-meta">
         <span data-i18n="hero-label">Direction artistique</span>
@@ -1188,25 +1159,13 @@ header { width: 100%; }
   <div class="carousel-dot" onclick="goToSlide(3)"></div>
   <div class="carousel-dot" onclick="goToSlide(4)"></div>
   <div class="carousel-dot" onclick="goToSlide(5)"></div>
-  <div class="carousel-dot" onclick="goToSlide(6)"></div>
-  <div class="carousel-dot" onclick="goToSlide(7)"></div>
-  <div class="carousel-dot" onclick="goToSlide(8)"></div>
-  <div class="carousel-dot" onclick="goToSlide(9)"></div>
-  <div class="carousel-dot" onclick="goToSlide(10)"></div>
-  <div class="carousel-dot" onclick="goToSlide(11)"></div>
-  <div class="carousel-dot" onclick="goToSlide(12)"></div>
-  <div class="carousel-dot" onclick="goToSlide(13)"></div>
-  <div class="carousel-dot" onclick="goToSlide(14)"></div>
     </div>
   </div>
   </div>
 
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav>
-      <a onclick="nav('contact')">Contact</a>
-      <a onclick="nav('apropos')">À propos</a>
-    </nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
@@ -1291,9 +1250,8 @@ header { width: 100%; }
   </div>
 
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('contact')">Contact</a>
-<a onclick="nav('apropos')">À propos</a></nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
@@ -1339,9 +1297,8 @@ header { width: 100%; }
     </div>
   </div>
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('contact')">Contact</a>
-<a onclick="nav('apropos')">À propos</a></nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
@@ -1455,20 +1412,19 @@ header { width: 100%; }
   </div>
 
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('contact')">Contact</a>
-<a onclick="nav('projets')">Projets</a></nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
 
 <!-- ══ CONTACT ══ -->
-<div class="page" id="page-contact">
+<div class="page" id="page-contacts">
   <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
     <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-moonlit-pond.jpg" alt="Contact">
     <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
     <div style="position:absolute;bottom:24px;left:48px;">
-      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Contact</h2>
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Contacts</h2>
     </div>
   </div>
 
@@ -1502,9 +1458,8 @@ header { width: 100%; }
     </div>
   </div>
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('projets')">Projets</a>
-<a onclick="nav('apropos')">À propos</a></nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
@@ -1578,10 +1533,14 @@ header { width: 100%; }
 
   <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour toute demande concernant les œuvres, contacter la Galerie Rabouan Moussion ou Forma Mantis.</p>
-    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://www.rabouanmoussion.com" target="_blank" style="color:var(--gray-text);">Galerie Rabouan Moussion ↗</a></div>
+    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contacts')">Nous contacter</a><a class="btn-outline" href="https://www.rabouanmoussion.com" target="_blank" style="color:var(--gray-text);">Galerie Rabouan Moussion ↗</a></div>
   </div>
 
-  <footer><p>Forma Mantis</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p></p></footer>
+  <footer>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
+    <p></p>
+  </footer>
 </div>
 
 <!-- ══ CHARLES MASON — GALERIE NEC ══ -->
@@ -1667,9 +1626,13 @@ header { width: 100%; }
 
   <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour toute demande sur cette exposition, contacter Forma Mantis ou la Galerie NEC.</p>
-    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://galerienec.com" target="_blank" style="color:var(--gray-text);">Galerie NEC ↗</a></div>
+    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contacts')">Nous contacter</a><a class="btn-outline" href="https://galerienec.com" target="_blank" style="color:var(--gray-text);">Galerie NEC ↗</a></div>
   </div>
-  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p></p></footer>
+  <footer>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
+    <p></p>
+  </footer>
 </div>
 
 <!-- ══ LA JEUNESSE A TOUJOURS RAISON ══ -->
@@ -1721,9 +1684,13 @@ header { width: 100%; }
   </div>
   <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour en savoir plus sur les artistes exposés ou les projets nés de cette collaboration, contacter Forma Mantis.</p>
-    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk</a></div>
+    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contacts')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk</a></div>
   </div>
-  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p></p></footer>
+  <footer>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
+    <p></p>
+  </footer>
 </div>
 
 <!-- ══ LES NYMPHÉAS — STROUK ══ -->
@@ -1774,18 +1741,22 @@ header { width: 100%; }
   </div>
   <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;">Pour en savoir plus sur les artistes ou les œuvres, contacter Forma Mantis ou la Galerie Strouk.</p>
-    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contact')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk</a></div>
+    <div style="display:flex;gap:16px;flex-shrink:0;"><a class="btn-outline" onclick="nav('contacts')">Nous contacter</a><a class="btn-outline" href="https://stroukgallery.com" target="_blank" style="color:var(--gray-text);">Galerie Strouk</a></div>
   </div>
-  <footer><p>Forma Mantis — 2025</p><nav><a onclick="nav('projets')">Projets</a><a onclick="nav('artistes')">Artistes</a><a onclick="nav('contact')">Contact</a></nav><p></p></footer>
+  <footer>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
+    <p></p>
+  </footer>
 </div>
 
 <!-- ══ BIBLIOTHÈQUE ══ -->
-<div class="page" id="page-bibliotheque">
+<div class="page" id="page-editions">
   <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
-    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-moss-waterfall.jpg" alt="Bibliothèque">
+    <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-moss-waterfall.jpg" alt="Éditions">
     <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
     <div style="position:absolute;bottom:24px;left:48px;">
-      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Bibliothèque</h2>
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Éditions</h2>
     </div>
   </div>
 
@@ -1808,7 +1779,7 @@ header { width: 100%; }
         <p style="font-family:var(--serif);font-size:22px;color:var(--black);">180 €</p>
         <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">Tirage de tête 50 ex. / Tirage courant 150 ex.</p>
       </div>
-      <a class="btn-outline" onclick="nav('contact')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
+      <a class="btn-outline" onclick="nav('contacts')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
     </div>
   </div>
 
@@ -1829,7 +1800,7 @@ header { width: 100%; }
         <p style="font-family:var(--serif);font-size:22px;color:var(--black);">180 €</p>
         <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">Tirage de tête 50 ex. / Tirage courant 150 ex.</p>
       </div>
-      <a class="btn-outline" onclick="nav('contact')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
+      <a class="btn-outline" onclick="nav('contacts')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
     </div>
   </div>
 
@@ -1850,23 +1821,63 @@ header { width: 100%; }
         <p style="font-family:var(--serif);font-size:22px;color:var(--black);">180 €</p>
         <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-text);">Tirage de tête 50 ex. / Tirage courant 150 ex.</p>
       </div>
-      <a class="btn-outline" onclick="nav('contact')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
+      <a class="btn-outline" onclick="nav('contacts')" style="margin-top:20px;display:inline-block;width:fit-content;" data-i18n="biblio-btn">Réserver un exemplaire</a>
     </div>
   </div>
 
   <div style="padding:48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--gray-light);">
     <p style="font-family:var(--serif);font-size:16px;color:var(--gray-text);max-width:480px;line-height:1.65;" data-i18n="biblio-order">Les commandes se font par email. Envoi dans toute la France et à l'international.</p>
-    <a class="btn-outline" onclick="nav('contact')" data-i18n="biblio-btn">Commander par email</a>
+    <a class="btn-outline" onclick="nav('contacts')" data-i18n="biblio-btn">Commander par email</a>
   </div>
 
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('projets')" data-i18n="n-projets">Projets</a><a onclick="nav('contact')" data-i18n="n-contact">Contact</a><a onclick="nav('apropos')" data-i18n="n-apropos">À propos</a></nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
 
 <!-- ══ RENDEZ-VOUS ══ -->
+<!-- ══ INTRA-MUROS ══ -->
+<div class="page" id="page-intramuros">
+  <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:saturate(0.8) brightness(0.7);" src="mss-accueil-04.jpg" alt="Intra-muros">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
+    <div style="position:absolute;bottom:24px;left:48px;">
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Intra-muros</h2>
+    </div>
+  </div>
+  <div style="max-width:720px;padding:64px 48px 96px;">
+    <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;">Maison Saint-Sauveur — Intra-muros</p>
+    <p style="font-family:var(--serif);font-size:20px;line-height:1.7;color:var(--black);">Texte en préparation.</p>
+  </div>
+  <footer>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
+    <p></p>
+  </footer>
+</div>
+
+<!-- ══ EXTRA-MUROS ══ -->
+<div class="page" id="page-extramuros">
+  <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
+    <img style="width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:saturate(0.8) brightness(0.7);" src="mss-accueil-01.jpg" alt="Extra-muros">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(14,14,13,0.5) 0%,transparent 60%);"></div>
+    <div style="position:absolute;bottom:24px;left:48px;">
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Extra-muros</h2>
+    </div>
+  </div>
+  <div style="max-width:720px;padding:64px 48px 96px;">
+    <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;">Maison Saint-Sauveur — Extra-muros</p>
+    <p style="font-family:var(--serif);font-size:20px;line-height:1.7;color:var(--black);">Texte en préparation.</p>
+  </div>
+  <footer>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
+    <p></p>
+  </footer>
+</div>
+
 <div class="page" id="page-rdv">
   <div style="position:relative;height:220px;overflow:hidden;border-bottom:0.5px solid var(--gray-light);">
     <img style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.7);" src="forma-mantis-marsh-sunset.jpg" alt="Rendez-vous">
@@ -1958,9 +1969,8 @@ header { width: 100%; }
   </div>
 
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a>
-</nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
@@ -2035,9 +2045,8 @@ header { width: 100%; }
   </div>
 
   <footer>
-    <p>Forma Mantis — 2025</p>
-    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('contact')">Contact</a>
-</nav>
+    <p>Maison Saint-Sauveur</p>
+    <nav><a onclick="nav('projets')">Projets</a><a onclick="nav('editions')">Éditions</a><a onclick="nav('contacts')">Contacts</a><a onclick="nav('intramuros')">Intra-muros</a><a onclick="nav('extramuros')">Extra-muros</a></nav>
     <p></p>
   </footer>
 </div>
@@ -2076,7 +2085,7 @@ function closeLightbox() {
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
 
 // ── CAROUSEL ──
-const carouselImages = 15;
+const carouselImages = document.querySelectorAll('.carousel-slide').length;
 let carouselIndex = 0;
 
 function goToSlide(n) {
@@ -2124,6 +2133,11 @@ function storeFRBaselines() {
 const translations_en = {
   // Navigation
   "Accueil": "Home",
+  "Éditions": "Editions",
+  "Contacts": "Contacts",
+  "Intra-muros": "Intra muros",
+  "Extra-muros": "Extra muros",
+  "Texte en préparation.": "Text in preparation.",
   "Projets": "Projects",
   "Artistes": "Artists",
   "Bibliothèque": "Library",

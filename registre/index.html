@@ -229,6 +229,18 @@ tfoot td{font-weight:600;border-top:1px solid var(--ink)}
 .morelist .plus-row[aria-expanded="true"]::after{content:"−"}
 .morelist button.sub{padding-left:20px;font-size:15px}
 .mhead,.fab,.doors.tiles{display:none}
+.guide{position:relative}
+.guide summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);padding:4px 2px;border-radius:999px}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary i{width:11px;height:11px;border-radius:50%;background:#C8102E;box-shadow:0 0 0 3px color-mix(in srgb,#C8102E 22%,transparent);flex:none}
+.guide summary:hover span,.guide[open] summary span{color:var(--ink)}
+.guide summary:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.guide .pop{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:250px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px color-mix(in srgb,#000 14%,transparent);padding:6px;display:flex;flex-direction:column}
+.guide .pop a{display:flex;flex-direction:column;gap:1px;padding:9px 11px;border-radius:7px;color:var(--ink);text-decoration:none}
+.guide .pop a:hover{background:var(--sea-soft)}
+.guide .pop a b{font-weight:600;font-size:14px}
+.guide .pop a span{font-size:12px;color:var(--muted)}
+@media (max-width:860px){.guide .pop{left:0;right:auto}}
 .nav .search-t{border:1px solid var(--line);background:var(--surface);margin-bottom:10px;color:var(--muted)}
 .mh-act{display:flex;gap:8px}
 .mh-act .icon-btn{font-size:20px}
@@ -848,7 +860,7 @@ accueil(){ const t=today(); const role=myRole(); const name=role==="thomas"?"Tho
   return h("div",{class:"view"},
     h("div",{class:"hero-img",role:"img","aria-label":"Le Cabellou, près de Concarneau, l'hôtel Borney sur une carte postale ancienne"},h("span",{},"Le Cabellou, près Concarneau")),
     h("div",{class:"head"},h("div",{class:"titles"},h("p",{class:"eyebrow"},fmtDate(t,{weekday:"long",day:"numeric",month:"long",year:"numeric"})),h("h1",{class:"display"},name?["Bonjour ",h("em",{},name),"."]:["Maison ",h("em",{},"Saint Sauveur")])),
-      h("div",{class:"toolbar"},h("span",{class:"who"},whoDots()),h("button",{type:"button",class:"btn small hide-m",onclick:()=>logout("Tu es déconnecté. À bientôt.")},"Se déconnecter"),h("button",{type:"button",class:"btn small ghost hide-m","data-waves":"",onclick:toggleWaves},audio?"Couper les vagues":"Bruit des vagues"))),
+      h("div",{class:"toolbar"},guideEl(),h("span",{class:"who"},whoDots()),h("button",{type:"button",class:"btn small hide-m",onclick:()=>logout("Tu es déconnecté. À bientôt.")},"Se déconnecter"),h("button",{type:"button",class:"btn small ghost hide-m","data-waves":"",onclick:toggleWaves},audio?"Couper les vagues":"Bruit des vagues"))),
     S.readOnly?h("p",{class:"banner"},"Tu consultes le registre en lecture seule."):"",
     doorsEl(),
     todos.length?h("section",{class:"panel"},h("h3",{},"À traiter"),h("ul",{class:"list"},todos.map(todoRow))):"",
@@ -1277,6 +1289,9 @@ function renderMobile(){ const mh=$("#mhead"); if(!mh) return; const home=S.view
     h("span",{class:"here"},home?"":viewLabel(S.view)),
     h("div",{class:"mh-act"},(()=>{ const b=h("button",{type:"button",class:"icon-btn","aria-label":"Chercher",onclick:openSearch}); b.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'; return b; })(),h("button",{type:"button",class:"icon-btn","aria-label":"Toutes les rubriques",onclick:openSommaire},"☰")));
   $("#fab").hidden=!S.session||S.readOnly||!S.ready; }
+function guideEl(){ const d=document.createElement("details"); d.className="guide"; const sm=h("summary",{"aria-label":"Mode d'emploi et démonstration",title:"Mode d'emploi"},h("i"),h("span",{},"Mode d'emploi"));
+  d.append(sm,h("div",{class:"pop"},h("a",{href:"mode-emploi.pdf",download:"Registre-MSS-mode-emploi.pdf",target:"_blank",rel:"noopener"},h("b",{},"Mode d'emploi"),h("span",{},"PDF · 11 pages")),h("a",{href:"demo-registre-ordinateur.mp4",target:"_blank",rel:"noopener"},h("b",{},"Démonstration · ordinateur"),h("span",{},"Vidéo · 1 min 20")),h("a",{href:"demo-registre-telephone.mp4",target:"_blank",rel:"noopener"},h("b",{},"Démonstration · téléphone"),h("span",{},"Vidéo · 30 s"))));
+  d.addEventListener("toggle",()=>{ if(d.open){ const off=e=>{ if(!d.contains(e.target)){ d.open=false; removeEventListener("pointerdown",off,true); } }; addEventListener("pointerdown",off,true); } }); return d; }
 function doorsEl(){ const t=today(); const sub={agenda:dayEntries(t,false).length+" aujourd'hui",contacts:contacts().length.toLocaleString("fr-FR")+" fiches",inventaire:S.items.filter(i=>i.statut==="Disponible").length+" disponibles",ventes:S.ventes.filter(v=>v.statut==="Devis"||v.statut==="Accepté").length+" devis en cours"};
   return h("nav",{class:"doors tiles","aria-label":"Rubriques principales"},DOORS.map(([k,l])=>h("button",{type:"button",class:"tile",onclick:()=>go(k)},h("span",{class:"tn"},l),h("span",{class:"tm"},sub[k]||""))),h("button",{type:"button",class:"tile",style:"grid-column:1 / -1;min-height:52px",onclick:()=>{ somPlus=true; openSommaire(); }},h("span",{class:"tm",style:"font-size:14px;color:var(--ink)"},"Plus"))); }
 

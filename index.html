@@ -1184,10 +1184,11 @@ header { width: 100%; }
     </div>
   </div>
 
-  <div class="page-header">
+  <div class="page-header" data-registre="texte" data-page="projets">
     <h2 data-i18n="projets-title">Projets</h2>
     <p data-i18n="projets-sub">Expositions, résidences et situations — pensées en relation avec leurs lieux.</p>
   </div>
+  <div data-registre="fiches" data-page="projets" hidden></div>
 
   <div class="project-row" onclick="nav('mason')">
     <div class="project-row-img">
@@ -1766,6 +1767,9 @@ header { width: 100%; }
 
 
 
+  <div data-registre="texte" data-page="editions" hidden style="max-width:760px;padding:64px 48px 40px;"></div>
+  <div data-registre="fiches" data-page="editions" hidden></div>
+
   <!-- ÉDITION 01 : The Unknown Craftsman -->
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="height:360px;overflow:hidden;border-right:0.5px solid var(--gray-light);">
@@ -1851,11 +1855,12 @@ header { width: 100%; }
       <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Intra-muros</h2>
     </div>
   </div>
-  <div style="max-width:760px;padding:64px 48px 40px;">
+  <div data-registre="texte" data-page="intramuros" style="max-width:760px;padding:64px 48px 40px;">
     <p style="font-family:var(--serif);font-size:22px;line-height:1.6;color:var(--black);margin-bottom:28px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus, suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
     <p style="font-size:14px;line-height:1.85;color:var(--gray-text);margin-bottom:16px;">Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.</p>
     <p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
   </div>
+  <div data-registre="fiches" data-page="intramuros" hidden></div>
   <div class="mss-duo" style="display:grid;grid-template-columns:1fr 1fr;border-top:0.5px solid var(--gray-light);border-bottom:0.5px solid var(--gray-light);">
     <div style="height:520px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-02.jpg" alt="Maison Saint-Sauveur — Intra-muros" onclick="openLightbox(this.src, this.alt)"></div>
     <div style="height:520px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-03.jpg" alt="Maison Saint-Sauveur — Intra-muros" onclick="openLightbox(this.src, this.alt)"></div>
@@ -1880,11 +1885,12 @@ header { width: 100%; }
       <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Extra-muros</h2>
     </div>
   </div>
-  <div style="max-width:760px;padding:64px 48px 40px;">
+  <div data-registre="texte" data-page="extramuros" style="max-width:760px;padding:64px 48px 40px;">
     <p style="font-family:var(--serif);font-size:22px;line-height:1.6;color:var(--black);margin-bottom:28px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus, suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
     <p style="font-size:14px;line-height:1.85;color:var(--gray-text);margin-bottom:16px;">Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.</p>
     <p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
   </div>
+  <div data-registre="fiches" data-page="extramuros" hidden></div>
   <div class="mss-duo" style="display:grid;grid-template-columns:1fr 1fr;border-top:0.5px solid var(--gray-light);border-bottom:0.5px solid var(--gray-light);">
     <div style="height:520px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-06.jpg" alt="Maison Saint-Sauveur — Extra-muros" onclick="openLightbox(this.src, this.alt)"></div>
     <div style="height:520px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-05.jpg" alt="Maison Saint-Sauveur — Extra-muros" onclick="openLightbox(this.src, this.alt)"></div>
@@ -1923,7 +1929,19 @@ header { width: 100%; }
       <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;">
         <a href="mailto:contact@formamantis.com" class="btn-outline" style="display:inline-block;width:fit-content;">contact@formamantis.com</a>
       </div>
-      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--gray-muted);margin-top:32px;line-height:1.6;">Le système de prise de rendez-vous en ligne sera disponible prochainement.</p>
+      <form id="mss-rdv" novalidate style="margin-top:36px;">
+        <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Demander un rendez-vous</p>
+        <div class="form-field"><label for="rdv-nom">Nom &amp; prénom</label><input id="rdv-nom" name="nom" type="text" autocomplete="name" required></div>
+        <div class="form-field"><label for="rdv-email">E-mail</label><input id="rdv-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="form-field"><label for="rdv-tel">Téléphone (facultatif)</label><input id="rdv-tel" name="tel" type="tel" autocomplete="tel"></div>
+        <div class="form-field"><label for="rdv-type">Objet</label><select id="rdv-type" name="type"><option>Visite d'exposition</option><option>Présentation des éditions</option><option>Visite atelier</option><option>Entretien presse</option><option>Autre</option></select></div>
+        <div class="form-field"><label for="rdv-date">Date souhaitée (facultatif)</label><input id="rdv-date" name="date" type="date"></div>
+        <div class="form-field"><label for="rdv-msg">Message</label><textarea id="rdv-msg" name="message"></textarea></div>
+        <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Site web <input name="site_web" tabindex="-1" autocomplete="off"></label></div>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.65;color:var(--gray-text);margin-bottom:24px;cursor:pointer;"><input type="checkbox" name="consentement" style="margin-top:3px;flex:none;"> J'accepte que Maison Saint-Sauveur utilise ces informations pour répondre à ma demande. Elles ne sont ni cédées ni utilisées à d'autres fins, et sont effacées sur simple demande.</label>
+        <button type="submit" class="btn-outline" style="background:none;cursor:pointer;font:inherit;">Envoyer la demande</button>
+        <p id="mss-rdv-msg" role="status" aria-live="polite" style="font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--black);margin-top:18px;min-height:1.5em;"></p>
+      </form>
     </div>
     <div style="padding:56px 48px;display:flex;flex-direction:column;gap:32px;">
       <div>
@@ -2375,6 +2393,74 @@ document.addEventListener('touchend', e => {
   }
 }, {passive: true});
 
+</script>
+<script id="mss-registre">
+/* Maison Saint-Sauveur : le site lit le registre (fiches publiées seulement) et lui envoie les demandes de rendez-vous. */
+(function () {
+  const RPC = "https://imgpydatjmsxurjwpqpt.supabase.co/rest/v1/rpc/";
+  const KEY = "sb_publishable_vabaOqZ5rWlS6lD7VbVwjQ_fgGehk6a";
+  const IMG = "https://imgpydatjmsxurjwpqpt.supabase.co/storage/v1/object/public/visuels/";
+  const PAGE = { "Projets": "projets", "Éditions": "editions", "Intra-muros": "intramuros", "Extra-muros": "extramuros" };
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const call = (f, body) => fetch(RPC + f, { method: "POST", headers: { apikey: KEY, "Content-Type": "application/json" }, body: JSON.stringify(body || {}) }).then(r => r.ok ? r.json() : Promise.reject(new Error("http " + r.status)));
+  const paras = t => String(t || "").split(/\n\s*\n/).map(x => x.trim()).filter(Boolean);
+  const img = f => { const v = (f.visuels || []).find(x => x && !/^video/.test(x.t || "") && String(x.id).indexOf("/") > 0); return v ? IMG + String(v.id).split("/").map(encodeURIComponent).join("/") : ""; };
+  const fmt = d => /^\d{4}-\d{2}-\d{2}$/.test(d || "") ? new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : (d || "");
+  const eur = n => { const x = Number(String(n).replace(",", ".")); return isFinite(x) && x > 0 ? x.toLocaleString("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }) : ""; };
+  function detail(l, v) { return v ? `<div class="project-row-detail"><span>${esc(l)}</span><p>${esc(v).replace(/\n/g, "<br>")}</p></div>` : ""; }
+  function carte(f) {
+    const src = img(f);
+    const imgEl = src ? `<img class="img-cover" src="${esc(src)}" alt="${esc([f.auteur, f.titre].filter(Boolean).join(" — "))}" loading="lazy" style="cursor:zoom-in" onclick="event.stopPropagation();typeof openLightbox==='function'&&openLightbox(this.src,this.alt)">` : `<div style="width:100%;height:100%;background:var(--gray-light);"></div>`;
+    let meta = "", right = "", titre = esc(f.titre || "Sans titre"), desc = paras(f.texte).map(esc).join("<br><br>");
+    if (f.type === "oeuvre") {
+      meta = esc(f.auteur || "Œuvre") + (f.statut ? ` <span class="status-badge">${esc(f.statut)}</span>` : "");
+      titre += f.annee ? `<span style="font-style:normal">, ${esc(f.annee)}</span>` : "";
+      right = detail("Technique", f.technique) + detail("Dimensions", f.dimensions) + detail("Tirage", f.edition ? f.edition + " ex." : "") + (f.prix && !f.statut ? detail("Prix", eur(f.prix)) : "");
+    } else if (f.type === "exposition") {
+      const auj = new Date().toISOString().slice(0, 10); const enCours = f.debut && f.fin && f.debut <= auj && auj <= f.fin;
+      meta = "Exposition" + (f.lieu ? " — " + esc(f.lieu.split("\n")[0]) : "") + (enCours ? ` <span class="status-badge active">En cours</span>` : (f.fin && f.fin < auj ? ` <span class="status-badge">Passée</span>` : ""));
+      right = detail("Lieu", f.lieu) + detail("Dates", [fmt(f.debut), fmt(f.fin)].filter(Boolean).join(" – ")) + detail("Vernissage", fmt(f.vernissage)) + detail("Artistes", f.artistes);
+    } else {
+      meta = esc(f.genre || "Projet") + (f.lieu ? " — " + esc(f.lieu.split("\n")[0]) : "") + (f.annee ? ` <span class="status-badge">${esc(f.annee)}</span>` : "");
+      right = detail("Lieu", f.lieu) + detail("Dates", f.dates) + detail("Artistes", f.artistes);
+    }
+    return `<div class="project-row" style="cursor:default"><div class="project-row-img">${imgEl}</div><div class="project-row-body"><div class="project-row-meta">${meta}</div><div class="project-row-title"><em>${titre}</em></div>${desc ? `<div class="project-row-desc">${desc}</div>` : ""}</div><div class="project-row-right">${right}</div></div>`;
+  }
+  function textes(id, pg) {
+    const el = document.querySelector(`[data-registre="texte"][data-page="${id}"]`); if (!el || !pg || !(pg.chapo || pg.texte || pg.titre)) return;
+    if (el.classList.contains("page-header")) {
+      const h2 = el.querySelector("h2"), p = el.querySelector("p");
+      if (pg.titre && h2) { h2.textContent = pg.titre; h2.removeAttribute("data-i18n"); }
+      if (pg.chapo && p) { p.textContent = pg.chapo; p.removeAttribute("data-i18n"); }
+      if (pg.texte) { el.querySelectorAll(".mss-reg").forEach(x => x.remove()); paras(pg.texte).forEach(t => { const q = document.createElement("p"); q.className = "mss-reg"; q.textContent = t; q.style.cssText = "margin-top:14px;max-width:62ch"; el.append(q); }); }
+      return;
+    }
+    el.innerHTML = (pg.chapo ? `<p style="font-family:var(--serif);font-size:22px;line-height:1.6;color:var(--black);margin-bottom:28px;">${esc(pg.chapo)}</p>` : "") +
+      paras(pg.texte).map((t, i, a) => `<p style="font-size:14px;line-height:1.85;color:var(--gray-text);${i < a.length - 1 ? "margin-bottom:16px;" : ""}">${esc(t)}</p>`).join("");
+    el.hidden = false;
+  }
+  call("site_contenu").then(d => {
+    Object.entries(d.pages || {}).forEach(([id, pg]) => textes(id, pg));
+    const g = {}; (d.fiches || []).forEach(f => { const k = PAGE[f.page] || "projets"; (g[k] = g[k] || []).push(f); });
+    document.querySelectorAll('[data-registre="fiches"]').forEach(box => { const arr = g[box.dataset.page] || []; box.innerHTML = arr.map(carte).join(""); box.hidden = !arr.length; });
+  }).catch(e => console.warn("registre", e));
+
+  // Demande de rendez-vous
+  const form = document.getElementById("mss-rdv"); if (!form) return;
+  const ouvert = Date.now(); const msg = document.getElementById("mss-rdv-msg");
+  form.addEventListener("submit", async e => {
+    e.preventDefault(); const v = Object.fromEntries(new FormData(form).entries()); const btn = form.querySelector("button[type=submit]");
+    if (!v.nom || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email || "")) { msg.textContent = "Indiquez votre nom et une adresse e-mail valide."; return; }
+    if (!form.consentement.checked) { msg.textContent = "Cochez la case de consentement pour que nous puissions vous répondre."; return; }
+    btn.disabled = true; msg.textContent = "Envoi…";
+    try {
+      const r = await call("site_demande_rdv", { p: { nom: v.nom, email: v.email, tel: v.tel, type: v.type, date: v.date, message: v.message, site_web: v.site_web, consentement: "true", delai: String(Date.now() - ouvert) } });
+      if (r && r.ok) { form.reset(); msg.textContent = "Merci. Votre demande est bien arrivée ; nous revenons vers vous rapidement."; }
+      else msg.textContent = r && r.erreur === "trop" ? "Votre demande a déjà été reçue. Nous revenons vers vous." : r && r.erreur === "trop_rapide" ? "Un instant : relisez votre demande puis envoyez-la de nouveau." : "La demande n'a pas pu être envoyée. Vérifiez les champs, ou écrivez-nous par e-mail.";
+    } catch (x) { msg.textContent = "Envoi impossible pour le moment. Écrivez-nous par e-mail."; }
+    finally { btn.disabled = false; }
+  });
+})();
 </script>
 </body>
 </html>

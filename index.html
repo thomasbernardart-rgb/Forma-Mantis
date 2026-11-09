@@ -1094,6 +1094,9 @@ header { width: 100%; }
   background: rgba(255,255,255,0.9);
 }
 @media (max-width: 768px) {
+  .mss-duo, .mss-cols { grid-template-columns: 1fr !important; }
+  .mss-duo > div { height: 380px !important; border-right: 0 !important; }
+  .mss-cols { gap: 28px !important; padding: 32px 20px 64px !important; }
   .carousel-bottom { padding: 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 </style>
@@ -1144,7 +1147,7 @@ header { width: 100%; }
     <div class="carousel-overlay"></div>
     <div class="carousel-bottom">
       <div class="hero-title">
-        <p data-i18n="hero-sub">Art contemporain — Mode — Édition</p>
+        <p data-i18n="hero-sub">Lorem ipsum — Dolor sit — Amet</p>
         <h1>Maison Saint-Sauveur</h1>
       </div>
       <div class="hero-meta">
@@ -1431,7 +1434,7 @@ header { width: 100%; }
   <div class="contact-wrap">
     <div class="contact-left">
       <h2 data-i18n="contact-title">Contact</h2>
-      <p class="intro" data-i18n="contact-intro">Forma Mantis développe des collaborations avec artistes, collectionneurs, institutions et partenaires privés.</p>
+      <p class="intro" data-i18n="contact-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero, sed cursus ante dapibus diam.</p>
       <div class="contact-block"><span>Direction artistique</span><p>Valentine Gauthier & Thomas Bernard</p></div>
       <div class="contact-block"><span>Contact général</span><a href="mailto:contact@formamantis.com">contact@formamantis.com</a></div>
       <div class="contact-block"><span>Presse & partenariats</span><a href="mailto:presse@formamantis.com">presse@formamantis.com</a></div>
@@ -1847,9 +1850,18 @@ header { width: 100%; }
       <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Intra-muros</h2>
     </div>
   </div>
-  <div style="max-width:720px;padding:64px 48px 96px;">
-    <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;">Maison Saint-Sauveur — Intra-muros</p>
-    <p style="font-family:var(--serif);font-size:20px;line-height:1.7;color:var(--black);">Texte en préparation.</p>
+  <div style="max-width:760px;padding:64px 48px 40px;">
+    <p style="font-family:var(--serif);font-size:22px;line-height:1.6;color:var(--black);margin-bottom:28px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus, suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
+    <p style="font-size:14px;line-height:1.85;color:var(--gray-text);margin-bottom:16px;">Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.</p>
+    <p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+  </div>
+  <div class="mss-duo" style="display:grid;grid-template-columns:1fr 1fr;border-top:0.5px solid var(--gray-light);border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:520px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-02.jpg" alt="Maison Saint-Sauveur — Intra-muros" onclick="openLightbox(this.src, this.alt)"></div>
+    <div style="height:520px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-03.jpg" alt="Maison Saint-Sauveur — Intra-muros" onclick="openLightbox(this.src, this.alt)"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;padding:48px 48px 96px;" class="mss-cols">
+    <div><p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Lorem ipsum</p><p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit. Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar.</p></div>
+    <div><p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Dolor sit amet</p><p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam.</p></div>
   </div>
   <footer>
     <p>Maison Saint-Sauveur</p>
@@ -1867,9 +1879,18 @@ header { width: 100%; }
       <h2 style="font-family:var(--serif);font-size:28px;font-weight:400;color:#fff;">Extra-muros</h2>
     </div>
   </div>
-  <div style="max-width:720px;padding:64px 48px 96px;">
-    <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;">Maison Saint-Sauveur — Extra-muros</p>
-    <p style="font-family:var(--serif);font-size:20px;line-height:1.7;color:var(--black);">Texte en préparation.</p>
+  <div style="max-width:760px;padding:64px 48px 40px;">
+    <p style="font-family:var(--serif);font-size:22px;line-height:1.6;color:var(--black);margin-bottom:28px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus, suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
+    <p style="font-size:14px;line-height:1.85;color:var(--gray-text);margin-bottom:16px;">Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.</p>
+    <p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+  </div>
+  <div class="mss-duo" style="display:grid;grid-template-columns:1fr 1fr;border-top:0.5px solid var(--gray-light);border-bottom:0.5px solid var(--gray-light);">
+    <div style="height:520px;overflow:hidden;border-right:0.5px solid var(--gray-light);"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-06.jpg" alt="Maison Saint-Sauveur — Extra-muros" onclick="openLightbox(this.src, this.alt)"></div>
+    <div style="height:520px;overflow:hidden;"><img style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;" src="mss-accueil-05.jpg" alt="Maison Saint-Sauveur — Extra-muros" onclick="openLightbox(this.src, this.alt)"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;padding:48px 48px 96px;" class="mss-cols">
+    <div><p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Lorem ipsum</p><p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit. Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar.</p></div>
+    <div><p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Dolor sit amet</p><p style="font-size:14px;line-height:1.85;color:var(--gray-text);">Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam.</p></div>
   </div>
   <footer>
     <p>Maison Saint-Sauveur</p>
@@ -2137,7 +2158,6 @@ const translations_en = {
   "Contacts": "Contacts",
   "Intra-muros": "Intra muros",
   "Extra-muros": "Extra muros",
-  "Texte en préparation.": "Text in preparation.",
   "Projets": "Projects",
   "Artistes": "Artists",
   "Bibliothèque": "Library",

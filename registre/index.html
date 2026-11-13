@@ -1,4 +1,20 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><meta name="theme-color" content="#F4F3EF"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Registre"><meta name="apple-mobile-web-app-status-bar-style" content="default"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><meta name="theme-color" content="#F4F3EF"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Registre"><meta name="apple-mobile-web-app-status-bar-style" content="default"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.dgrid{display:grid;grid-template-columns:40px repeat(7,minmax(64px,1fr));gap:4px;min-width:520px}
+.dgrid .dh{text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:4px}
+.dgrid .dh b{display:block;font-size:16px;letter-spacing:0;color:var(--ink);font-weight:500}
+.dgrid .dh.today b{color:var(--sea)}
+.dgrid .hh{font-size:12px;color:var(--muted);display:flex;align-items:center;font-family:var(--font-mono)}
+.dcell{all:unset;box-sizing:border-box;height:30px;border-radius:5px;font-size:11px;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 4px;cursor:pointer;position:relative}
+.dcell.libre{background:color-mix(in srgb,var(--ok) 16%,transparent);border:1px solid color-mix(in srgb,var(--ok) 45%,transparent);color:var(--ok)}
+.dcell.ferme{background:color-mix(in srgb,var(--bad) 9%,transparent);border:1px solid color-mix(in srgb,var(--bad) 28%,transparent)}
+.dcell.demande{background:color-mix(in srgb,var(--warn) 22%,transparent);border:1px solid var(--warn);color:var(--warn);font-weight:600}
+.dcell.pris{background:var(--ink);color:var(--surface)}
+.dcell.passe{background:color-mix(in srgb,var(--line) 45%,transparent);cursor:default}
+.dcell.passe.etait{background:color-mix(in srgb,var(--ok) 7%,transparent)}
+.dcell.ex::after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;background:currentColor}
+.dcell.ferme.ex::after{background:var(--bad)}
+.dcell:focus-visible{outline:2px solid var(--sea);outline-offset:1px}
+.dcell[disabled]{cursor:default}
+</style></head><body>
 <title>Registre Saint Sauveur</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -395,8 +411,8 @@ const MVT_STATUT = {"Dépôt (confiée)":"En dépôt","Prêt":"Prêtée","Exposi
 const S = { view:"accueil", taches:[], mouvements:[], projets:[], pages:[], catalogues:[],
   rdv:[], expos:[], newsletters:[], cercles:[], diffusions:[], waOpen:null, publications:[], reglages:{}, comptes:{},
   gcal:{}, gcalState:{}, peers:[], ready:false, dbFailed:false, readOnly:false, session:null,
-  f:{ cq:"", ccat:"", ccercle:"", csrc:"", crel:false, climit:100, iq:"", istat:"", icat:"", iart:"", ilimit:150, vq:"", vstat:"", vlimit:150, kmode:"synthese", kent:"", kq:"", ksens:"", kyr:"", kano:false, agPast:false, agMode:"liste", agRef:null, wa:{titre:"",msg:"",brief:"",cercle:"",cat:"",tag:"",src:"",opt:false,exp:"",wlimit:150}, ig:{mode:"semaine",ref:null,statut:"",type:""} },
-  imp:null, dup:null, busy:null, compta:{loaded:false,err:null,entites:[],factures:[],echeances:[],tva:[],transactions:[]} };
+  f:{ cq:"", ccat:"", ccercle:"", csrc:"", crel:false, climit:100, iq:"", istat:"", icat:"", iart:"", ilimit:150, vq:"", vstat:"", vlimit:150, dLieu:"Paris", dMode:"semaine", dSem:0, kmode:"synthese", kent:"", kq:"", ksens:"", kyr:"", kano:false, agPast:false, agMode:"liste", agRef:null, wa:{titre:"",msg:"",brief:"",cercle:"",cat:"",tag:"",src:"",opt:false,exp:"",wlimit:150}, ig:{mode:"semaine",ref:null,statut:"",type:""} },
+  imp:null, dup:null, busy:null, dispo:{loaded:false,err:null,regles:[],exceptions:[]}, compta:{loaded:false,err:null,entites:[],factures:[],echeances:[],tva:[],transactions:[]} };
 let DB=null, USER=null, ME=null, ROOM=null, MCP=null, DL=null, SAMPLE=null, ASSETS=null;
 
 /* ---------- Outils ---------- */
@@ -432,6 +448,65 @@ let toastT; function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidde
 /* ---------- Données : une fiche par ligne (Supabase) ---------- */
 const SB_URL="https://imgpydatjmsxurjwpqpt.supabase.co", SB_KEY="sb_publishable_vabaOqZ5rWlS6lD7VbVwjQ_fgGehk6a";
 const SB=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+/* ---------- Disponibilités : semaine type par lieu + exceptions datées (tables creneaux_*) ---------- */
+let dispoLoading=false;
+async function loadDispo(){ if(dispoLoading) return; dispoLoading=true; const D=S.dispo;
+  try{ const [r1,r2]=await Promise.all([SB.from("creneaux_regles").select("*"),SB.from("creneaux_exceptions").select("*").gte("date",addDays(today(),-1))]);
+    if(r1.error) throw r1.error; if(r2.error) throw r2.error; Object.assign(D,{regles:r1.data||[],exceptions:r2.data||[],loaded:true,err:null}); }
+  catch(e){ D.err=e.message||String(e); }
+  dispoLoading=false; schedule(); }
+const DISPO_H=[8,9,10,11,12,13,14,15,16,17,18,19];
+function dispoRdvAt(lieu,d,h){ return S.rdv.find(r=>{ if(r.date!==d||!/^\d{1,2}:/.test(r.heure||"")) return false; if(["Annulé","Refusé"].includes(r.statut)) return false; if(r.site_lieu&&r.site_lieu!==lieu) return false;
+  const h0=Number(r.heure.split(":")[0]); const m=String(r.duree||"").match(/(\d+)\s*h/); const dur=Math.max(1,m?Number(m[1]):1); return h>=h0&&h<h0+dur; }); }
+async function dispoToggleRegle(lieu,jour,h){ if(S.readOnly) return; const D=S.dispo; const has=D.regles.find(r=>r.lieu===lieu&&r.jour===jour&&r.heure===h);
+  const q=has?SB.from("creneaux_regles").delete().eq("lieu",lieu).eq("jour",jour).eq("heure",h):SB.from("creneaux_regles").insert({lieu,jour,heure:h});
+  const {error}=await q; if(error){ toast("Enregistrement impossible : "+error.message); return; }
+  if(has) D.regles=D.regles.filter(r=>r!==has); else D.regles.push({lieu,jour,heure:h}); schedule(); }
+async function dispoToggleJour(lieu,d,h){ if(S.readOnly) return; const D=S.dispo; const jour=parseISO(d).getDay();
+  const ex=D.exceptions.find(e=>e.lieu===lieu&&e.date===d&&e.heure===h); const regle=D.regles.some(r=>r.lieu===lieu&&r.jour===jour&&r.heure===h);
+  let error;
+  if(ex){ ({error}=await SB.from("creneaux_exceptions").delete().eq("lieu",lieu).eq("date",d).eq("heure",h)); if(!error) D.exceptions=D.exceptions.filter(e=>e!==ex); }
+  else { const row={lieu,date:d,heure:h,ouvert:!regle,par:myRole()||null}; ({error}=await SB.from("creneaux_exceptions").insert(row)); if(!error) D.exceptions.push(row); }
+  if(error){ toast("Enregistrement impossible : "+error.message); return; } schedule(); }
+function dispoView(){ const D=S.dispo; const f=S.f; const t=today();
+  if(SAMPLE) return h("section",{class:"panel"},h("p",{class:"empty"},"Les disponibilités ne sont pas disponibles en démonstration."));
+  if(!D.loaded){ if(!D.err) loadDispo(); return h("section",{class:"panel"},h("p",{class:"empty"},D.err?"Chargement impossible : "+D.err:"Chargement des disponibilités…")); }
+  const lieu=f.dLieu, mode=f.dMode;
+  const lieux=h("div",{class:"tabs",role:"tablist","aria-label":"Lieu"},["Paris","Bretagne"].map(l=>h("button",{type:"button",role:"tab",class:"tab","aria-selected":lieu===l?"true":"false",onclick:()=>{ f.dLieu=l; schedule(); }},l)));
+  const modes=h("div",{class:"tabs",role:"tablist","aria-label":"Affichage"},[["semaine","Semaines à venir"],["type","Semaine type"]].map(([k,l])=>h("button",{type:"button",role:"tab",class:"tab","aria-selected":mode===k?"true":"false",onclick:()=>{ f.dMode=k; schedule(); }},l)));
+  const JN=["dim.","lun.","mar.","mer.","jeu.","ven.","sam."];
+  let grid, nav="", aide;
+  if(mode==="type"){
+    const jours=[1,2,3,4,5,6,0];
+    grid=h("div",{class:"dgrid"},h("span",{}),jours.map(j=>h("div",{class:"dh"},JN[j])),
+      DISPO_H.map(hh=>[h("div",{class:"hh"},hh+" h"),jours.map(j=>{ const on=D.regles.some(r=>r.lieu===lieu&&r.jour===j&&r.heure===hh);
+        return h("button",{type:"button",class:"dcell "+(on?"libre":"ferme"),disabled:S.readOnly,"aria-pressed":on?"true":"false","aria-label":JN[j]+" "+hh+" h, "+(on?"ouvert":"fermé"),onclick:()=>dispoToggleRegle(lieu,j,hh)},on?"ouvert":""); })]));
+    aide="Semaine type de "+lieu+" : chaque case verte est ouverte toutes les semaines. Un clic ouvre ou ferme l'heure.";
+  } else {
+    const ws=addDays(weekStart(t),7*f.dSem); const days=[...Array(7)].map((_,i)=>addDays(ws,i));
+    nav=h("div",{class:"toolbar"},h("button",{type:"button",class:"icon-btn","aria-label":"Semaine précédente",disabled:f.dSem<=0,onclick:()=>{ f.dSem=Math.max(0,f.dSem-1); schedule(); }},"‹"),
+      h("b",{style:"font-size:16px;min-width:220px;text-align:center"},"Semaine du "+fmtDate(ws,{day:"numeric",month:"long",year:"numeric"})),
+      h("button",{type:"button",class:"icon-btn","aria-label":"Semaine suivante",disabled:f.dSem>=12,onclick:()=>{ f.dSem=Math.min(12,f.dSem+1); schedule(); }},"›"));
+    const limite=new Date(Date.now()+24*3600e3);
+    grid=h("div",{class:"dgrid"},h("span",{}),days.map(d=>h("div",{class:"dh"+(d===t?" today":"")},fmtDate(d,{weekday:"short"}),h("b",{},String(parseISO(d).getDate())))),
+      DISPO_H.map(hh=>[h("div",{class:"hh"},hh+" h"),days.map(d=>{
+        const rdv=dispoRdvAt(lieu,d,hh);
+        if(rdv) return h("button",{type:"button",class:"dcell "+(rdv.statut==="Demandé"?"demande":"pris"),title:(rdv.contact_nom||rdv.demandeur_nom||"Rendez-vous")+" · "+rdv.statut,onclick:()=>openRdv(rdv)},rdv.contact_nom||rdv.demandeur_nom||rdv.statut);
+        const dt=parseISO(d); dt.setHours(hh); const passe=dt<limite;
+        const ex=S.dispo.exceptions.find(e=>e.lieu===lieu&&e.date===d&&e.heure===hh); const regle=S.dispo.regles.some(r=>r.lieu===lieu&&r.jour===dt.getDay()&&r.heure===hh);
+        const on=ex?ex.ouvert:regle;
+        if(passe) return h("span",{class:"dcell passe"+(on?" etait":"")});
+        return h("button",{type:"button",class:"dcell "+(on?"libre":"ferme")+(ex?" ex":""),disabled:S.readOnly,"aria-pressed":on?"true":"false","aria-label":fmtDate(d)+" "+hh+" h, "+(on?"disponible":"indisponible"),title:ex?(ex.ouvert?"Ouverture ponctuelle":"Fermeture ponctuelle"):"",onclick:()=>dispoToggleJour(lieu,d,hh)},on?"libre":""); })]));
+    aide="Vert : proposé aux clients sur le site. Rouge : indisponible. Orange : demande reçue du site, à valider. Gris foncé : rendez-vous du registre. Un clic sur une case verte ou rouge la bascule pour ce jour seulement (point = exception).";
+  }
+  const nb=D.regles.filter(r=>r.lieu===lieu).length;
+  return h("div",{style:"display:flex;flex-direction:column;gap:14px"},
+    h("div",{class:"toolbar"},lieux,modes,h("button",{type:"button",class:"btn small ghost",onclick:()=>{ D.loaded=false; D.err=null; schedule(); }},"Actualiser")),
+    nav,
+    h("section",{class:"panel"},h("div",{class:"scrollx"},grid),
+      h("div",{class:"legend"},h("span",{},h("i",{style:"background:var(--ok)"}),"Disponible"),h("span",{},h("i",{style:"background:var(--bad)"}),"Indisponible"),mode==="semaine"?[h("span",{},h("i",{style:"background:var(--warn)"}),"Demandé"),h("span",{},h("i",{style:"background:var(--ink)"}),"Rendez-vous")]:""),
+      h("p",{class:"hint"},aide+" Rendez-vous d'une heure ; 24 h de préavis sur le site. Semaine type "+lieu+" : "+nb+" heure"+(nb>1?"s":"")+" ouverte"+(nb>1?"s":"")+".")));
+}
 /* ---------- Comptabilité : tables entites, factures, echeances, transactions ---------- */
 let comptaLoading=false;
 async function loadCompta(){ if(comptaLoading) return; comptaLoading=true; const C=S.compta;
@@ -879,11 +954,12 @@ accueil(){ const t=today(); const role=myRole(); const name=role==="thomas"?"Tho
     h("div",{class:"stats"},stat(contacts().length.toLocaleString("fr-FR"),"contacts"),stat(S.items.filter(i=>i.statut==="Disponible").length,"pièces disponibles"),stat(S.rdv.filter(r=>r.date>=t&&r.statut!=="Annulé").length,"rendez-vous à venir"),stat(eur(facture),"facturé en "+yr))); },
 
 agenda(){ const t=today(); const mode=S.f.agMode; const ref=S.f.agRef||t;
-  const tabs=h("div",{class:"tabs",role:"tablist","aria-label":"Affichage de l'agenda"},[["liste","Liste"],["semaine","Semaine"],["mois","Mois"]].map(([k,l])=>h("button",{type:"button",role:"tab",id:"ag-tab-"+k,class:"tab","aria-selected":mode===k?"true":"false",onclick:()=>{ S.f.agMode=k; setupCalendars(); schedule(); }},l)));
+  const tabs=h("div",{class:"tabs",role:"tablist","aria-label":"Affichage de l'agenda"},[["liste","Liste"],["semaine","Semaine"],["mois","Mois"],["dispos","Disponibilités"]].map(([k,l])=>h("button",{type:"button",role:"tab",id:"ag-tab-"+k,class:"tab","aria-selected":mode===k?"true":"false",onclick:()=>{ S.f.agMode=k; setupCalendars(); schedule(); }},l)));
   const links=h("div",{class:"toolbar"},calList().map(([slot,id])=>h("a",{class:"btn small",href:calLink(id),target:"_blank",rel:"noopener"},"Google Agenda · "+calLabel(slot))));
   const legend=h("div",{class:"legend"},h("span",{},h("i",{style:"background:var(--sea)"}),"Registre"),h("span",{},h("i",{style:"background:var(--c-thomas)"}),"Agenda de Thomas"),h("span",{},h("i",{style:"background:var(--c-valentine)"}),"Agenda de Valentine"),h("span",{},h("i",{style:"background:var(--ok)"}),"Tâches"),h("span",{},h("i",{style:"background:var(--c-ig)"}),"Instagram"),h("span",{},h("i",{style:"background:var(--warn)"}),"Expositions, newsletters, suites"));
   let body;
-  if(mode==="semaine"){ const ws=weekStart(ref); const days=[...Array(7)].map((_,i)=>addDays(ws,i));
+  if(mode==="dispos"){ body=[dispoView()]; }
+  else if(mode==="semaine"){ const ws=weekStart(ref); const days=[...Array(7)].map((_,i)=>addDays(ws,i));
     const nav=navBar(fmtDate(ws,{day:"numeric",month:"long"})+" – "+fmtDate(days[6],{day:"numeric",month:"long",year:"numeric"}),()=>shiftRef(-7),()=>shiftRef(7));
     body=[nav,h("div",{class:"scrollx"},h("div",{class:"week"},days.map(d=>{ const es=dayEntries(d); return h("div",{class:"daycol"+(d===t?" today":"")},h("div",{class:"dh"},h("b",{},String(parseISO(d).getDate())),h("span",{},fmtDate(d,{weekday:"long"}))),es.map(evBtn),S.readOnly?"":h("div",{class:"add-pair"},h("button",{type:"button",class:"add",onclick:()=>openRdv({date:d})},"+ rendez-vous"),h("button",{type:"button",class:"add",onclick:()=>openTache({date:d})},"+ tâche"))); })))]; }
   else if(mode==="mois"){ const d0=ref.slice(0,8)+"01"; const gs=weekStart(d0); const mon=d0.slice(0,7); const cells=[...Array(42)].map((_,i)=>addDays(gs,i)); const weeks=cells[35].slice(0,7)===mon?42:35;

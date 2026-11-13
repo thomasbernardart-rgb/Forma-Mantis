@@ -382,9 +382,9 @@ const STATUTS_VENTE = ["Devis","Accepté","Facturée","Payée","Annulée"];
 const STATUTS_ITEM = ["Disponible","Réservée","Vendue","En dépôt","Prêtée"];
 const CAT_ITEM = ["Œuvre","Pièce de mode","Édition","Objet","Mobilier","Autre"];
 const CHIP = {"Demandé":"warn","Confirmé":"sea","Honoré":"ok","Annulé":"off","Devis":"off","Accepté":"sea","Facturée":"warn","Payée":"ok","Annulée":"off","Disponible":"ok","Réservée":"warn","Vendue":"off","En dépôt":"sea","Prêtée":"sea","Brouillon":"off","Programmée":"warn","Envoyée":"ok","Idée":"off","Prêt":"sea","Programmé":"warn","Publié":"ok"};
-const VIEWS_LIST = [["accueil","Aujourd'hui"],["agenda","Agenda"],["contacts","Contacts"],["inventaire","Œuvres et pièces"],["ventes","Ventes"],["expos","Expositions"],["site","Site"],["catalogues","Catalogues"],["cercles","Cercles"],["newsletters","Newsletters"],["whatsapp","WhatsApp"],["instagram","Instagram"],["sauvegarde","Import et sauvegarde"],["reglages","Réglages"]];
-const MAIN_VIEWS = ["accueil","agenda","contacts","inventaire","ventes"];
-const DOORS = [["agenda","Agenda","Rendez-vous et tâches"],["contacts","Contacts","Annuaire, relances"],["inventaire","Œuvres","Inventaire, fiches, QR"],["ventes","Ventes","Devis et factures"]];
+const VIEWS_LIST = [["accueil","Aujourd'hui"],["agenda","Agenda"],["contacts","Contacts"],["inventaire","Œuvres et pièces"],["ventes","Ventes"],["compta","Comptabilité"],["expos","Expositions"],["site","Site"],["catalogues","Catalogues"],["cercles","Cercles"],["newsletters","Newsletters"],["whatsapp","WhatsApp"],["instagram","Instagram"],["sauvegarde","Import et sauvegarde"],["reglages","Réglages"]];
+const MAIN_VIEWS = ["accueil","agenda","contacts","inventaire","ventes","compta"];
+const DOORS = [["agenda","Agenda","Rendez-vous et tâches"],["contacts","Contacts","Annuaire, relances"],["inventaire","Œuvres","Inventaire, fiches, QR"],["ventes","Ventes","Devis et factures"],["compta","Comptabilité","Factures, TVA, échéances"]];
 const TYPES_TACHE = ["Régie","Réunion équipe","Chantier","Accrochage","Transport, logistique","Rangement","Administratif","Production","Autre"];
 const STATUTS_TACHE = ["À faire","En cours","Fait"];
 const PAGES_SITE = ["Projets","Éditions","Intra-muros","Extra-muros"];
@@ -395,8 +395,8 @@ const MVT_STATUT = {"Dépôt (confiée)":"En dépôt","Prêt":"Prêtée","Exposi
 const S = { view:"accueil", taches:[], mouvements:[], projets:[], pages:[], catalogues:[],
   rdv:[], expos:[], newsletters:[], cercles:[], diffusions:[], waOpen:null, publications:[], reglages:{}, comptes:{},
   gcal:{}, gcalState:{}, peers:[], ready:false, dbFailed:false, readOnly:false, session:null,
-  f:{ cq:"", ccat:"", ccercle:"", csrc:"", crel:false, climit:100, iq:"", istat:"", icat:"", iart:"", ilimit:150, vq:"", vstat:"", vlimit:150, agPast:false, agMode:"liste", agRef:null, wa:{titre:"",msg:"",brief:"",cercle:"",cat:"",tag:"",src:"",opt:false,exp:"",wlimit:150}, ig:{mode:"semaine",ref:null,statut:"",type:""} },
-  imp:null, dup:null, busy:null };
+  f:{ cq:"", ccat:"", ccercle:"", csrc:"", crel:false, climit:100, iq:"", istat:"", icat:"", iart:"", ilimit:150, vq:"", vstat:"", vlimit:150, kmode:"synthese", kent:"", kq:"", ksens:"", kyr:"", kano:false, agPast:false, agMode:"liste", agRef:null, wa:{titre:"",msg:"",brief:"",cercle:"",cat:"",tag:"",src:"",opt:false,exp:"",wlimit:150}, ig:{mode:"semaine",ref:null,statut:"",type:""} },
+  imp:null, dup:null, busy:null, compta:{loaded:false,err:null,entites:[],factures:[],echeances:[],tva:[],transactions:[]} };
 let DB=null, USER=null, ME=null, ROOM=null, MCP=null, DL=null, SAMPLE=null, ASSETS=null;
 
 /* ---------- Outils ---------- */
@@ -432,6 +432,14 @@ let toastT; function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidde
 /* ---------- Données : une fiche par ligne (Supabase) ---------- */
 const SB_URL="https://imgpydatjmsxurjwpqpt.supabase.co", SB_KEY="sb_publishable_vabaOqZ5rWlS6lD7VbVwjQ_fgGehk6a";
 const SB=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+/* ---------- Comptabilité : tables entites, factures, echeances, transactions ---------- */
+let comptaLoading=false;
+async function loadCompta(){ if(comptaLoading) return; comptaLoading=true; const C=S.compta;
+  try{ const q=async(t,col,asc)=>{ const {data,error}=await SB.from(t).select("*").order(col,{ascending:asc}).limit(5000); if(error) throw error; return data||[]; };
+    const [entites,factures,echeances,tva,transactions]=await Promise.all([q("entites","code",true),q("factures","date_facture",false),q("echeances","date_limite",true),q("tva_par_mois","mois",false),q("transactions","date_operation",false)]);
+    Object.assign(C,{entites,factures,echeances,tva,transactions,loaded:true,err:null}); }
+  catch(e){ C.err=e.message||String(e); }
+  comptaLoading=false; schedule(); }
 const STORES={contacts:{rub:"contacts",p:"c"},items:{rub:"items",p:"o"},ventes:{rub:"ventes",p:"f"}};
 const LISTS=["rdv","expos","newsletters","cercles","diffusions","publications","taches","mouvements","projets","pages","catalogues"];
 S.st={}; for(const k in STORES) S.st[k]={map:new Map(),dirty:true,arr:[]};
@@ -943,6 +951,76 @@ ventes(){ const f=S.f; const n=norm(f.vq); const yr=String(new Date().getFullYea
       h("tbody",{},rows.slice(0,f.vlimit).map(v=>h("tr",{onclick:()=>openVente(v),tabindex:"0",onkeydown:e=>{if(e.key==="Enter") openVente(v);}},h("td",{class:"mono"},v.numero||"devis",v.nature==="Avoir"?h("span",{class:"sub"},"avoir"):""),h("td",{},fmtShort(v.date)),h("td",{},v.contact_nom||""),h("td",{},(v.lignes||[]).map(l=>l.designation).filter(Boolean).join(", ")),h("td",{class:"num"},eur(v.montant_ttc)),h("td",{class:v.statut==="Facturée"&&v.echeance&&v.echeance<today()?"late":""},v.echeance?fmtShort(v.echeance):""),h("td",{},chip(v.statut))))))):
     h("section",{class:"panel"},h("p",{class:"empty"},S.ventes.length?"Aucune vente ne correspond aux filtres.":"Aucune vente enregistrée. Un devis se transforme en facture numérotée en un clic, et la pièce liée passe en vendue.")),
     rows.length>f.vlimit?h("button",{type:"button",class:"btn more",onclick:()=>{f.vlimit+=300;schedule();}},"Afficher 300 de plus ("+(rows.length-f.vlimit)+" restantes)"):""); },
+
+compta(){ const C=S.compta; const f=S.f; const t=today(); const yr=String(new Date().getFullYear());
+  if(SAMPLE) return h("div",{class:"view"},headBlock("Comptabilité","Comptabilité"),h("section",{class:"panel"},h("p",{class:"empty"},"La comptabilité n'est pas disponible en démonstration.")));
+  if(!C.loaded){ if(!C.err) loadCompta(); return h("div",{class:"view"},headBlock("Comptabilité","Comptabilité"),h("section",{class:"panel"},h("p",{class:"empty"},C.err?"Chargement impossible : "+C.err:"Chargement des comptes…"))); }
+  const ENT={VGD:"VGD",HELIO:"Héliotrope"}; const entName=c=>ENT[c]||c;
+  const inEnt=r=>!f.kent||r.entite===f.kent;
+  const tabs=h("div",{class:"tabs",role:"tablist","aria-label":"Volets de la comptabilité"},[["synthese","Synthèse"],["factures","Factures"],["echeances","Échéances"],["tva","TVA"],["banque","Banque"]].map(([k,l])=>h("button",{type:"button",role:"tab",class:"tab","aria-selected":f.kmode===k?"true":"false",onclick:()=>{ f.kmode=k; schedule(); }},l)));
+  const entSel=h("select",{"aria-label":"Société",style:"max-width:260px",value:f.kent,onchange:e=>{ f.kent=e.target.value; schedule(); }},h("option",{value:""},"Toutes les sociétés"),C.entites.filter(x=>x.actif).map(x=>h("option",{value:x.code},entName(x.code))));
+  const fac=C.factures.filter(inEnt); const ech=C.echeances.filter(r=>!r.entite||inEnt(r));
+  const vivantes=fac.filter(r=>r.statut!=="annulee");
+  const caYr=vivantes.filter(r=>r.sens==="emise"&&(r.date_facture||"").startsWith(yr)).reduce((s,r)=>s+Number(r.ht||0),0);
+  const tvaYr=vivantes.filter(r=>r.sens==="emise"&&(r.date_facture||"").startsWith(yr)).reduce((s,r)=>s+Number(r.tva||0),0);
+  const aEnc=vivantes.filter(r=>r.sens==="emise"&&["envoyee","deposee","recue","approuvee","partiellement_payee"].includes(r.statut)).reduce((s,r)=>s+Number(r.ttc||0),0);
+  const prochaines=ech.filter(r=>r.statut==="a_faire").sort((a,b)=>a.date_limite.localeCompare(b.date_limite));
+  const enRetard=prochaines.filter(r=>r.date_limite<t);
+  const anomalies=fac.filter(r=>r.anomalie);
+  const head=headBlock("Comptabilité",f.kent?entName(f.kent):"VGD et Héliotrope",[entSel,h("button",{type:"button",class:"btn small ghost",onclick:()=>{ C.loaded=false; C.err=null; schedule(); }},"Actualiser")]);
+  const stats=h("div",{class:"stats"},stat(eur(caYr),"facturé HT en "+yr),stat(eur(tvaYr),"TVA collectée en "+yr),stat(eur(aEnc),"à encaisser"),stat(prochaines[0]?fmtShort(prochaines[0].date_limite):"—","prochaine échéance"),stat(String(anomalies.length),"anomalies à corriger"));
+  const STAT={archive:["Archive","off"],brouillon:["Brouillon","off"],envoyee:["Envoyée","sea"],deposee:["Déposée","sea"],recue:["Reçue","sea"],approuvee:["Approuvée","sea"],payee:["Payée","ok"],partiellement_payee:["Partiellement payée","warn"],rejetee:["Rejetée","bad"],annulee:["Annulée","off"]};
+  const st=s=>{ const [l,c]=STAT[s]||[s,"off"]; return h("span",{class:"chip chip-"+c},l); };
+  const REG={normal:"TVA normale",export:"Export, exonéré",hors_champ_259_1:"Hors champ (art. 259-1 CGI)",marge:"Régime de la marge",autoliquidation:"Autoliquidation"};
+  const openFacture=r=>openDrawer((r.sens==="emise"?"Facture ":"Facture reçue ")+(r.numero||""),[
+    h("dl",{class:"spec"},[["Société",entName(r.entite)],["Date",fmtShort(r.date_facture)],["Échéance",r.date_echeance?fmtShort(r.date_echeance):""],[r.sens==="emise"?"Client":"Fournisseur",r.tiers_nom],["N° TVA",r.tiers_tva],["Pays",r.tiers_pays],["Objet",r.objet],["Nature",r.nature],["Régime TVA",REG[r.regime_tva]||r.regime_tva],["HT",eur(r.ht)],["TVA",eur(r.tva)],["TTC",eur(r.ttc)],["Statut",(STAT[r.statut]||[r.statut])[0]],["Source",r.source==="serveur"?"Serveur (archive)":r.source==="qonto"?"Qonto":"Registre"],["Fichier d'origine",r.fichier]].filter(([,v])=>v!=null&&v!=="").map(([l,v])=>[h("dt",{},l),h("dd",{},String(v))])),
+    r.anomalie?h("p",{class:"banner"},h("b",{},"À corriger. "),r.anomalie):"",
+    r.archive?h("p",{class:"hint"},"Facture archivée : montants, numéro et date figés."):""]);
+  const facTable=rows=>rows.length?h("div",{class:"tablewrap"},h("table",{},h("thead",{},h("tr",{},h("th",{},"Numéro"),h("th",{},"Date"),h("th",{},"Société"),h("th",{},"Tiers"),h("th",{},"Objet"),h("th",{class:"num"},"HT"),h("th",{class:"num"},"TVA"),h("th",{class:"num"},"TTC"),h("th",{},"Statut"))),
+    h("tbody",{},rows.map(r=>h("tr",{onclick:()=>openFacture(r),tabindex:"0",onkeydown:e=>{ if(e.key==="Enter") openFacture(r); }},h("td",{class:"mono"},r.numero||"—",r.anomalie?h("span",{class:"sub",style:"color:var(--bad)"},"à corriger"):""),h("td",{},fmtShort(r.date_facture)),h("td",{},entName(r.entite)),h("td",{},r.tiers_nom||""),h("td",{},r.objet||""),h("td",{class:"num"},eur(r.ht)),h("td",{class:"num"},eur(r.tva)),h("td",{class:"num"},eur(r.ttc)),h("td",{},st(r.statut))))))):h("section",{class:"panel"},h("p",{class:"empty"},"Aucune facture ne correspond."));
+  const toggleEch=async r=>{ if(S.readOnly) return; const nv=r.statut==="fait"?"a_faire":"fait"; const {error}=await SB.from("echeances").update({statut:nv}).eq("id",r.id); if(error){ toast("Enregistrement impossible : "+error.message); return; } r.statut=nv; toast(nv==="fait"?"Échéance cochée.":"Échéance rouverte."); schedule(); };
+  const echRow=r=>h("li",{class:"entry"},h("span",{class:"time"+(r.statut==="a_faire"&&r.date_limite<t?" late":"")},fmtDate(r.date_limite,{day:"numeric",month:"short"})),
+    h("div",{class:"what"},h("b",{},r.intitule),h("span",{class:"sub",style:"display:block"},[r.entite?entName(r.entite):"Les deux sociétés",r.note].filter(Boolean).join(" · "))),
+    h("div",{class:"chips"},r.a_confirmer?h("span",{class:"chip chip-warn"},"à confirmer"):"",h("label",{class:"check"},h("input",{type:"checkbox",checked:r.statut==="fait",disabled:S.readOnly,onchange:()=>toggleEch(r)}),"fait")));
+  let body;
+  if(f.kmode==="factures"){
+    const n=norm(f.kq); const years=uniq(fac.map(r=>(r.date_facture||"").slice(0,4)).filter(Boolean)).sort().reverse();
+    const rows=fac.filter(r=>(!f.ksens||r.sens===f.ksens)&&(!f.kyr||(r.date_facture||"").startsWith(f.kyr))&&(!f.kano||r.anomalie)&&(!n||norm([r.numero,r.tiers_nom,r.objet].join(" ")).includes(n))).sort((a,b)=>(b.date_facture||"").localeCompare(a.date_facture||"")||(b.numero||"").localeCompare(a.numero||""));
+    const tot=k=>rows.filter(r=>r.statut!=="annulee").reduce((s,r)=>s+Number(r[k]||0),0);
+    body=[h("div",{class:"filters"},h("input",{type:"search",placeholder:"Numéro, client, objet…",value:f.kq,"aria-label":"Rechercher une facture",oninput:e=>{ f.kq=e.target.value; schedule(); }}),
+      h("select",{"aria-label":"Sens",value:f.ksens,onchange:e=>{ f.ksens=e.target.value; schedule(); }},h("option",{value:""},"Émises et reçues"),h("option",{value:"emise"},"Émises"),h("option",{value:"recue"},"Reçues")),
+      h("select",{"aria-label":"Année",value:f.kyr,onchange:e=>{ f.kyr=e.target.value; schedule(); }},h("option",{value:""},"Toutes années"),years.map(y=>h("option",{value:y},y))),
+      h("label",{class:"check"},h("input",{type:"checkbox",checked:f.kano,onchange:e=>{ f.kano=e.target.checked; schedule(); }}),"À corriger seulement")),
+      h("p",{class:"hint"},rows.length+" factures · HT "+eur(tot("ht"))+" · TVA "+eur(tot("tva"))+" · TTC "+eur(tot("ttc"))),
+      facTable(rows)]; }
+  else if(f.kmode==="echeances"){
+    const ouvertes=prochaines.filter(r=>r.date_limite<=addDays(t,400)); const faites=ech.filter(r=>r.statut==="fait").sort((a,b)=>b.date_limite.localeCompare(a.date_limite));
+    const mois=uniq(ouvertes.map(r=>r.date_limite.slice(0,7)));
+    body=[enRetard.length?h("p",{class:"banner"},enRetard.length+" échéance"+(enRetard.length>1?"s":"")+" dépassée"+(enRetard.length>1?"s":"")+"."):"",
+      mois.length?mois.map(m=>h("section",{class:"panel"},h("h3",{},fmtDate(m+"-01",{month:"long",year:"numeric"})),h("ul",{class:"list"},ouvertes.filter(r=>r.date_limite.startsWith(m)).map(echRow)))):h("section",{class:"panel"},h("p",{class:"empty"},"Aucune échéance ouverte.")),
+      faites.length?h("section",{class:"panel"},h("h3",{},"Faites"),h("ul",{class:"list"},faites.slice(0,40).map(echRow))):"",
+      h("p",{class:"hint"},"Dates indicatives, à confirmer par CBE Expertise. Les dates exactes de TVA dépendent du service des impôts.")]; }
+  else if(f.kmode==="tva"){
+    const rows=C.tva.filter(inEnt).sort((a,b)=>b.mois.localeCompare(a.mois)||a.entite.localeCompare(b.entite));
+    body=[h("p",{class:"banner"},"État préparatoire, calculé sur la date des factures. Héliotrope paie la TVA à l'encaissement : les montants exacts viendront avec les paiements Qonto. La déclaration reste faite par CBE ou sur impots.gouv."),
+      rows.length?h("div",{class:"tablewrap"},h("table",{},h("thead",{},h("tr",{},h("th",{},"Mois"),h("th",{},"Société"),h("th",{class:"num"},"Ventes HT"),h("th",{class:"num"},"TVA collectée"),h("th",{class:"num"},"Achats HT"),h("th",{class:"num"},"TVA déductible"),h("th",{class:"num"},"Solde"))),
+        h("tbody",{},rows.map(r=>h("tr",{},h("td",{},fmtDate(r.mois,{month:"long",year:"numeric"})),h("td",{},entName(r.entite)),h("td",{class:"num"},eur(r.ventes_ht)),h("td",{class:"num"},eur(r.tva_collectee)),h("td",{class:"num"},eur(r.achats_ht)),h("td",{class:"num"},eur(r.tva_deductible)),h("td",{class:"num"},eur(r.solde))))))):h("section",{class:"panel"},h("p",{class:"empty"},"Aucune donnée."))]; }
+  else if(f.kmode==="banque"){
+    const tr=C.transactions.filter(inEnt).sort((a,b)=>(b.date_operation||"").localeCompare(a.date_operation||""));
+    body=[tr.length?h("div",{class:"tablewrap"},h("table",{},h("thead",{},h("tr",{},h("th",{},"Date"),h("th",{},"Société"),h("th",{},"Libellé"),h("th",{class:"num"},"Montant"),h("th",{},"Rapprochement"))),
+        h("tbody",{},tr.map(r=>h("tr",{},h("td",{},fmtShort((r.date_operation||"").slice(0,10))),h("td",{},entName(r.entite)),h("td",{},r.libelle||r.contrepartie||""),h("td",{class:"num"},eur(r.montant)),h("td",{},r.rapprochement==="valide"?h("span",{class:"chip chip-ok"},"rapproché"):r.rapprochement==="sans_piece"?h("span",{class:"chip chip-bad"},"sans justificatif"):h("span",{class:"chip chip-warn"},"à rapprocher"))))))):
+      h("section",{class:"panel"},h("h3",{},"Comptes Qonto en cours d'ouverture"),
+        h("p",{style:"margin:0;max-width:68ch"},"Dès que les comptes VGD et Héliotrope sont ouverts, les opérations arrivent ici toutes les heures, avec le rapprochement facture par facture et la liste des dépenses sans justificatif."),
+        h("ol",{style:"margin:0;padding-left:20px;max-width:68ch;line-height:1.6"},h("li",{},"Dans Qonto : activer la réception des factures électroniques (obligatoire depuis le 1er septembre 2026)."),h("li",{},"Régler la numérotation : Héliotrope à partir de 0025, VGD à partir de FA24100021."),h("li",{},"Créer une clé API en lecture pour chaque société et la déposer dans Supabase (secrets QONTO_VGD et QONTO_HELIO)."))) ]; }
+  else {
+    body=[enRetard.length?h("p",{class:"banner"},enRetard.length+" échéance"+(enRetard.length>1?"s":"")+" dépassée"+(enRetard.length>1?"s":"")+". ",h("button",{type:"button",class:"link",onclick:()=>{ f.kmode="echeances"; schedule(); }},"Voir les échéances")):"",
+      h("div",{class:"grid2"},C.entites.filter(x=>x.actif&&inEnt(x)).map(x=>{ const fx=C.factures.filter(r=>r.entite===x.code); const nAno=fx.filter(r=>r.anomalie).length; const last=fx.filter(r=>r.sens==="emise").sort((a,b)=>(b.date_facture||"").localeCompare(a.date_facture||""))[0];
+        return h("section",{class:"panel"},h("h3",{},x.raison_sociale),
+          h("dl",{class:"spec"},[["Forme",x.forme+(x.capital?", capital "+eur(x.capital):"")],["SIREN",x.siren],["TVA",x.tva_intra],["Clôture",x.cloture_exercice],["Impôt sur les sociétés",x.regime_is],["TVA",x.regime_tva],["Exigibilité",x.tva_exigibilite],["Banque",x.banque_actuelle],["Expert-comptable",x.comptable+(x.ref_comptable?" (dossier "+x.ref_comptable+")":"")],["Dernière facture",last?last.numero+" du "+fmtShort(last.date_facture):"—"]].filter(([,v])=>v).map(([l,v])=>[h("dt",{},l),h("dd",{},String(v))])),
+          nAno?h("button",{type:"button",class:"btn small",onclick:()=>{ f.kmode="factures"; f.kent=x.code; f.kano=true; schedule(); }},nAno+" facture"+(nAno>1?"s":"")+" à corriger"):""); })),
+      h("section",{class:"panel"},h("h3",{},"Prochaines échéances"),prochaines.length?h("ul",{class:"list"},prochaines.slice(0,6).map(echRow)):h("p",{class:"empty"},"Rien à venir.")),
+      C.entites.some(x=>!x.actif&&x.code==="MSS")?h("p",{class:"hint"},"Maison Saint-Sauveur : future SCI, pas encore active. Les ventes passent par Héliotrope et VGD."):""]; }
+  return h("div",{class:"view"},head,h("div",{class:"scrollx"},tabs),stats,...body); },
 
 expos(){ const rows=S.expos.slice().sort((a,b)=>(b.debut||b.vernissage||"").localeCompare(a.debut||a.vernissage||""));
   return h("div",{class:"view"},headBlock("Expositions et présentations","Expositions",[h("button",{type:"button",class:"btn primary",onclick:()=>openForm("expos",null),disabled:S.readOnly},"Nouvelle exposition")]),

@@ -2440,21 +2440,26 @@ document.addEventListener('touchend', e => {
   }).catch(e => console.warn("registre", e));
 
   // Calendrier des créneaux : une heure, Paris et Bretagne séparés.
-  // Disponibilités d'exemple, en attendant la grille tenue dans le registre.
+  // Les créneaux libres viennent du registre (site_creneaux). Semaine type de secours si la base ne répond pas.
   const DISPOS = {
     Paris:    { 2: [10, 11, 12, 14, 15, 16, 17], 3: [10, 11, 12, 14, 15, 16, 17], 4: [10, 11, 12, 14, 15, 16, 17], 5: [14, 15, 16, 17] },
     Bretagne: { 5: [10, 11], 6: [10, 11, 12, 15, 16, 17], 0: [15, 16] }
   };
   const PRIS = {}; // créneaux déjà réservés, fournis plus tard par le registre : { "2026-11-18T15": true }
-  const HEURES = [10, 11, 12, 14, 15, 16, 17], SEMAINES = 6;
+  const SEMAINES = 6;
   const cal = document.getElementById("mss-cal");
   const calState = { lieu: "Paris", sem: 0, choix: null };
   const isoD = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
   const lundi = n => { const d = new Date(); d.setHours(0, 0, 0, 0); const k = (d.getDay() + 6) % 7; d.setDate(d.getDate() - k + 7 * n); return d; };
   const jours = n => { const l = lundi(n); return [0, 1, 2, 3, 4, 5, 6].map(i => { const d = new Date(l); d.setDate(l.getDate() + i); return d; }); };
-  const libre = (d, h) => { const t = new Date(d); t.setHours(h); if (t.getTime() < Date.now() + 24 * 3600e3) return false; const w = (DISPOS[calState.lieu] || {})[d.getDay()] || []; return w.includes(h) && !PRIS[isoD(d) + "T" + h]; };
+  const LIBRES = {}; // { Paris: Set("2026-11-18T10", …) } chargé depuis le registre
+  const libre = (d, h) => { const t = new Date(d); t.setHours(h); if (t.getTime() < Date.now() + 24 * 3600e3) return false;
+    const L = LIBRES[calState.lieu]; if (L) return L.has(isoD(d) + "T" + String(h).padStart(2, "0"));
+    const w = (DISPOS[calState.lieu] || {})[d.getDay()] || []; return w.includes(h) && !PRIS[isoD(d) + "T" + h]; };
+  const chargerCreneaux = lieu => call("site_creneaux", { p_lieu: lieu }).then(a => { if (Array.isArray(a)) { LIBRES[lieu] = new Set(a); } }).catch(e => console.warn("créneaux", e));
   const fmtJour = d => d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
-  const semVide = n => !jours(n).some(d => HEURES.some(h => libre(d, h)));
+  const heures = () => { const L = LIBRES[calState.lieu]; let hs = L && L.size ? [...L].map(k => Number(k.slice(11, 13))) : Object.values(DISPOS[calState.lieu] || {}).flat(); hs = [...new Set(hs)].sort((a, b) => a - b); return hs.length ? hs : [10, 11, 12, 14, 15, 16, 17]; };
+  const semVide = n => !jours(n).some(d => heures().some(h => libre(d, h)));
   const premiereSem = () => { let n = 0; while (n < SEMAINES - 1 && semVide(n)) n++; return n; };
   function drawCal() {
     if (!cal) return;
@@ -2463,7 +2468,7 @@ document.addEventListener('touchend', e => {
     let html = '<div class="mss-cal-lieux" role="group" aria-label="Lieu du rendez-vous">' + ["Paris", "Bretagne"].map(x => '<button type="button" data-lieu="' + x + '" aria-pressed="' + (calState.lieu === x) + '">' + x + '</button>').join("") + '</div>';
     html += '<div class="mss-cal-nav"><button type="button" data-sem="-1" aria-label="Semaine précédente"' + (calState.sem <= 0 ? " disabled" : "") + '>‹</button><span aria-live="polite">' + titre + '</span><button type="button" data-sem="1" aria-label="Semaine suivante"' + (calState.sem >= SEMAINES - 1 ? " disabled" : "") + '>›</button></div>';
     html += '<div class="mss-cal-grid" role="grid"><span></span>' + js.map(d => '<div class="mss-cal-dh">' + d.toLocaleDateString("fr-FR", { weekday: "short" }).replace(".", "") + '<b>' + d.getDate() + '</b></div>').join("");
-    HEURES.forEach(h => {
+    heures().forEach(h => {
       html += '<div class="mss-cal-h">' + h + ' h</div>';
       js.forEach(d => { const k = isoD(d) + "T" + h; const ok = libre(d, h); const sel = calState.choix && calState.choix.k === k && calState.choix.lieu === calState.lieu;
         const lab = fmtJour(d) + ", " + h + " h à " + (h + 1) + " h, " + (ok ? "disponible" : "indisponible");
@@ -2488,6 +2493,7 @@ document.addEventListener('touchend', e => {
       if (f && !f.disabled) f.focus();
     });
     calState.sem = premiereSem(); drawCal();
+    Promise.all([chargerCreneaux("Paris"), chargerCreneaux("Bretagne")]).then(() => { if (!calState.choix) calState.sem = premiereSem(); drawCal(); });
   }
 
   // Demande de rendez-vous
@@ -2501,7 +2507,8 @@ document.addEventListener('touchend', e => {
     btn.disabled = true; msg.textContent = "Envoi…";
     try {
       const r = await call("site_demande_rdv", { p: { nom: v.nom, email: v.email, tel: v.tel, type: v.type, date: v.date, heure: v.heure, lieu: v.lieu, message: "Créneau demandé : " + calState.choix.texte + (v.message ? "\n\n" + v.message : ""), site_web: v.site_web, consentement: "true", delai: String(Date.now() - ouvert) } });
-      if (r && r.ok) { form.reset(); calState.choix = null; drawCal(); msg.textContent = "Merci. Votre demande est bien arrivée ; nous revenons vers vous rapidement."; }
+      if (r && r.erreur === "pris") { const l = calState.lieu; calState.choix = null; await chargerCreneaux(l); drawCal(); msg.textContent = "Ce créneau vient d'être pris. Choisissez-en un autre dans le calendrier."; return; }
+      if (r && r.ok) { const l = calState.lieu; form.reset(); calState.choix = null; await chargerCreneaux(l); drawCal(); msg.textContent = "Merci. Votre demande est bien arrivée ; nous revenons vers vous rapidement."; }
       else msg.textContent = r && r.erreur === "trop" ? "Votre demande a déjà été reçue. Nous revenons vers vous." : r && r.erreur === "trop_rapide" ? "Un instant : relisez votre demande puis envoyez-la de nouveau." : "La demande n'a pas pu être envoyée. Vérifiez les champs, ou écrivez-nous par e-mail.";
     } catch (x) { msg.textContent = "Envoi impossible pour le moment. Écrivez-nous par e-mail."; }
     finally { btn.disabled = false; }

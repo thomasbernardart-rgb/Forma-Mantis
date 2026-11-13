@@ -1123,6 +1123,9 @@ header { width: 100%; }
 .mss-cal-choix { margin-top: 16px; font-family: var(--serif); font-size: 16px; line-height: 1.5; color: var(--black); min-height: 1.5em; }
 .mss-cal-choix em { color: var(--gray-text); }
 @media (max-width: 768px) {
+  .mss-rdv-grid { display: flex !important; flex-direction: column !important; }
+  .mss-rdv-grid > div { border-right: 0 !important; padding: 40px 20px !important; }
+  .mss-rdv-grid > .mss-rdv-cal { order: -1; border-bottom: 0.5px solid var(--gray-light); }
   .mss-cal-grid { grid-template-columns: 30px repeat(7, minmax(0, 1fr)); gap: 3px; }
   .mss-cal-slot { height: 32px; font-size: 0; }
   .mss-cal-dh { font-size: 9px; letter-spacing: 0.04em; }
@@ -1948,7 +1951,7 @@ header { width: 100%; }
     <p>Rencontres, visites d'exposition, présentations d'éditions — sur demande.</p>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
+  <div class="mss-rdv-grid" style="display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--gray-light);">
     <div style="padding:56px 48px;border-right:0.5px solid var(--gray-light);">
       <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Prendre contact</p>
       <p style="font-family:var(--serif);font-size:19px;line-height:1.75;color:var(--black);" data-i18n="rdv-p1">Forma Mantis reçoit sur rendez-vous — collectionneurs, institutions, artistes, partenaires.</p>
@@ -1963,7 +1966,7 @@ header { width: 100%; }
         <div class="form-field"><label for="rdv-email">E-mail</label><input id="rdv-email" name="email" type="email" autocomplete="email" required></div>
         <div class="form-field"><label for="rdv-tel">Téléphone (facultatif)</label><input id="rdv-tel" name="tel" type="tel" autocomplete="tel"></div>
         <div class="form-field"><label for="rdv-type">Objet</label><select id="rdv-type" name="type"><option>Visite d'exposition</option><option>Présentation des éditions</option><option>Visite atelier</option><option>Entretien presse</option><option>Autre</option></select></div>
-        <div class="form-field"><label id="mss-cal-label">Choisir un créneau</label><div id="mss-cal" class="mss-cal" aria-labelledby="mss-cal-label"></div><input type="hidden" id="rdv-date" name="date"><input type="hidden" id="rdv-heure" name="heure"><input type="hidden" id="rdv-lieu" name="lieu" value="Paris"></div>
+        <div><input type="hidden" id="rdv-date" name="date"><input type="hidden" id="rdv-heure" name="heure"><input type="hidden" id="rdv-lieu" name="lieu" value="Paris"></div>
         <div class="form-field"><label for="rdv-msg">Message</label><textarea id="rdv-msg" name="message"></textarea></div>
         <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Site web <input name="site_web" tabindex="-1" autocomplete="off"></label></div>
         <label style="display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.65;color:var(--gray-text);margin-bottom:24px;cursor:pointer;"><input type="checkbox" name="consentement" style="margin-top:3px;flex:none;"> J'accepte que Maison Saint-Sauveur utilise ces informations pour répondre à ma demande. Elles ne sont ni cédées ni utilisées à d'autres fins, et sont effacées sur simple demande.</label>
@@ -1971,44 +1974,9 @@ header { width: 100%; }
         <p id="mss-rdv-msg" role="status" aria-live="polite" style="font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--black);margin-top:18px;min-height:1.5em;"></p>
       </form>
     </div>
-    <div style="padding:56px 48px;display:flex;flex-direction:column;gap:32px;">
-      <div>
-        <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:16px;">Types de rendez-vous</p>
-        <div style="display:flex;flex-direction:column;gap:0;">
-          <div style="border-top:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
-            <div>
-              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Visite d'exposition</p>
-              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Présentation privée avec Thomas Bernard</p>
-            </div>
-            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Sur demande</span>
-          </div>
-          <div style="border-top:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
-            <div>
-              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Présentation des éditions</p>
-              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Découverte des tirages disponibles</p>
-            </div>
-            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Sur demande</span>
-          </div>
-          <div style="border-top:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
-            <div>
-              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Entretien presse</p>
-              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Valentine Gauthier & Thomas Bernard</p>
-            </div>
-            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Sur demande</span>
-          </div>
-          <div style="border-top:0.5px solid var(--gray-light);border-bottom:0.5px solid var(--gray-light);padding:16px 0;display:grid;grid-template-columns:1fr auto;align-items:center;">
-            <div>
-              <p style="font-family:var(--serif);font-size:15px;color:var(--black);">Dîner & rencontre réseau</p>
-              <p style="font-size:12px;color:var(--gray-text);margin-top:3px;">Sur invitation</p>
-            </div>
-            <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-text);">Invitation</span>
-          </div>
-        </div>
-      </div>
-      <div style="border-top:0.5px solid var(--gray-light);padding-top:24px;">
-        <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;">Localisation</p>
-        <p style="font-family:var(--serif);font-size:15px;color:var(--black);line-height:1.6;">Paris<br><span style="color:var(--gray-text);font-size:13px;">En galerie ou à l'atelier, selon les projets en cours</span></p>
-      </div>
+    <div class="mss-rdv-cal" style="padding:56px 48px;">
+      <p id="mss-cal-label" style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-text);margin-bottom:24px;">Choisir un créneau</p>
+      <div id="mss-cal" class="mss-cal" aria-labelledby="mss-cal-label"></div>
     </div>
   </div>
 
@@ -2488,6 +2456,8 @@ document.addEventListener('touchend', e => {
   const jours = n => { const l = lundi(n); return [0, 1, 2, 3, 4, 5, 6].map(i => { const d = new Date(l); d.setDate(l.getDate() + i); return d; }); };
   const libre = (d, h) => { const t = new Date(d); t.setHours(h); if (t.getTime() < Date.now() + 24 * 3600e3) return false; const w = (DISPOS[calState.lieu] || {})[d.getDay()] || []; return w.includes(h) && !PRIS[isoD(d) + "T" + h]; };
   const fmtJour = d => d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+  const semVide = n => !jours(n).some(d => HEURES.some(h => libre(d, h)));
+  const premiereSem = () => { let n = 0; while (n < SEMAINES - 1 && semVide(n)) n++; return n; };
   function drawCal() {
     if (!cal) return;
     const js = jours(calState.sem); const l = lundi(calState.sem); const fin = js[js.length - 1];
@@ -2503,13 +2473,13 @@ document.addEventListener('touchend', e => {
     });
     html += '</div><div class="mss-cal-legende"><span><i style="background:#e3ebdf;border:0.5px solid #8ea786"></i>Disponible</span><span><i style="background:repeating-linear-gradient(135deg,#f1e0da 0 3px,#ead2ca 3px 6px);border:0.5px solid #d9b3a7"></i>Indisponible</span><span><i style="background:var(--black)"></i>Votre choix</span></div>';
     const c = calState.choix;
-    html += '<p class="mss-cal-choix" aria-live="polite">' + (c ? "Votre créneau : " + c.texte + "." : "<em>Rendez-vous d'une heure. Choisissez un créneau vert.</em>") + '</p>';
+    html += '<p class="mss-cal-choix" aria-live="polite">' + (c ? "Votre créneau : " + c.texte + ".<br><em style=\"font-size:14px\">Complétez le formulaire pour envoyer la demande.</em>" : "<em>Rendez-vous d'une heure. Choisissez un créneau vert.</em>") + '</p>';
     cal.innerHTML = html;
   }
   if (cal) {
     cal.addEventListener("click", e => {
       const b = e.target.closest("button"); if (!b) return;
-      if (b.dataset.lieu) { calState.lieu = b.dataset.lieu; }
+      if (b.dataset.lieu) { calState.lieu = b.dataset.lieu; if (semVide(calState.sem)) calState.sem = premiereSem(); }
       else if (b.dataset.sem) { calState.sem = Math.max(0, Math.min(SEMAINES - 1, calState.sem + Number(b.dataset.sem))); }
       else if (b.dataset.k) { const [ds, hs] = b.dataset.k.split("T"); const h = Number(hs); const d = new Date(ds + "T00:00:00");
         if (calState.choix && calState.choix.k === b.dataset.k && calState.choix.lieu === calState.lieu) calState.choix = null;
@@ -2519,7 +2489,7 @@ document.addEventListener('touchend', e => {
       const f = b.dataset.k ? cal.querySelector('[data-k="' + b.dataset.k + '"]') : b.dataset.lieu ? cal.querySelector('[data-lieu="' + b.dataset.lieu + '"]') : cal.querySelector('[data-sem="' + b.dataset.sem + '"]');
       if (f && !f.disabled) f.focus();
     });
-    drawCal();
+    calState.sem = premiereSem(); drawCal();
   }
 
   // Demande de rendez-vous
@@ -2528,7 +2498,7 @@ document.addEventListener('touchend', e => {
   form.addEventListener("submit", async e => {
     e.preventDefault(); const v = Object.fromEntries(new FormData(form).entries()); const btn = form.querySelector("button[type=submit]");
     if (!v.nom || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email || "")) { msg.textContent = "Indiquez votre nom et une adresse e-mail valide."; return; }
-    if (!calState.choix) { msg.textContent = "Choisissez un créneau dans le calendrier."; return; }
+    if (!calState.choix) { msg.textContent = "Choisissez un créneau dans le calendrier, en haut de la page."; return; }
     if (!form.consentement.checked) { msg.textContent = "Cochez la case de consentement pour que nous puissions vous répondre."; return; }
     btn.disabled = true; msg.textContent = "Envoi…";
     try {

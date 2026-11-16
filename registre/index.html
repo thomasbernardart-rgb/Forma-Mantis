@@ -1419,7 +1419,7 @@ instagram(){ const t=today(); const g=S.f.ig; const ref=g.ref||t; const compte=S
 
 site(){ const pg=id=>S.pages.find(p=>p.id===id); const PG=[["projets","Projets"],["editions","Éditions"],["intramuros","Intra-muros"],["extramuros","Extra-muros"]];
   const pubI=S.items.filter(i=>i.publier), pubE=S.expos.filter(x=>x.publier), proj=S.projets.slice().sort((a,b)=>(num(a.ordre)??999)-(num(b.ordre)??999)||String(b.annee||"").localeCompare(String(a.annee||"")));
-  const siteUrl="https://thomasbernardart-rgb.github.io/Forma-Mantis/";
+  const siteUrl=new URL("../",location.href.split("#")[0]).href;
   return h("div",{class:"view"},headBlock("Site maisonsaintsauveur.fr","Site",[h("a",{class:"btn",href:siteUrl,target:"_blank",rel:"noopener"},"Voir le site"),h("button",{type:"button",class:"btn primary",disabled:S.readOnly,onclick:()=>openForm("projets",{section:"Projets",publier:1})},"Nouveau projet")]),
     h("p",{class:"muted",style:"margin:0;max-width:66ch"},"Ce qui est écrit ici, et toute fiche cochée « Publier sur le site » (œuvre, exposition, projet), apparaît sur le site en quelques secondes. Rien d'autre ne sort : ni prix d'achat, ni notes, ni contacts. Décocher retire la fiche du site."),
     h("section",{class:"panel"},h("h3",{},"Textes des pages"),h("div",{class:"cards"},PG.map(([id,l])=>{ const p=pg(id); const ex=p&&(p.chapo||p.texte); return h("button",{type:"button",class:"card",onclick:()=>openForm("pages",{...(p||{}),id,titre:(p&&p.titre)||l})},h("span",{class:"n"},l),h("span",{class:"d"},ex?String(ex).slice(0,110)+(String(ex).length>110?"…":""):"Le site affiche encore le texte provisoire."),h("span",{class:"c"},ex?"Rédigé":"À écrire")); }))),

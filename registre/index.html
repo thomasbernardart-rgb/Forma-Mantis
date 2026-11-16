@@ -1131,6 +1131,17 @@ function todoRow(x){ return h("li",{class:"todo"},h("span",{class:"sev "+x.sev})
 function headBlock(eyebrow,title,tools){ return h("div",{class:"head"},h("div",{class:"titles"},h("p",{class:"eyebrow"},eyebrow),title?h("h1",{class:"display"},title):""),tools?h("div",{class:"toolbar"},tools):""); }
 function calStatusLine(){ const bad=Object.entries(S.gcalState).filter(([,x])=>x.state==="error"); if(!bad.length) return ""; return h("div",{class:"banner"},bad.map(([slot,x])=>h("div",{},x.owner?h("b",{},"Agenda "+(slot==="valentine2"?"de Valentine (second)":slot==="valentine"?"de Valentine":"de Thomas")+" : "):"",calMessage(x)," ",x.code==="no_ics"||x.code==="adresse_invalide"||/^http_/.test(x.code||"")?h("button",{type:"button",class:"btn small",onclick:()=>go("reglages")},"Ouvrir les réglages"):""))); }
 
+/* ---------- Demandes déposées par Claude : validation écrite ---------- */
+const DEM={loaded:false,busy:false,list:[],at:0,arm:null};
+async function loadDemandes(){ if(DEM.busy) return; DEM.busy=true; try{ const {data,error}=await SB.from("demandes").select("*").eq("statut","en_attente").order("cree_le",{ascending:true}); if(!error){ DEM.list=data||[]; DEM.loaded=true; } }catch(e){} DEM.at=Date.now(); DEM.busy=false; schedule(); }
+async function traiterDemande(d,valider){ try{ const r=valider?await SB.rpc("valider_demande",{p_id:d.id}):await SB.rpc("refuser_demande",{p_id:d.id,p_motif:null}); if(r.error) throw r.error; toast((valider?"Demande n° "+d.id+" : ":"")+(r.data||"fait")); }catch(e){ toast("Impossible : "+(e.message||e)); } DEM.arm=null; if(S.compta) S.compta.loaded=false; DEM.at=0; loadDemandes(); }
+function demandesPanel(){ if(!DEM.busy&&(!DEM.loaded||Date.now()-DEM.at>60000)) setTimeout(loadDemandes,0); if(!DEM.list.length) return "";
+  return h("section",{class:"panel todo-panel"},h("h3",{},"À valider · "+DEM.list.length),h("p",{class:"empty",style:"margin:0 0 .6em"},"Actions demandées à Claude. Rien n'est fait tant que tu ne valides pas ici."),
+    h("ul",{class:"list"},DEM.list.map(d=>h("li",{class:"entry"},h("span",{class:"time"},fmtShort(String(d.cree_le).slice(0,10))),h("div",{class:"what"},h("b",{},d.resume),h("span",{class:"mono"}," · n° "+d.id)),
+      S.readOnly?"":h("span",{class:"toolbar"},
+        DEM.arm===d.id?h("button",{type:"button",class:"btn primary small",onclick:()=>traiterDemande(d,true)},"Confirmer"):h("button",{type:"button",class:"btn small",onclick:()=>{ DEM.arm=d.id; schedule(); }},"Valider"),
+        h("button",{type:"button",class:"btn small ghost",onclick:()=>traiterDemande(d,false)},"Refuser")))))); }
+
 const VIEWS = {
 fiche(){ const rec=findItemByToken(S.ficheId); const back=h("button",{type:"button",class:"btn small ghost",onclick:()=>go("inventaire")},"← Inventaire");
   if(!rec) return h("div",{class:"view fiche"},back,headBlock("Fiche technique","Fiche introuvable"),h("p",{class:"muted"},"Cette pièce n'est plus au registre, ou le QR code vient d'un autre registre. Cherche-la dans l'inventaire par son numéro."));
@@ -1160,6 +1171,7 @@ accueil(){ const t=today(); const role=myRole(); const name=role==="thomas"?"Tho
     h("div",{class:"head"},h("div",{class:"titles"},h("p",{class:"eyebrow"},fmtDate(t,{weekday:"long",day:"numeric",month:"long",year:"numeric"})),h("h1",{class:"display"},name?["Bonjour ",h("em",{},name),"."]:["Maison ",h("em",{},"Saint Sauveur")])),
       h("div",{class:"toolbar"},guideEl(),h("span",{class:"who"},whoDots()),h("button",{type:"button",class:"btn small",onclick:()=>logout("Tu es déconnecté. À bientôt.")},"Se déconnecter"),h("button",{type:"button",class:"btn small ghost hide-m","data-waves":"",onclick:toggleWaves},audio?"Couper les vagues":"Bruit des vagues"))),
     S.readOnly?h("p",{class:"banner"},"Tu consultes le registre en lecture seule."):"",
+    demandesPanel(),
     todos.length?h("section",{class:"panel todo-panel"},h("h3",{},"À traiter · "+todos.length),h("ul",{class:"list"},todos.map(todoRow))):h("section",{class:"panel"},h("h3",{},"À traiter"),h("p",{class:"empty"},"Rien en attente. Belle journée.")),
     h("div",{class:"grid2"},dayPanel("Aujourd'hui",t),dayPanel("Demain",addDays(t,1))),
     calStatusLine(),

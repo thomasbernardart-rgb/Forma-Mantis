@@ -1,5 +1,5 @@
 /* Registre Maison Saint Sauveur : l'application reste disponible sans réseau. */
-const V = "mss-registre-v16";
+const V = "mss-registre-v17";
 const SHELL = ["./", "index.html", "lib/supabase.js", "lib/591.supabase.js", "lib/qrcode.js", "cabellou.jpg", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-180.png", "favicon.svg", "favicon-32.png", "catalogue.html", "lib/catalogue.js"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V && k.startsWith("mss-")).map(k => caches.delete(k)))).then(() => self.clients.claim())); });

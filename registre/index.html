@@ -443,7 +443,7 @@ body{font-size:15px}
   <header class="mhead" id="mhead"></header>
   <nav class="tabbar" id="tabbar" aria-label="Rubriques" hidden></nav>
   <aside class="rail">
-    <div class="brand"><img class="brand-logo" src="favicon.svg" alt="" width="40" height="40"><span class="house">Maison Saint-Sauveur</span><span class="sub">Registre</span></div>
+    <div class="brand"><img class="brand-logo" src="favicon.svg" alt="" width="40" height="40"><span class="house">Maison Saint Sauveur</span><span class="sub">Registre</span></div>
     <nav class="nav" id="nav" aria-label="Sections du registre"></nav>
     <div class="rail-foot">
       <div class="who" id="rail-who"></div>
@@ -1416,7 +1416,7 @@ whatsapp(){ if(S.waOpen){ const d=S.diffusions.find(x=>x.id===S.waOpen); if(d) r
         h("div",{class:"field"},h("label",{for:"wa-src"},"Source"),h("select",{id:"wa-src",value:w.src,onchange:e=>{ w.src=e.target.value; schedule(); }},h("option",{value:""},"Toutes"),srcs.map(x=>h("option",{value:x},x)))),
         h("div",{class:"field"},h("label",{for:"wa-tag"},"Mot-clé"),h("input",{type:"text",id:"wa-tag",value:w.tag,placeholder:"Ex. VIP, Preview",oninput:e=>{ w.tag=e.target.value; schedule(); }})),
         h("div",{class:"field"},h("span",{class:"lbl"},"Accord"),h("label",{class:"check"},h("input",{type:"checkbox",id:"wa-opt",checked:w.opt,onchange:e=>{ w.opt=e.target.checked; schedule(); }}),"Seulement ceux qui ont accepté WhatsApp")),
-        SAMPLE?h("div",{class:"field wide"},h("label",{for:"wa-brief"},"Rédaction automatique"),h("div",{style:"display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px"},h("input",{type:"text",id:"wa-brief",value:w.brief,placeholder:"Ex. invitation au vernissage de Vincent Gicquel le 14 novembre à 18 h, rue Saint-Sauveur",oninput:e=>{ w.brief=e.target.value; }}),h("button",{type:"button",class:"btn",onclick:draft},"Rédiger le message"))):"",
+        SAMPLE?h("div",{class:"field wide"},h("label",{for:"wa-brief"},"Rédaction automatique"),h("div",{style:"display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px"},h("input",{type:"text",id:"wa-brief",value:w.brief,placeholder:"Ex. invitation au vernissage de Vincent Gicquel le 14 novembre à 18 h, rue Saint Sauveur",oninput:e=>{ w.brief=e.target.value; }}),h("button",{type:"button",class:"btn",onclick:draft},"Rédiger le message"))):"",
         h("div",{class:"field wide"},h("label",{for:"wa-msg"},"Message"),h("textarea",{id:"wa-msg",style:"min-height:140px",value:w.msg,placeholder:"Bonjour {prenom}, …",oninput:e=>{ w.msg=e.target.value; schedule(); }}),
           h("div",{class:"toolbar"},h("span",{class:"hint"},"Insérer :"),[["{prenom}","prénom"],["{nom}","nom"],["{civilite}","civilité"],["{societe}","société"]].map(([v,l])=>h("button",{type:"button",class:"btn small ghost",onclick:()=>ins(v)},l))))),
       sample1&&w.msg?h("div",{class:"banner",style:"white-space:pre-wrap;border-color:var(--line);background:var(--sea-soft)"},h("b",{},"Aperçu pour "+contactName(sample1)+" : "),waText(w.msg,sample1)):"",
@@ -1740,7 +1740,7 @@ function renderTabbar(){ const tb=$("#tabbar"); if(!tb) return; const cur=S.view
     h("button",{type:"button","aria-current":MAIN_VIEWS.includes(cur)?null:"page",onclick:openSommaire},navIcon("plus"),h("span",{},"Plus")));
   tb.hidden=!S.session||!S.ready; }
 function renderMobile(){ renderTabbar(); const mh=$("#mhead"); if(!mh) return; const home=S.view==="accueil";
-  mh.replaceChildren(S.view!=="fiche"?h("button",{type:"button",class:"brand-m",onclick:()=>scrollTo(0,0)},h("img",{src:"favicon.svg",alt:"",width:"28",height:"28"}),h("span",{},"Maison Saint-Sauveur")):h("button",{type:"button",class:"back",onclick:()=>go("inventaire")},"‹ Œuvres"),
+  mh.replaceChildren(S.view!=="fiche"?h("button",{type:"button",class:"brand-m",onclick:()=>scrollTo(0,0)},h("img",{src:"favicon.svg",alt:"",width:"28",height:"28"}),h("span",{},"Maison Saint Sauveur")):h("button",{type:"button",class:"back",onclick:()=>go("inventaire")},"‹ Œuvres"),
     h("span",{class:"here"},""),
     h("div",{class:"mh-act"},(()=>{ const b=h("button",{type:"button",class:"icon-btn","aria-label":"Chercher",onclick:openSearch}); b.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'; return b; })(),""));
   $("#fab").hidden=!S.session||S.readOnly||!S.ready; }

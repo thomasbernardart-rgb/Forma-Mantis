@@ -8,18 +8,19 @@
 <title>Maison Saint-Sauveur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --black: #0a0a09;
-  --white: #f5f3ef;
-  --gray-light: #e8e6e1;
-  --gray-mid: #a8a8a4;
-  --gray-text: #3a3a38;
-  --gray-muted: #666663;
-  --serif: 'EB Garamond', Georgia, serif;
-  --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --black: #1C1B19;
+  --white: #EEEAE2;
+  --gray-light: #CFC8BB;
+  --gray-mid: #A39F97;
+  --gray-text: #1C1B19;
+  --gray-muted: #6B675F;
+  --house: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --serif: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --sans: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
 }
 html { scroll-behavior: smooth; }
 body {
@@ -43,7 +44,7 @@ header {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(245,243,239,0.96);
+  background: rgba(238,234,226,0.96);
   backdrop-filter: blur(8px);
   border-bottom: 0.5px solid var(--gray-light);
   display: flex;
@@ -1114,14 +1115,14 @@ header { width: 100%; }
 .mss-cal-dh { text-align: center; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-text); padding-bottom: 6px; line-height: 1.5; }
 .mss-cal-dh b { display: block; font-family: var(--serif); font-weight: 400; font-size: 17px; letter-spacing: 0; text-transform: none; color: var(--black); }
 .mss-cal-h { font-size: 11px; color: var(--gray-muted); display: flex; align-items: center; font-variant-numeric: tabular-nums; }
-.mss-cal-slot { all: unset; box-sizing: border-box; height: 34px; border-radius: 2px; display: grid; place-items: center; font-size: 11px; font-variant-numeric: tabular-nums; }
+.mss-cal-slot { all: unset; box-sizing: border-box; height: 34px; border-radius: 0; display: grid; place-items: center; font-size: 11px; font-variant-numeric: tabular-nums; }
 .mss-cal-slot.libre { background: #e3ebdf; border: 0.5px solid #8ea786; color: #3f5a39; cursor: pointer; }
 .mss-cal-slot.libre:hover { background: #d3e0cd; }
 .mss-cal-slot.pris { background: repeating-linear-gradient(135deg, #f1e0da 0 5px, #ead2ca 5px 10px); border: 0.5px solid #d9b3a7; cursor: not-allowed; }
 .mss-cal-slot.choisi { background: var(--black); border: 0.5px solid var(--black); color: var(--white); cursor: pointer; }
 .mss-cal-legende { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 11px; color: var(--gray-text); }
 .mss-cal-legende span { display: inline-flex; align-items: center; gap: 7px; }
-.mss-cal-legende i { width: 14px; height: 10px; display: inline-block; border-radius: 2px; }
+.mss-cal-legende i { width: 14px; height: 10px; display: inline-block; border-radius: 0; }
 .mss-cal-choix { margin-top: 16px; font-family: var(--serif); font-size: 16px; line-height: 1.5; color: var(--black); min-height: 1.5em; }
 .mss-cal-choix em { color: var(--gray-text); }
 @media (max-width: 768px) {
@@ -1132,6 +1133,16 @@ header { width: 100%; }
   .mss-cal-slot { height: 32px; font-size: 0; }
   .mss-cal-dh { font-size: 9px; letter-spacing: 0.04em; }
 }
+
+/* Charte commune Maison Saint Sauveur (nov. 2026) : texte en IBM Plex Mono, le nom en Cormorant Garamond 600, papier, encre, filets. */
+body { font-weight: 400; font-size: 13.5px; line-height: 1.6; }
+.logo { font-family: var(--house); font-weight: 600; font-size: 21px; letter-spacing: .01em; text-transform: none; }
+.hero-title h1 { font-weight: 500; text-transform: uppercase; font-size: 32px; letter-spacing: .01em; line-height: 1.1; }
+.hero-title h1 body * { font-style: normal !important; }
+@media (max-width: 760px) { #page-accueil .hero-title h1, .hero-title h1.house { font-size: 40px; } }
+#page-accueil .hero-title h1, .hero-title h1.house { font-family: var(--house); font-weight: 600; text-transform: none; font-size: 56px; line-height: 1; }
+.page-header h2, .about-hero-text h2, .contact-left h2 { font-weight: 500; text-transform: uppercase; letter-spacing: .02em; }
+em { font-style: normal; }
 </style>
 </head>
 <body>
@@ -1182,7 +1193,7 @@ header { width: 100%; }
     <div class="carousel-bottom">
       <div class="hero-title">
         <p data-i18n="hero-sub">Lorem ipsum — Dolor sit — Amet</p>
-        <h1>Maison Saint-Sauveur</h1>
+        <h1 class="house">Maison Saint-Sauveur</h1>
       </div>
       <div class="hero-meta">
         <span data-i18n="hero-label">Direction artistique</span>
